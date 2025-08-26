@@ -259,9 +259,181 @@ Bienvenido a casa.`,
 
   const t = translations[language]
   
-  // Helper function to translate category titles
+  // Comprehensive translation mappings for resource content
+  const resourceTranslations = {
+    // Resource Names
+    names: {
+      "ICEE Crisis Hotline": "Línea de Crisis ICEE",
+      "Integral Care Crisis Hotline": "Línea de Crisis Integral Care",
+      "SAFE Alliance": "Alianza SAFE",
+      "National Suicide and Crisis Lifeline": "Línea Nacional de Prevención del Suicidio y Crisis",
+      "Veterans Crisis Line": "Línea de Crisis para Veteranos",
+      "Crisis Text Line": "Línea de Crisis por Mensaje de Texto",
+      "Austin Police Department Non-Emergency": "Departamento de Policía de Austin No Emergencia",
+      "Travis County Emergency Services": "Servicios de Emergencia del Condado de Travis",
+      "United Way 211": "United Way 211",
+      "Capital Metro Crisis Response Team": "Equipo de Respuesta a Crisis de Capital Metro",
+      "Austin State Hospital": "Hospital Estatal de Austin",
+      "Capital Area Behavioral Health Consortium": "Consorcio de Salud Conductual del Área Capital",
+      "Austin Recovery": "Recuperación Austin",
+      "Samaritan Center": "Centro Samaritano",
+      "Central Health": "Salud Central",
+      "People's Community Clinic": "Clínica Comunitaria de la Gente",
+      "CommUnityCare": "CommUnityCare",
+      "Capital Area Food Bank": "Banco de Alimentos del Área Capital",
+      "Caritas of Austin": "Caritas de Austin",
+      "Salvation Army": "Ejército de Salvación",
+      "Front Steps": "Front Steps",
+      "Austin Resource Center for the Homeless": "Centro de Recursos de Austin para Personas sin Hogar",
+      "Texas Legal Aid": "Asistencia Legal de Texas",
+      "Volunteer Legal Services": "Servicios Legales Voluntarios"
+    },
+    // Service Descriptions
+    services: {
+      "24/7 crisis support, emergency assistance": "Apoyo de crisis 24/7, asistencia de emergencia",
+      "24/7 mental health crisis support, immediate emotional support": "Apoyo de crisis de salud mental 24/7, apoyo emocional inmediato",
+      "24/7 domestic violence & sexual assault hotline, emergency shelter": "Línea directa 24/7 de violencia doméstica y agresión sexual, refugio de emergencia",
+      "24/7 suicide prevention and crisis support": "Prevención de suicidio 24/7 y apoyo de crisis",
+      "Crisis support for veterans": "Apoyo de crisis para veteranos",
+      "Text-based crisis counseling": "Consejería de crisis basada en mensajes de texto",
+      "Non-emergency police assistance, reports, information": "Asistencia policial no de emergencia, reportes, información",
+      "Emergency services coordination and response": "Coordinación y respuesta de servicios de emergencia",
+      "Information and referrals for health and human services": "Información y referencias para servicios de salud y humanos",
+      "Crisis intervention, mental health mobile outreach": "Intervención de crisis, alcance móvil de salud mental",
+      "Mental health counseling and therapy": "Consejería y terapia de salud mental",
+      "Substance abuse treatment and recovery services": "Tratamiento de abuso de sustancias y servicios de recuperación",
+      "Food pantry and meal programs": "Despensa de alimentos y programas de comidas",
+      "Emergency shelter and transitional housing": "Refugio de emergencia y vivienda de transición",
+      "Medical care and healthcare services": "Atención médica y servicios de salud",
+      "Legal aid and advocacy services": "Asistencia legal y servicios de defensoría",
+      "Job training and employment assistance": "Capacitación laboral y asistencia de empleo",
+      "Financial assistance and utility help": "Asistencia financiera y ayuda con servicios públicos",
+      "Transportation services and bus passes": "Servicios de transporte y pases de autobús",
+      "Clothing and personal items": "Ropa y artículos personales"
+    },
+    // Notes
+    notes: {
+      "Cold weather emergency activation": "Activación de emergencia por clima frío",
+      "Text or call available": "Mensaje de texto o llamada disponible",
+      "Press 1 for veterans": "Presiona 1 para veteranos",
+      "Free and confidential": "Gratis y confidencial",
+      "24/7 availability": "Disponibilidad 24/7",
+      "Multilingual support available": "Apoyo multilingüe disponible"
+    },
+    // Common terms and patterns
+    common: {
+      // Days of the week
+      "Monday": "Lunes",
+      "Tuesday": "Martes", 
+      "Wednesday": "Miércoles",
+      "Thursday": "Jueves",
+      "Friday": "Viernes",
+      "Saturday": "Sábado",
+      "Sunday": "Domingo",
+      // Time and availability
+      "24/7": "24/7",
+      "Available": "Disponible",
+      "Open": "Abierto",
+      "Closed": "Cerrado",
+      "Hours": "Horarios",
+      "Emergency": "Emergencia",
+      // Services and support
+      "Crisis": "Crisis",
+      "Support": "Apoyo",
+      "Hotline": "Línea Directa",
+      "Services": "Servicios",
+      "Free": "Gratis",
+      "Confidential": "Confidencial",
+      "Counseling": "Consejería",
+      "Therapy": "Terapia",
+      "Treatment": "Tratamiento",
+      "Recovery": "Recuperación",
+      "Assistance": "Asistencia",
+      "Help": "Ayuda",
+      // Location terms
+      "Center": "Centro",
+      "Clinic": "Clínica",
+      "Hospital": "Hospital",
+      "Office": "Oficina",
+      "Location": "Ubicación",
+      "Address": "Dirección",
+      "Austin": "Austin",
+      "Texas": "Texas",
+      // Contact terms
+      "Call": "Llamar",
+      "Text": "Mensaje de texto",
+      "Email": "Correo electrónico",
+      "Website": "Sitio web",
+      "Contact": "Contacto",
+      // Common phrases
+      "Please call": "Por favor llame",
+      "Call ahead": "Llame con anticipación",
+      "Walk-ins welcome": "Se aceptan visitas sin cita",
+      "Appointment required": "Se requiere cita",
+      "No cost": "Sin costo",
+      "Sliding scale": "Escala móvil"
+    }
+  }
+
+  // Helper functions for translation
   const translateCategory = (categoryTitle: string) => {
     return (t.categoryNames as Record<string, string>)[categoryTitle] || categoryTitle
+  }
+
+  const translateResourceName = (name: string) => {
+    if (language === 'en') return name
+    // Check for exact match first
+    if ((resourceTranslations.names as Record<string, string>)[name]) {
+      return (resourceTranslations.names as Record<string, string>)[name]
+    }
+    // Apply common term translations for partial matches
+    let translatedName = name
+    Object.entries(resourceTranslations.common).forEach(([en, es]) => {
+      const regex = new RegExp(`\\b${en}\\b`, 'gi')
+      translatedName = translatedName.replace(regex, es)
+    })
+    return translatedName
+  }
+
+  const translateServices = (services: string) => {
+    if (language === 'en') return services
+    // Check for exact match first
+    if ((resourceTranslations.services as Record<string, string>)[services]) {
+      return (resourceTranslations.services as Record<string, string>)[services]
+    }
+    // Apply common term translations for partial matches
+    let translatedServices = services
+    Object.entries(resourceTranslations.common).forEach(([en, es]) => {
+      const regex = new RegExp(`\\b${en}\\b`, 'gi')
+      translatedServices = translatedServices.replace(regex, es)
+    })
+    return translatedServices
+  }
+
+  const translateNotes = (notes: string) => {
+    if (language === 'en') return notes
+    // Check for exact match first
+    if ((resourceTranslations.notes as Record<string, string>)[notes]) {
+      return (resourceTranslations.notes as Record<string, string>)[notes]
+    }
+    // Apply common term translations for partial matches
+    let translatedNotes = notes
+    Object.entries(resourceTranslations.common).forEach(([en, es]) => {
+      const regex = new RegExp(`\\b${en}\\b`, 'gi')
+      translatedNotes = translatedNotes.replace(regex, es)
+    })
+    return translatedNotes
+  }
+
+  const translateText = (text: string) => {
+    if (language === 'en' || !text) return text
+    let translatedText = text
+    // Apply common term translations
+    Object.entries(resourceTranslations.common).forEach(([en, es]) => {
+      const regex = new RegExp(`\\b${en}\\b`, 'gi')
+      translatedText = translatedText.replace(regex, es)
+    })
+    return translatedText
   }
 
   const resourceData: ResourceCategory[] = [
@@ -3510,7 +3682,7 @@ Bienvenido a casa.`,
                   className="bg-white border border-gray-300 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow print:break-inside-avoid print:border-gray-400 print:shadow-none"
                 >
                   <h3 className="font-bold text-xl text-gray-900 mb-3 leading-tight">
-                    {resource.name}
+                    {translateResourceName(resource.name)}
                   </h3>
                   
                   <div className="space-y-2 text-sm text-gray-700">
@@ -3523,7 +3695,7 @@ Bienvenido a casa.`,
                         </div>
                         <div>
                           <span className="font-semibold text-gray-800">{t.address}:</span>
-                          <span className="ml-2">{resource.address}</span>
+                          <span className="ml-2">{translateText(resource.address)}</span>
                         </div>
                       </div>
                     )}
@@ -3580,7 +3752,7 @@ Bienvenido a casa.`,
                         </div>
                         <div>
                           <span className="font-semibold text-gray-800">{t.hours}:</span>
-                          <span className="ml-2">{resource.hours}</span>
+                          <span className="ml-2">{translateText(resource.hours)}</span>
                         </div>
                       </div>
                     )}
@@ -3594,7 +3766,7 @@ Bienvenido a casa.`,
                         </div>
                         <div>
                           <span className="font-semibold text-gray-800">{t.services}:</span>
-                          <span className="ml-2">{resource.services}</span>
+                          <span className="ml-2">{translateServices(resource.services)}</span>
                         </div>
                       </div>
                     )}
@@ -3608,7 +3780,7 @@ Bienvenido a casa.`,
                         </div>
                         <div>
                           <span className="font-semibold text-yellow-800">{t.notes}:</span>
-                          <span className="ml-2 italic text-yellow-700">{resource.notes}</span>
+                          <span className="ml-2 italic text-yellow-700">{translateNotes(resource.notes)}</span>
                         </div>
                       </div>
                     )}
