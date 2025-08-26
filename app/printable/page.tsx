@@ -27,6 +27,7 @@ export default function PrintableResourcesPage() {
   const [selectedCategories, setSelectedCategories] = useState<CategorySelection>({})
   const [showCategorySelector, setShowCategorySelector] = useState(true)
   const [language, setLanguage] = useState<'en' | 'es'>('en')
+  const [layoutMode, setLayoutMode] = useState<'compact' | 'cards'>('compact')
 
   useEffect(() => {
     setIsLoading(false)
@@ -3547,15 +3548,29 @@ Bienvenido a casa.`,
             </svg>
           </button>
           
-          {/* Language Toggle */}
-          <div className="flex items-center space-x-2">
-            <span className="text-sm text-gray-600">Language:</span>
-            <button
-              onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}
-              className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition-colors text-sm font-medium"
-            >
-              {language === 'en' ? 'Español' : 'English'}
-            </button>
+          {/* Controls: Language & Layout Toggle */}
+          <div className="flex items-center space-x-4">
+            {/* Layout Toggle */}
+            <div className="flex items-center space-x-2">
+              <span className="text-sm text-gray-600">Layout:</span>
+              <button
+                onClick={() => setLayoutMode(layoutMode === 'compact' ? 'cards' : 'compact')}
+                className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm font-medium"
+              >
+                {layoutMode === 'compact' ? 'Card View' : 'Compact View'}
+              </button>
+            </div>
+            
+            {/* Language Toggle */}
+            <div className="flex items-center space-x-2">
+              <span className="text-sm text-gray-600">Language:</span>
+              <button
+                onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}
+                className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition-colors text-sm font-medium"
+              >
+                {language === 'en' ? 'Español' : 'English'}
+              </button>
+            </div>
           </div>
         </div>
         
@@ -3675,12 +3690,82 @@ Bienvenido a casa.`,
               {translateCategory(category.title)}
             </h2>
             
-            <div className="grid gap-6">
-              {category.resources.map((resource, resourceIndex) => (
-                <div 
-                  key={resourceIndex} 
-                  className="bg-white border border-gray-300 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow print:break-inside-avoid print:border-gray-400 print:shadow-none"
-                >
+            {/* Conditional Layout Based on Mode */}
+            {layoutMode === 'compact' ? (
+              /* Compact Table Layout - Optimized for Print */
+              <div className="compact-resource-table">
+                <div className="hidden print:block mb-2 text-xs text-gray-600 font-medium border-b border-gray-300 pb-1">
+                  <div className="grid grid-cols-12 gap-2">
+                    <div className="col-span-4">Resource & Contact</div>
+                    <div className="col-span-6">Services & Description</div>
+                    <div className="col-span-2">Website</div>
+                  </div>
+                </div>
+                {category.resources.map((resource, resourceIndex) => (
+                  <div 
+                    key={resourceIndex} 
+                    className="grid grid-cols-12 gap-2 py-1.5 text-xs border-b border-gray-100 print:break-inside-avoid hover:bg-gray-50 print:hover:bg-transparent"
+                  >
+                    {/* Column 1: Resource Name & Contact */}
+                    <div className="col-span-4 space-y-0.5">
+                      <div className="font-semibold text-gray-900 text-sm leading-tight">
+                        {translateResourceName(resource.name)}
+                      </div>
+                      {resource.phone && (
+                        <div className="text-blue-600 font-mono">
+                          📞 {resource.phone}
+                        </div>
+                      )}
+                      {resource.address && (
+                        <div className="text-gray-600">
+                          📍 {translateText(resource.address)}
+                        </div>
+                      )}
+                      {resource.email && (
+                        <div className="text-gray-600 break-all">
+                          ✉️ {resource.email}
+                        </div>
+                      )}
+                      {resource.hours && (
+                        <div className="text-gray-600">
+                          🕒 {translateText(resource.hours)}
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Column 2: Services & Description */}
+                    <div className="col-span-6">
+                      {resource.services && (
+                        <div className="text-gray-800 mb-1">
+                          <span className="font-medium">Services:</span> {translateServices(resource.services)}
+                        </div>
+                      )}
+                      {resource.notes && (
+                        <div className="text-gray-700 italic">
+                          <span className="font-medium">Note:</span> {translateNotes(resource.notes)}
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Column 3: Website */}
+                    <div className="col-span-2">
+                      {resource.website && (
+                        <div className="text-blue-600 break-all">
+                          🌐 {resource.website}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              /* Original Card Layout - Better for Screen Viewing */
+              <div className="grid gap-6">
+                {category.resources.map((resource, resourceIndex) => (
+                  <div 
+                    key={resourceIndex} 
+                    className="bg-white border border-gray-300 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow print:break-inside-avoid print:border-gray-400 print:shadow-none"
+                  >
                   <h3 className="font-bold text-xl text-gray-900 mb-3 leading-tight">
                     {translateResourceName(resource.name)}
                   </h3>
@@ -3786,8 +3871,10 @@ Bienvenido a casa.`,
                     )}
                   </div>
                 </div>
-              ))}
-            </div>
+                  ))}
+                </div>
+              )
+            }
           </div>
         ))}
       </div>
