@@ -31,9 +31,9 @@ export default function QRCodeGenerator({
 
       try {
         const options = {
-          errorCorrectionLevel: errorCorrectionLevel === 'low' ? 'L' : 
+          errorCorrectionLevel: (errorCorrectionLevel === 'low' ? 'L' : 
                                errorCorrectionLevel === 'medium' ? 'M' :
-                               errorCorrectionLevel === 'quartile' ? 'Q' : 'H',
+                               errorCorrectionLevel === 'quartile' ? 'Q' : 'H') as 'L' | 'M' | 'Q' | 'H',
           type: 'image/png' as const,
           quality: 0.92,
           margin: includeMargin ? 2 : 0,

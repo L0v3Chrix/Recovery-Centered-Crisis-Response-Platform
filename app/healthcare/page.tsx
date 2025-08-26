@@ -220,9 +220,7 @@ export default function HealthcarePage() {
                       }}
                       size="sm"
                       className="inline-flex items-center gap-1 px-3 py-2 bg-warm-slate-100 text-warm-slate-700 text-sm font-medium rounded-lg hover:bg-warm-slate-200 transition-colors"
-                    >
-                      📤 Share
-                    </ShareButton>
+                    />
                   </div>
                 </div>
                 
@@ -234,7 +232,7 @@ export default function HealthcarePage() {
                       <div>
                         <div className="flex items-center gap-2 text-warm-slate-700 font-medium mb-2">
                           <div className="h-px bg-warm-slate-300 flex-1"></div>
-                          <span className="text-sm">TODAY'S HOURS</span>
+                          <span className="text-sm">TODAY&apos;S HOURS</span>
                           <div className="h-px bg-warm-slate-300 flex-1"></div>
                         </div>
                         <p className="text-warm-slate-700 font-medium">{resource.todayHours}</p>

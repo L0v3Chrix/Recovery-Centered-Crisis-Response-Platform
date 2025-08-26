@@ -25,7 +25,7 @@ const foodResources = [
     reviewCount: 284,
     accessibility: ['Wheelchair accessible', 'Drive-through available', 'Large parking area'],
     eligibility: 'All welcome, no income verification',
-    whatToExpected: 'Large-scale food distribution with fresh produce and shelf-stable foods from multiple mobile locations.',
+    whatToExpect: 'Large-scale food distribution with fresh produce and shelf-stable foods from multiple mobile locations.',
     todayHours: 'Monday-Thursday: 9am-6pm, Friday: 9am-5pm, Saturday: 9am-1pm'
   },
 
@@ -46,7 +46,7 @@ const foodResources = [
     reviewCount: 127,
     accessibility: ['Wheelchair accessible', 'Street parking', 'English/Spanish'],
     eligibility: 'No ID or documentation required',
-    whatToExpected: 'Free hot meals, sack lunches, coffee, and shower facilities in a welcoming environment.',
+    whatToExpect: 'Free hot meals, sack lunches, coffee, and shower facilities in a welcoming environment.',
     todayHours: 'Daily: 7:00am - 2:00pm'
   },
 
@@ -67,7 +67,7 @@ const foodResources = [
     reviewCount: 156,
     accessibility: ['Wheelchair accessible', 'Mental health support', 'Downtown location'],
     eligibility: 'All welcome, especially those experiencing homelessness',
-    whatToExpected: 'Meals served with dignity alongside comprehensive support services.',
+    whatToExpect: 'Meals served with dignity alongside comprehensive support services.',
     todayHours: 'Breakfast: Mon-Fri 8-9am, Dinner: Mon-Thu 5:30-6:30pm'
   },
 
@@ -88,7 +88,7 @@ const foodResources = [
     reviewCount: 89,
     accessibility: ['Downtown location', 'Public transit accessible', 'Multilingual staff'],
     eligibility: 'All welcome, some services may require income verification',
-    whatToExpected: 'Comprehensive emergency assistance including food, clothing, and financial support.',
+    whatToExpect: 'Comprehensive emergency assistance including food, clothing, and financial support.',
     todayHours: 'Monday-Friday: 8am-11:30am, 1pm-4:30pm'
   },
 
@@ -109,7 +109,7 @@ const foodResources = [
     reviewCount: 203,
     accessibility: ['Wheelchair accessible', '24/7 access', 'Health clinic on-site'],
     eligibility: 'All welcome',
-    whatToExpected: 'Hot meals served in large dining area with comprehensive shelter and health services.',
+    whatToExpect: 'Hot meals served in large dining area with comprehensive shelter and health services.',
     todayHours: 'Breakfast: 7-9am, Lunch: 11am-1pm, Dinner: 5-7pm'
   },
 
@@ -128,7 +128,7 @@ const foodResources = [
     verified: 'Aug 2025',
     accessibility: ['Wheelchair accessible', 'Bilingual staff', 'Community parking'],
     eligibility: 'All welcome',
-    whatToExpected: 'Faith-based community services including meals and basic necessities.',
+    whatToExpect: 'Faith-based community services including meals and basic necessities.',
     todayHours: 'Monday-Friday: 8am-2pm'
   },
 
@@ -147,7 +147,7 @@ const foodResources = [
     verified: 'Aug 2025',
     accessibility: ['Wheelchair accessible', 'Faith-inclusive', 'Ample parking'],
     eligibility: 'All welcome regardless of faith background',
-    whatToExpected: 'Church-based community services with meals and basic necessities in supportive environment.',
+    whatToExpect: 'Church-based community services with meals and basic necessities in supportive environment.',
     todayHours: 'Monday-Saturday: 9am-3pm'
   },
 
@@ -166,7 +166,7 @@ const foodResources = [
     verified: 'Aug 2025',
     accessibility: ['Wheelchair accessible', 'Community parking', 'Family-friendly'],
     eligibility: 'All families welcome',
-    whatToExpected: 'Friendly food pantry with hot meals and variety of fresh and shelf-stable foods.',
+    whatToExpect: 'Friendly food pantry with hot meals and variety of fresh and shelf-stable foods.',
     todayHours: 'Wed-Fri: 11am-3pm, Saturday: 9am-1pm'
   },
 
@@ -185,7 +185,7 @@ const foodResources = [
     verified: 'Aug 2025',
     accessibility: ['Wheelchair accessible', 'Ample parking', 'Bilingual staff'],
     eligibility: 'All families welcome',
-    whatToExpected: 'Community-focused food pantry with variety of fresh and shelf-stable foods.',
+    whatToExpect: 'Community-focused food pantry with variety of fresh and shelf-stable foods.',
     todayHours: 'Tuesday/Thursday: 10am-2pm, Saturday: 9am-12pm'
   },
 
@@ -204,7 +204,7 @@ const foodResources = [
     verified: 'Aug 2025',
     accessibility: ['Wheelchair accessible', 'Public transit accessible', 'Government services'],
     eligibility: 'Central Austin residents',
-    whatToExpected: 'County-operated pantry with consistent food distribution and comprehensive resource connections.',
+    whatToExpect: 'County-operated pantry with consistent food distribution and comprehensive resource connections.',
     todayHours: 'Monday/Wednesday/Friday: 1pm-5pm'
   },
 
@@ -223,7 +223,7 @@ const foodResources = [
     verified: 'Aug 2025',
     accessibility: ['Wheelchair accessible', 'Community location', 'Family-friendly'],
     eligibility: 'All families in need',
-    whatToExpected: 'Community-driven food pantry providing emergency food assistance with dignity.',
+    whatToExpect: 'Community-driven food pantry providing emergency food assistance with dignity.',
     todayHours: 'Monday/Wednesday: 10am-1pm, Saturday: 9am-12pm'
   },
 
@@ -242,7 +242,7 @@ const foodResources = [
     verified: 'Aug 2025',
     accessibility: ['Wheelchair accessible', 'Faith-inclusive', 'South Austin location'],
     eligibility: 'All welcome regardless of faith',
-    whatToExpected: 'Faith-based food pantry providing emergency assistance with spiritual support available.',
+    whatToExpect: 'Faith-based food pantry providing emergency assistance with spiritual support available.',
     todayHours: 'Wednesday: 6pm-8pm, Saturday: 10am-1pm'
   },
 
@@ -261,7 +261,7 @@ const foodResources = [
     verified: 'Aug 2025',
     accessibility: ['Wheelchair accessible', 'Community location', 'Bilingual services'],
     eligibility: 'East Austin residents priority',
-    whatToExpected: 'Neighborhood-focused food pantry with additional community programs and services.',
+    whatToExpect: 'Neighborhood-focused food pantry with additional community programs and services.',
     todayHours: 'Tuesday/Thursday: 9am-12pm, Friday: 2pm-5pm'
   },
 
@@ -280,7 +280,7 @@ const foodResources = [
     verified: 'Aug 2025',
     accessibility: ['Wheelchair accessible', 'Bilingual staff', 'Public transit accessible'],
     eligibility: 'All income levels for assistance',
-    whatToExpected: 'Professional assistance with SNAP applications and food benefit programs.',
+    whatToExpect: 'Professional assistance with SNAP applications and food benefit programs.',
     todayHours: 'Monday-Friday: 9am-5pm'
   },
 
@@ -301,7 +301,7 @@ const foodResources = [
     reviewCount: 98,
     accessibility: ['Brings food to people', 'No transportation needed', 'Multilingual volunteers'],
     eligibility: 'All welcome, focuses on street community',
-    whatToExpected: 'Food trucks visit various locations with free meals and friendly conversation.',
+    whatToExpect: 'Food trucks visit various locations with free meals and friendly conversation.',
     todayHours: 'Evening routes - check website for current schedule'
   },
 
@@ -322,7 +322,7 @@ const foodResources = [
     reviewCount: 156,
     accessibility: ['Wheelchair accessible', 'Downtown location', 'Family-friendly'],
     eligibility: 'All families and individuals in need',
-    whatToExpected: 'Comprehensive food services including pantry and hot meals with additional family support.',
+    whatToExpect: 'Comprehensive food services including pantry and hot meals with additional family support.',
     todayHours: 'Food Pantry: Mon-Fri 9am-12pm, Hot Meals: Daily 11:30am-1pm'
   }
 ]
@@ -409,7 +409,7 @@ export default function FoodPage() {
         {/* Resource Cards - Exactly following wireframe format */}
         <div className="space-y-6">
           {foodResources.map((resource) => {
-            const status = getStatusDisplay(resource.status, resource.timeLeft)
+            const status = getStatusDisplay(resource.status)
             
             return (
               <div key={resource.id} className="bg-white rounded-lg border border-warm-slate-200 overflow-hidden">
@@ -541,7 +541,7 @@ export default function FoodPage() {
                   <div className="p-6 bg-soft-cream-50 border-t border-warm-slate-100">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <h4 className="font-semibold text-warm-slate-800 mb-2">━━━ TODAY'S HOURS ━━━</h4>
+                        <h4 className="font-semibold text-warm-slate-800 mb-2">━━━ TODAY&apos;S HOURS ━━━</h4>
                         <p className="text-warm-slate-700 mb-1">{resource.todayHours}</p>
                         <p className="text-sm text-warm-slate-600 mb-4">📍 What to expect: {resource.whatToExpect}</p>
 
