@@ -10,6 +10,7 @@ interface Resource {
   email?: string
   hours?: string
   services?: string
+  description?: string
   notes?: string
 }
 
@@ -481,17 +482,23 @@ Bienvenido a casa.`,
         {
           name: "Travis County Emergency Services",
           phone: "512-854-9130",
-          services: "Emergency assistance, disaster response"
+          website: "www.traviscountytx.gov/emergency-services",
+          services: "Emergency assistance, disaster response",
+          description: "County-wide emergency response coordination, disaster preparedness, and emergency management services for Travis County residents."
         },
         {
           name: "Texas Crisis Text Line",
           phone: "Text 'TX' to 741741",
-          services: "Texas-specific crisis text support"
+          website: "www.crisistextline.org",
+          services: "Texas-specific crisis text support",
+          description: "Free 24/7 crisis text support specifically for Texas residents. Text TX to 741741 for immediate assistance from trained crisis counselors."
         },
         {
           name: "LGBTQ+ National Hotline",
           phone: "1-888-843-4564",
-          services: "Crisis support for LGBTQ+ individuals"
+          website: "www.lgbtqnationalhotline.org",
+          services: "Crisis support for LGBTQ+ individuals",
+          description: "Confidential peer-support hotline for LGBTQ+ individuals providing crisis intervention, information, and local resources."
         }
       ]
     },
@@ -501,12 +508,16 @@ Bienvenido a casa.`,
         {
           name: "Austin Grief and Loss Center",
           phone: "512-472-7878",
-          services: "Grief counseling services"
+          website: "www.austingrief.com",
+          services: "Grief counseling services",
+          description: "Professional grief counseling and support groups for individuals and families dealing with loss, trauma, and life transitions."
         },
         {
           name: "Christi Center",
           phone: "512-467-2600",
-          services: "Mental health counseling"
+          website: "www.christicenter.org",
+          services: "Mental health counseling",
+          description: "Community mental health center providing counseling, therapy, and psychiatric services on a sliding scale basis."
         },
         {
           name: "Integral Care",
