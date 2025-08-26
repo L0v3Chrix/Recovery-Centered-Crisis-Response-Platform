@@ -78,7 +78,7 @@ export default function PrintableResourcesPage() {
       clearAll: "Clear All",
       printAll: "Print All",
       printSelected: "Print Selected",
-      categories: "categories",
+      categoriesText: "categories",
       resources: "resources",
       showing: "Showing all",
       selected: "Selected",
@@ -114,7 +114,7 @@ export default function PrintableResourcesPage() {
       notes: "Notes",
       
       // Category Translations
-      categories: {
+      categoryNames: {
         "EMERGENCY SERVICES & CRISIS SUPPORT": "Emergency Services & Crisis Support",
         "BEHAVIORAL/MENTAL HEALTH & COUNSELING": "Behavioral/Mental Health & Counseling",
         "FOOD ASSISTANCE - DAILY MEALS": "Food Assistance - Daily Meals",
@@ -171,7 +171,7 @@ Welcome home.`,
       clearAll: "Limpiar Todo",
       printAll: "Imprimir Todo",
       printSelected: "Imprimir Seleccionados",
-      categories: "categorías",
+      categoriesText: "categorías",
       resources: "recursos",
       showing: "Mostrando todos",
       selected: "Seleccionados",
@@ -207,7 +207,7 @@ Welcome home.`,
       notes: "Notas",
       
       // Category Translations
-      categories: {
+      categoryNames: {
         "EMERGENCY SERVICES & CRISIS SUPPORT": "Servicios de Emergencia y Apoyo en Crisis",
         "BEHAVIORAL/MENTAL HEALTH & COUNSELING": "Salud Conductual/Mental y Consejería",
         "FOOD ASSISTANCE - DAILY MEALS": "Asistencia Alimentaria - Comidas Diarias",
@@ -261,7 +261,7 @@ Bienvenido a casa.`,
   
   // Helper function to translate category titles
   const translateCategory = (categoryTitle: string) => {
-    return t.categories[categoryTitle] || categoryTitle
+    return (t.categoryNames as Record<string, string>)[categoryTitle] || categoryTitle
   }
 
   const resourceData: ResourceCategory[] = [
@@ -3396,7 +3396,7 @@ Bienvenido a casa.`,
                 onClick={handleSelectAll}
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
               >
-                {t.selectAll} ({resourceData.length} {t.categories})
+                {t.selectAll} ({resourceData.length} {t.categoriesText})
               </button>
               
               <button
@@ -3430,7 +3430,7 @@ Bienvenido a casa.`,
 
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div className="text-sm text-gray-600">
-                <span className="font-medium">{t.selected}:</span> {getSelectedCategoriesCount()} {language === 'es' ? 'de' : 'of'} {resourceData.length} {t.categories}<br/>
+                <span className="font-medium">{t.selected}:</span> {getSelectedCategoriesCount()} {language === 'es' ? 'de' : 'of'} {resourceData.length} {t.categoriesText}<br/>
                 <span className="font-medium">{t.resourcesToPrint}</span> {getTotalResourceCount()}
               </div>
               
@@ -3490,7 +3490,7 @@ Bienvenido a casa.`,
         <div className="text-sm text-gray-500">
           {t.showing} <span className="font-semibold text-blue-600">{getTotalResourceCount()}</span> {t.resources} 
           {getSelectedCategoriesCount() < resourceData.length && (
-            <span> {language === 'es' ? 'en' : 'from'} <span className="font-semibold">{getSelectedCategoriesCount()}</span> {language === 'es' ? 'de' : 'of'} {resourceData.length} {t.categories}</span>
+            <span> {language === 'es' ? 'en' : 'from'} <span className="font-semibold">{getSelectedCategoriesCount()}</span> {language === 'es' ? 'de' : 'of'} {resourceData.length} {t.categoriesText}</span>
           )}
         </div>
       </div>
