@@ -26,6 +26,7 @@ export default function PrintableResourcesPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [selectedCategories, setSelectedCategories] = useState<CategorySelection>({})
   const [showCategorySelector, setShowCategorySelector] = useState(false)
+  const [language, setLanguage] = useState<'en' | 'es'>('en')
 
   useEffect(() => {
     setIsLoading(false)
@@ -66,6 +67,125 @@ export default function PrintableResourcesPage() {
       return total
     }, 0)
   }
+
+  const translations = {
+    en: {
+      selectCategories: "Select Categories to Print",
+      selectAll: "Select All",
+      clearAll: "Clear All",
+      printAll: "Print All",
+      printSelected: "Print Selected",
+      categories: "categories",
+      resources: "resources",
+      showing: "Showing all",
+      selected: "Selected",
+      resourcesToPrint: "Resources to print:",
+      pageTitle: "Central Texas Resources",
+      pageSubtitle: "Printable Resource Guide",
+      printHeader: "Central Texas Resources for People in Need",
+      printSubtitle: "Comprehensive Resource Guide",
+      aboutTitle: "About This Resource List",
+      aboutText: "This comprehensive directory contains 516 verified resources for people experiencing hardship in Central Texas. It includes emergency services, food assistance, housing, healthcare, and essential support services.",
+      immediateHelp: "For immediate help:",
+      emergencyNumbers: "IMPORTANT PHONE NUMBERS - KEEP WITH YOU",
+      emergency: "EMERGENCY",
+      crisis: "CRISIS HOTLINE",
+      domestic: "DOMESTIC VIOLENCE",
+      mental: "MENTAL HEALTH CRISIS",
+      foodBank: "FOOD BANK",
+      housing: "HOUSING ASSESSMENT",
+      info: "INFO & REFERRALS",
+      weather: "COLD WEATHER EMERGENCY",
+      printFooter: "Central Texas Resources Directory",
+      compiled: "Compiled from verified community resources",
+      visitWebsite: "Visit centraltexasresources.org for updates",
+      lastUpdated: "Last updated:",
+      welcomeMessage: {
+        title: "Welcome Home",
+        content: `To the one holding this page:
+You are not lost to us.
+We kept a light on.
+
+If the road has been hard—
+if your name felt heavy or missing—
+know this: you were never the problem.
+
+There is a seat at our table.
+Come as you are; bring every piece.
+We'll bring time, care, and hands that know how to help.
+
+This county is a circle, not a gate.
+You are part of us—our neighbor, our teacher, our future.
+What you've lived through is wisdom.
+What you need, we share.
+
+Turn the page when you're ready.
+We'll walk at your pace.
+We can't be "us" without you.
+Welcome home.`,
+        signature: "—Your Travis County community"
+      }
+    },
+    es: {
+      selectCategories: "Seleccionar Categorías para Imprimir",
+      selectAll: "Seleccionar Todo",
+      clearAll: "Limpiar Todo",
+      printAll: "Imprimir Todo",
+      printSelected: "Imprimir Seleccionados",
+      categories: "categorías",
+      resources: "recursos",
+      showing: "Mostrando todos",
+      selected: "Seleccionados",
+      resourcesToPrint: "Recursos para imprimir:",
+      pageTitle: "Recursos del Centro de Texas",
+      pageSubtitle: "Guía de Recursos Imprimible",
+      printHeader: "Recursos del Centro de Texas para Personas en Necesidad",
+      printSubtitle: "Guía Integral de Recursos",
+      aboutTitle: "Acerca de Esta Lista de Recursos",
+      aboutText: "Este directorio integral contiene 516 recursos verificados para personas que experimentan dificultades en el Centro de Texas. Incluye servicios de emergencia, asistencia alimentaria, vivienda, atención médica y servicios de apoyo esenciales.",
+      immediateHelp: "Para ayuda inmediata:",
+      emergencyNumbers: "NÚMEROS TELEFÓNICOS IMPORTANTES - MANTÉNGALOS CONSIGO",
+      emergency: "EMERGENCIA",
+      crisis: "LÍNEA DE CRISIS",
+      domestic: "VIOLENCIA DOMÉSTICA",
+      mental: "CRISIS DE SALUD MENTAL",
+      foodBank: "BANCO DE ALIMENTOS",
+      housing: "EVALUACIÓN DE VIVIENDA",
+      info: "INFORMACIÓN Y REFERENCIAS",
+      weather: "EMERGENCIA DE CLIMA FRÍO",
+      printFooter: "Directorio de Recursos del Centro de Texas",
+      compiled: "Compilado de recursos comunitarios verificados",
+      visitWebsite: "Visite centraltexasresources.org para actualizaciones",
+      lastUpdated: "Última actualización:",
+      welcomeMessage: {
+        title: "Bienvenido a Casa",
+        content: `A quien tenga esta página en sus manos:
+No estás perdido para nosotros.
+Mantuvimos una luz encendida.
+
+Si el camino ha sido difícil—
+si tu nombre se sintió pesado o perdido—
+sabe esto: nunca fuiste el problema.
+
+Hay un lugar en nuestra mesa.
+Ven como eres; trae cada pedazo.
+Traeremos tiempo, cuidado y manos que saben ayudar.
+
+Este condado es un círculo, no una puerta.
+Eres parte de nosotros—nuestro vecino, nuestro maestro, nuestro futuro.
+Lo que has vivido es sabiduría.
+Lo que necesitas, lo compartimos.
+
+Voltea la página cuando estés listo.
+Caminaremos a tu paso.
+No podemos ser "nosotros" sin ti.
+Bienvenido a casa.`,
+        signature: "—Tu comunidad del Condado de Travis"
+      }
+    }
+  }
+
+  const t = translations[language]
 
   const resourceData: ResourceCategory[] = [
     {
@@ -3161,21 +3281,34 @@ export default function PrintableResourcesPage() {
     <div className="container mx-auto px-4 py-8">
       {/* Category Selection Interface - Hidden on Print */}
       <div className="category-selector print:hidden mb-8 bg-gray-50 p-6 rounded-lg border">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">Select Categories to Print</h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold text-gray-800">{t.selectCategories}</h2>
+          
+          {/* Language Toggle */}
+          <div className="flex items-center space-x-2">
+            <span className="text-sm text-gray-600">Language:</span>
+            <button
+              onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}
+              className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm"
+            >
+              {language === 'en' ? 'Español' : 'English'}
+            </button>
+          </div>
+        </div>
         
         <div className="flex flex-wrap gap-4 mb-6">
           <button
             onClick={handleSelectAll}
             className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
           >
-            Select All ({resourceData.length} categories)
+            {t.selectAll} ({resourceData.length} {t.categories})
           </button>
           
           <button
             onClick={handleDeselectAll}
             className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors"
           >
-            Clear All
+            {t.clearAll}
           </button>
         </div>
 
@@ -3189,7 +3322,7 @@ export default function PrintableResourcesPage() {
                 className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
               />
               <span className="text-sm text-gray-700">
-                {category.title} ({category.resources.length} resources)
+                {category.title} ({category.resources.length} {t.resources})
               </span>
             </label>
           ))}
@@ -3197,45 +3330,66 @@ export default function PrintableResourcesPage() {
 
         <div className="flex justify-between items-center">
           <div className="text-sm text-gray-600">
-            Selected: {getSelectedCategoriesCount()} of {resourceData.length} categories | 
-            Resources to print: {getTotalResourceCount()}
+            {t.selected}: {getSelectedCategoriesCount()} of {resourceData.length} {t.categories} | 
+            {t.resourcesToPrint} {getTotalResourceCount()}
           </div>
           
           <button
             onClick={handlePrint}
             className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold"
           >
-            Print {getTotalResourceCount() === resourceData.reduce((total, cat) => total + cat.resources.length, 0) ? 'All' : 'Selected'} Resources
+            {getTotalResourceCount() === resourceData.reduce((total, cat) => total + cat.resources.length, 0) ? t.printAll : t.printSelected} ({getTotalResourceCount()})
           </button>
         </div>
       </div>
 
-      {/* Print Header - Only shown on print */}
-      <div className="hidden print:block text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Central Texas Resources for People in Need
-        </h1>
-        <p className="text-lg text-gray-700 mb-4">
-          Comprehensive Resource Guide - {getTotalResourceCount()} Resources
-        </p>
-        <div className="border-b-2 border-gray-300 pb-4 mb-6">
-          <p className="text-sm text-gray-600">
-            For the most up-to-date information, please call the numbers provided. 
-            Services and hours may change without notice.
+      {/* Print Header with Welcome Message - Only shown on print */}
+      <div className="hidden print:block">
+        {/* Welcome Message - First Page Only */}
+        <div className="text-center mb-12 print:break-after-page">
+          <h1 className="text-4xl font-bold text-gray-900 mb-8">
+            {t.welcomeMessage.title}
+          </h1>
+          
+          <div className="max-w-2xl mx-auto text-left">
+            <div className="text-lg text-gray-800 leading-relaxed whitespace-pre-line mb-8">
+              {t.welcomeMessage.content}
+            </div>
+            
+            <div className="text-right text-lg italic text-gray-700">
+              {t.welcomeMessage.signature}
+            </div>
+          </div>
+        </div>
+
+        {/* Resource Guide Header - Subsequent Pages */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            {t.printHeader}
+          </h1>
+          <p className="text-lg text-gray-700 mb-4">
+            {t.printSubtitle} - {getTotalResourceCount()} {t.resources}
           </p>
+          <div className="border-b-2 border-gray-300 pb-4 mb-6">
+            <p className="text-sm text-gray-600">
+              {language === 'en' 
+                ? 'For the most up-to-date information, please call the numbers provided. Services and hours may change without notice.'
+                : 'Para obtener la información más actualizada, llame a los números proporcionados. Los servicios y horarios pueden cambiar sin previo aviso.'}
+            </p>
+          </div>
         </div>
       </div>
 
       {/* Screen Header - Hidden on print */}
       <div className="print:hidden text-center mb-8">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Central Texas Resources
+          {t.pageTitle}
         </h1>
         <p className="text-xl text-gray-700 mb-2">
-          Printable Resource Guide
+          {t.pageSubtitle}
         </p>
         <p className="text-lg text-gray-600">
-          {getTotalResourceCount()} Resources Available
+          {getTotalResourceCount()} {t.resources} Available
         </p>
       </div>
 
@@ -3317,36 +3471,58 @@ export default function PrintableResourcesPage() {
       {/* Important Phone Numbers Section - Always printed */}
       <div className="mt-12 print:mt-8 print:break-before-page">
         <h2 className="text-2xl font-bold text-red-700 mb-4 border-b-2 border-red-200 pb-2">
-          IMPORTANT PHONE NUMBERS - KEEP WITH YOU
+          {t.emergencyNumbers}
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg">
           <div className="bg-red-50 p-4 rounded border-2 border-red-200">
-            <div className="font-bold text-red-800 mb-2">EMERGENCY</div>
+            <div className="font-bold text-red-800 mb-2">{t.emergency}</div>
             <div className="font-mono text-xl">911</div>
           </div>
           
           <div className="bg-blue-50 p-4 rounded border-2 border-blue-200">
-            <div className="font-bold text-blue-800 mb-2">CRISIS HOTLINE</div>
+            <div className="font-bold text-blue-800 mb-2">{t.crisis}</div>
             <div className="font-mono text-xl">988</div>
           </div>
           
           <div className="bg-green-50 p-4 rounded border-2 border-green-200">
-            <div className="font-bold text-green-800 mb-2">2-1-1 INFO LINE</div>
+            <div className="font-bold text-green-800 mb-2">{t.info}</div>
             <div className="font-mono text-xl">211</div>
           </div>
           
           <div className="bg-purple-50 p-4 rounded border-2 border-purple-200">
-            <div className="font-bold text-purple-800 mb-2">DOMESTIC VIOLENCE</div>
+            <div className="font-bold text-purple-800 mb-2">{t.domestic}</div>
             <div className="font-mono text-xl">512-267-SAFE</div>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg mt-4">
+          <div className="bg-yellow-50 p-4 rounded border-2 border-yellow-200">
+            <div className="font-bold text-yellow-800 mb-2">{t.mental}</div>
+            <div className="font-mono text-xl">512-472-4357</div>
+          </div>
+          
+          <div className="bg-orange-50 p-4 rounded border-2 border-orange-200">
+            <div className="font-bold text-orange-800 mb-2">{t.foodBank}</div>
+            <div className="font-mono text-xl">877-541-7905</div>
+          </div>
+          
+          <div className="bg-indigo-50 p-4 rounded border-2 border-indigo-200">
+            <div className="font-bold text-indigo-800 mb-2">{t.housing}</div>
+            <div className="font-mono text-xl">512-522-1097</div>
+          </div>
+          
+          <div className="bg-gray-50 p-4 rounded border-2 border-gray-200">
+            <div className="font-bold text-gray-800 mb-2">{t.weather}</div>
+            <div className="font-mono text-xl">512-305-4233</div>
           </div>
         </div>
       </div>
 
       {/* Print Footer */}
       <div className="hidden print:block mt-8 pt-4 border-t border-gray-300 text-center text-sm text-gray-600">
-        <p>Central Texas Resources | Printed: {new Date().toLocaleDateString()}</p>
-        <p>For updates and digital version, visit our website</p>
+        <p>{t.printFooter} | {t.lastUpdated} {new Date().toLocaleDateString()}</p>
+        <p>{t.compiled} | {t.visitWebsite}</p>
       </div>
 
       <style jsx>{`
@@ -3370,6 +3546,11 @@ export default function PrintableResourcesPage() {
           .print\\:break-before-page {
             break-before: page;
             page-break-before: always;
+          }
+          
+          .print\\:break-after-page {
+            break-after: page;
+            page-break-after: always;
           }
           
           body {
