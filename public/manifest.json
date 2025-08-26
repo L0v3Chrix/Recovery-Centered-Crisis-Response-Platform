@@ -1,0 +1,56 @@
+{
+  "name": "Central Texas Real Life Resources",
+  "short_name": "TX Resources",
+  "description": "Connect to what you need when you need it - Recovery and support resources for Central Texas residents",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512", 
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["health", "utilities", "social", "lifestyle"],
+  "shortcuts": [
+    {
+      "name": "Crisis Help",
+      "short_name": "Crisis",
+      "description": "Get immediate crisis support",
+      "url": "/crisis",
+      "icons": [
+        {
+          "src": "/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Food Resources",
+      "short_name": "Food",
+      "description": "Find food assistance",
+      "url": "/food",
+      "icons": [
+        {
+          "src": "/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

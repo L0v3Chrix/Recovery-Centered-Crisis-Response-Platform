@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .crisis-button {
+    @apply bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-lg text-lg shadow-lg transform transition hover:scale-105 active:scale-95;
+  }
+  
+  .resource-card {
+    @apply bg-white rounded-lg shadow-md p-4 border border-gray-200 hover:shadow-lg transition-shadow;
+  }
+  
+  .action-button {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center gap-2;
+  }
+  
+  .call-button {
+    @apply bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg min-h-[60px] flex items-center justify-center;
+  }
+}
