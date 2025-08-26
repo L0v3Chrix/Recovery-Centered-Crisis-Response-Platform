@@ -25,7 +25,7 @@ interface CategorySelection {
 export default function PrintableResourcesPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [selectedCategories, setSelectedCategories] = useState<CategorySelection>({})
-  const [showCategorySelector, setShowCategorySelector] = useState(false)
+  const [showCategorySelector, setShowCategorySelector] = useState(true)
   const [language, setLanguage] = useState<'en' | 'es'>('en')
 
   useEffect(() => {
@@ -70,7 +70,10 @@ export default function PrintableResourcesPage() {
 
   const translations = {
     en: {
+      // UI Elements
       selectCategories: "Select Categories to Print",
+      hideCategories: "Hide Categories",
+      showCategories: "Show Category Selection",
       selectAll: "Select All",
       clearAll: "Clear All",
       printAll: "Print All",
@@ -100,6 +103,39 @@ export default function PrintableResourcesPage() {
       compiled: "Compiled from verified community resources",
       visitWebsite: "Visit centraltexasresources.org for updates",
       lastUpdated: "Last updated:",
+      
+      // Field Labels
+      address: "Address",
+      phone: "Phone",
+      website: "Website",
+      email: "Email",
+      hours: "Hours",
+      services: "Services",
+      notes: "Notes",
+      
+      // Category Translations
+      categories: {
+        "EMERGENCY SERVICES & CRISIS SUPPORT": "Emergency Services & Crisis Support",
+        "BEHAVIORAL/MENTAL HEALTH & COUNSELING": "Behavioral/Mental Health & Counseling",
+        "FOOD ASSISTANCE - DAILY MEALS": "Food Assistance - Daily Meals",
+        "FOOD ASSISTANCE - GROCERIES & FOOD PANTRIES": "Food Assistance - Groceries & Food Pantries",
+        "ATX FREE FRIDGES (24/7 ACCESS)": "ATX Free Fridges (24/7 Access)",
+        "EMERGENCY SHELTER & HOUSING": "Emergency Shelter & Housing",
+        "TRANSITIONAL & AFFORDABLE HOUSING": "Transitional & Affordable Housing",
+        "COORDINATED HOUSING ASSESSMENTS": "Coordinated Housing Assessments",
+        "MEDICAL & HEALTHCARE SERVICES": "Medical & Healthcare Services",
+        "SUBSTANCE ABUSE & RECOVERY": "Substance Abuse & Recovery",
+        "IDENTIFICATION & VITAL DOCUMENTS": "Identification & Vital Documents",
+        "BASIC SERVICES - MAIL, SHOWERS, LAUNDRY": "Basic Services - Mail, Showers, Laundry",
+        "TRANSPORTATION & BUS PASSES": "Transportation & Bus Passes",
+        "CLOTHING ASSISTANCE": "Clothing Assistance",
+        "LEGAL AID & ADVOCACY": "Legal Aid & Advocacy",
+        "EMPLOYMENT & EDUCATION": "Employment & Education",
+        "WOMEN, CHILDREN & FAMILY SERVICES": "Women, Children & Family Services",
+        "SENIOR SERVICES": "Senior Services",
+        "UTILITIES & FINANCIAL ASSISTANCE": "Utilities & Financial Assistance",
+        "SPECIALIZED SERVICES": "Specialized Services"
+      },
       welcomeMessage: {
         title: "Welcome Home",
         content: `To the one holding this page:
@@ -127,7 +163,10 @@ Welcome home.`,
       }
     },
     es: {
+      // UI Elements
       selectCategories: "Seleccionar Categorías para Imprimir",
+      hideCategories: "Ocultar Categorías",
+      showCategories: "Mostrar Selección de Categorías",
       selectAll: "Seleccionar Todo",
       clearAll: "Limpiar Todo",
       printAll: "Imprimir Todo",
@@ -157,6 +196,39 @@ Welcome home.`,
       compiled: "Compilado de recursos comunitarios verificados",
       visitWebsite: "Visite centraltexasresources.org para actualizaciones",
       lastUpdated: "Última actualización:",
+      
+      // Field Labels
+      address: "Dirección",
+      phone: "Teléfono",
+      website: "Sitio Web",
+      email: "Correo Electrónico",
+      hours: "Horarios",
+      services: "Servicios",
+      notes: "Notas",
+      
+      // Category Translations
+      categories: {
+        "EMERGENCY SERVICES & CRISIS SUPPORT": "Servicios de Emergencia y Apoyo en Crisis",
+        "BEHAVIORAL/MENTAL HEALTH & COUNSELING": "Salud Conductual/Mental y Consejería",
+        "FOOD ASSISTANCE - DAILY MEALS": "Asistencia Alimentaria - Comidas Diarias",
+        "FOOD ASSISTANCE - GROCERIES & FOOD PANTRIES": "Asistencia Alimentaria - Despensas y Alimentos",
+        "ATX FREE FRIDGES (24/7 ACCESS)": "Refrigeradores Gratuitos ATX (Acceso 24/7)",
+        "EMERGENCY SHELTER & HOUSING": "Refugio de Emergencia y Vivienda",
+        "TRANSITIONAL & AFFORDABLE HOUSING": "Vivienda de Transición y Asequible",
+        "COORDINATED HOUSING ASSESSMENTS": "Evaluaciones Coordinadas de Vivienda",
+        "MEDICAL & HEALTHCARE SERVICES": "Servicios Médicos y de Atención Médica",
+        "SUBSTANCE ABUSE & RECOVERY": "Abuso de Sustancias y Recuperación",
+        "IDENTIFICATION & VITAL DOCUMENTS": "Identificación y Documentos Vitales",
+        "BASIC SERVICES - MAIL, SHOWERS, LAUNDRY": "Servicios Básicos - Correo, Duchas, Lavandería",
+        "TRANSPORTATION & BUS PASSES": "Transporte y Pases de Autobús",
+        "CLOTHING ASSISTANCE": "Asistencia de Ropa",
+        "LEGAL AID & ADVOCACY": "Asistencia Legal y Defensoría",
+        "EMPLOYMENT & EDUCATION": "Empleo y Educación",
+        "WOMEN, CHILDREN & FAMILY SERVICES": "Servicios para Mujeres, Niños y Familias",
+        "SENIOR SERVICES": "Servicios para Adultos Mayores",
+        "UTILITIES & FINANCIAL ASSISTANCE": "Servicios Públicos y Asistencia Financiera",
+        "SPECIALIZED SERVICES": "Servicios Especializados"
+      },
       welcomeMessage: {
         title: "Bienvenido a Casa",
         content: `A quien tenga esta página en sus manos:
@@ -186,6 +258,11 @@ Bienvenido a casa.`,
   }
 
   const t = translations[language]
+  
+  // Helper function to translate category titles
+  const translateCategory = (categoryTitle: string) => {
+    return t.categories[categoryTitle] || categoryTitle
+  }
 
   const resourceData: ResourceCategory[] = [
     {
@@ -3278,81 +3355,116 @@ Bienvenido a casa.`,
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 bg-gray-50 min-h-screen print:bg-white">
       {/* Category Selection Interface - Hidden on Print */}
-      <div className="category-selector print:hidden mb-8 bg-gray-50 p-6 rounded-lg border">
+      <div className="category-selector print:hidden mb-8">
+        {/* Toggle Button */}
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold text-gray-800">{t.selectCategories}</h2>
+          <button
+            onClick={() => setShowCategorySelector(!showCategorySelector)}
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            <span>{showCategorySelector ? t.hideCategories : t.showCategories}</span>
+            <svg 
+              className={`w-4 h-4 transition-transform ${showCategorySelector ? 'rotate-180' : ''}`} 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
           
           {/* Language Toggle */}
           <div className="flex items-center space-x-2">
             <span className="text-sm text-gray-600">Language:</span>
             <button
               onClick={() => setLanguage(language === 'en' ? 'es' : 'en')}
-              className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm"
+              className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition-colors text-sm font-medium"
             >
               {language === 'en' ? 'Español' : 'English'}
             </button>
           </div>
         </div>
         
-        <div className="flex flex-wrap gap-4 mb-6">
-          <button
-            onClick={handleSelectAll}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-          >
-            {t.selectAll} ({resourceData.length} {t.categories})
-          </button>
-          
-          <button
-            onClick={handleDeselectAll}
-            className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors"
-          >
-            {t.clearAll}
-          </button>
-        </div>
+        {showCategorySelector && (
+          <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-200">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">{t.selectCategories}</h2>
+        
+            <div className="flex flex-wrap gap-3 mb-6">
+              <button
+                onClick={handleSelectAll}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+              >
+                {t.selectAll} ({resourceData.length} {t.categories})
+              </button>
+              
+              <button
+                onClick={handleDeselectAll}
+                className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm font-medium"
+              >
+                {t.clearAll}
+              </button>
+            </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
-          {resourceData.map((category, index) => (
-            <label key={index} className="flex items-center space-x-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={selectedCategories[category.title] || false}
-                onChange={() => handleCategoryToggle(category.title)}
-                className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
-              />
-              <span className="text-sm text-gray-700">
-                {category.title} ({category.resources.length} {t.resources})
-              </span>
-            </label>
-          ))}
-        </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+              {resourceData.map((category, index) => (
+                <label key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={selectedCategories[category.title] || false}
+                    onChange={() => handleCategoryToggle(category.title)}
+                    className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                  />
+                  <div className="flex-1">
+                    <span className="text-sm font-medium text-gray-800 block">
+                      {translateCategory(category.title)}
+                    </span>
+                    <span className="text-xs text-gray-500">
+                      {category.resources.length} {t.resources}
+                    </span>
+                  </div>
+                </label>
+              ))}
+            </div>
 
-        <div className="flex justify-between items-center">
-          <div className="text-sm text-gray-600">
-            {t.selected}: {getSelectedCategoriesCount()} of {resourceData.length} {t.categories} | 
-            {t.resourcesToPrint} {getTotalResourceCount()}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div className="text-sm text-gray-600">
+                <span className="font-medium">{t.selected}:</span> {getSelectedCategoriesCount()} {language === 'es' ? 'de' : 'of'} {resourceData.length} {t.categories}<br/>
+                <span className="font-medium">{t.resourcesToPrint}</span> {getTotalResourceCount()}
+              </div>
+              
+              <button
+                onClick={handlePrint}
+                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold text-sm"
+              >
+                {getTotalResourceCount() === resourceData.reduce((total, cat) => total + cat.resources.length, 0) ? t.printAll : t.printSelected} ({getTotalResourceCount()})
+              </button>
+            </div>
           </div>
-          
-          <button
-            onClick={handlePrint}
-            className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold"
-          >
-            {getTotalResourceCount() === resourceData.reduce((total, cat) => total + cat.resources.length, 0) ? t.printAll : t.printSelected} ({getTotalResourceCount()})
-          </button>
-        </div>
+        )}
       </div>
 
-      {/* Print Header with Welcome Message - Only shown on print */}
+      {/* Print Header with Welcome Message - Page 1 Only */}
       <div className="hidden print:block">
-        {/* Welcome Message - First Page Only */}
+        {/* Resource Guide Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            {t.printHeader}
+          </h1>
+          <p className="text-lg text-gray-700 mb-6">
+            {t.printSubtitle} - {getTotalResourceCount()} {t.resources}
+          </p>
+        </div>
+
+        {/* Welcome Message - Page 1 Only */}
         <div className="text-center mb-12 print:break-after-page">
-          <h1 className="text-4xl font-bold text-gray-900 mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-6">
             {t.welcomeMessage.title}
           </h1>
           
           <div className="max-w-2xl mx-auto text-left">
-            <div className="text-lg text-gray-800 leading-relaxed whitespace-pre-line mb-8">
+            <div className="text-lg text-gray-800 leading-relaxed whitespace-pre-line mb-6">
               {t.welcomeMessage.content}
             </div>
             
@@ -3362,102 +3474,142 @@ Bienvenido a casa.`,
           </div>
         </div>
 
-        {/* Resource Guide Header - Subsequent Pages */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {t.printHeader}
-          </h1>
-          <p className="text-lg text-gray-700 mb-4">
-            {t.printSubtitle} - {getTotalResourceCount()} {t.resources}
+        <div className="border-b-2 border-gray-300 pb-4 mb-6">
+          <p className="text-sm text-gray-600">
+            {language === 'en' 
+              ? 'For the most up-to-date information, please call the numbers provided. Services and hours may change without notice.'
+              : 'Para obtener la información más actualizada, llame a los números proporcionados. Los servicios y horarios pueden cambiar sin previo aviso.'}
           </p>
-          <div className="border-b-2 border-gray-300 pb-4 mb-6">
-            <p className="text-sm text-gray-600">
-              {language === 'en' 
-                ? 'For the most up-to-date information, please call the numbers provided. Services and hours may change without notice.'
-                : 'Para obtener la información más actualizada, llame a los números proporcionados. Los servicios y horarios pueden cambiar sin previo aviso.'}
-            </p>
-          </div>
         </div>
       </div>
 
-      {/* Screen Header - Hidden on print */}
-      <div className="print:hidden text-center mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          {t.pageTitle}
-        </h1>
-        <p className="text-xl text-gray-700 mb-2">
-          {t.pageSubtitle}
-        </p>
-        <p className="text-lg text-gray-600">
-          {getTotalResourceCount()} {t.resources} Available
-        </p>
+      {/* Page Header - Screen Only */}
+      <div className="print:hidden mb-8 text-center">
+        <h1 className="text-4xl font-bold text-gray-900 mb-2">{t.pageTitle}</h1>
+        <p className="text-lg text-gray-600 mb-4">{t.pageSubtitle}</p>
+        <div className="text-sm text-gray-500">
+          {t.showing} <span className="font-semibold text-blue-600">{getTotalResourceCount()}</span> {t.resources} 
+          {getSelectedCategoriesCount() < resourceData.length && (
+            <span> {language === 'es' ? 'en' : 'from'} <span className="font-semibold">{getSelectedCategoriesCount()}</span> {language === 'es' ? 'de' : 'of'} {resourceData.length} {t.categories}</span>
+          )}
+        </div>
       </div>
 
       {/* Resources Display */}
-      <div className="space-y-8">
+      <div className="space-y-8 bg-white print:bg-transparent rounded-2xl p-6 print:p-0 shadow-sm print:shadow-none">
         {getFilteredResourceData().map((category, categoryIndex) => (
           <div key={categoryIndex} className="print:break-inside-avoid">
             <h2 className="text-2xl font-bold text-blue-800 mb-4 border-b-2 border-blue-200 pb-2">
-              {category.title}
+              {translateCategory(category.title)}
             </h2>
             
-            <div className="grid gap-4">
+            <div className="grid gap-6">
               {category.resources.map((resource, resourceIndex) => (
                 <div 
                   key={resourceIndex} 
-                  className="bg-white border border-gray-200 rounded-lg p-4 print:break-inside-avoid print:border-gray-400"
+                  className="bg-white border border-gray-300 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow print:break-inside-avoid print:border-gray-400 print:shadow-none"
                 >
-                  <h3 className="font-bold text-lg text-gray-900 mb-2">
+                  <h3 className="font-bold text-xl text-gray-900 mb-3 leading-tight">
                     {resource.name}
                   </h3>
                   
-                  <div className="space-y-1 text-sm text-gray-700">
+                  <div className="space-y-2 text-sm text-gray-700">
                     {resource.address && (
-                      <div className="flex items-start">
-                        <span className="font-semibold w-16 flex-shrink-0">Address:</span>
-                        <span>{resource.address}</span>
+                      <div className="flex items-start space-x-2">
+                        <div className="flex-shrink-0 w-5 h-5 mt-0.5">
+                          <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div>
+                          <span className="font-semibold text-gray-800">{t.address}:</span>
+                          <span className="ml-2">{resource.address}</span>
+                        </div>
                       </div>
                     )}
                     
                     {resource.phone && (
-                      <div className="flex items-start">
-                        <span className="font-semibold w-16 flex-shrink-0">Phone:</span>
-                        <span className="font-mono">{resource.phone}</span>
+                      <div className="flex items-start space-x-2">
+                        <div className="flex-shrink-0 w-5 h-5 mt-0.5">
+                          <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <span className="font-semibold text-gray-800">{t.phone}:</span>
+                          <span className="ml-2 font-mono text-blue-600">{resource.phone}</span>
+                        </div>
                       </div>
                     )}
                     
                     {resource.website && (
-                      <div className="flex items-start">
-                        <span className="font-semibold w-16 flex-shrink-0">Website:</span>
-                        <span className="break-all">{resource.website}</span>
+                      <div className="flex items-start space-x-2">
+                        <div className="flex-shrink-0 w-5 h-5 mt-0.5">
+                          <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div className="min-w-0">
+                          <span className="font-semibold text-gray-800">{t.website}:</span>
+                          <span className="ml-2 text-blue-600 break-all">{resource.website}</span>
+                        </div>
                       </div>
                     )}
                     
                     {resource.email && (
-                      <div className="flex items-start">
-                        <span className="font-semibold w-16 flex-shrink-0">Email:</span>
-                        <span className="break-all">{resource.email}</span>
+                      <div className="flex items-start space-x-2">
+                        <div className="flex-shrink-0 w-5 h-5 mt-0.5">
+                          <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                          </svg>
+                        </div>
+                        <div className="min-w-0">
+                          <span className="font-semibold text-gray-800">{t.email}:</span>
+                          <span className="ml-2 text-blue-600 break-all">{resource.email}</span>
+                        </div>
                       </div>
                     )}
                     
                     {resource.hours && (
-                      <div className="flex items-start">
-                        <span className="font-semibold w-16 flex-shrink-0">Hours:</span>
-                        <span>{resource.hours}</span>
+                      <div className="flex items-start space-x-2">
+                        <div className="flex-shrink-0 w-5 h-5 mt-0.5">
+                          <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div>
+                          <span className="font-semibold text-gray-800">{t.hours}:</span>
+                          <span className="ml-2">{resource.hours}</span>
+                        </div>
                       </div>
                     )}
                     
                     {resource.services && (
-                      <div className="flex items-start">
-                        <span className="font-semibold w-16 flex-shrink-0">Services:</span>
-                        <span>{resource.services}</span>
+                      <div className="flex items-start space-x-2">
+                        <div className="flex-shrink-0 w-5 h-5 mt-0.5">
+                          <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div>
+                          <span className="font-semibold text-gray-800">{t.services}:</span>
+                          <span className="ml-2">{resource.services}</span>
+                        </div>
                       </div>
                     )}
                     
                     {resource.notes && (
-                      <div className="flex items-start">
-                        <span className="font-semibold w-16 flex-shrink-0">Notes:</span>
-                        <span className="italic">{resource.notes}</span>
+                      <div className="flex items-start space-x-2 mt-3 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                        <div className="flex-shrink-0 w-5 h-5 mt-0.5">
+                          <svg className="w-4 h-4 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div>
+                          <span className="font-semibold text-yellow-800">{t.notes}:</span>
+                          <span className="ml-2 italic text-yellow-700">{resource.notes}</span>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -3468,31 +3620,51 @@ Bienvenido a casa.`,
         ))}
       </div>
 
-      {/* Important Phone Numbers Section - Always printed */}
-      <div className="mt-12 print:mt-8 print:break-before-page">
+      {/* Important Phone Numbers Section - Always printed at bottom */}
+      <div className="mt-12 print:mt-8">
         <h2 className="text-2xl font-bold text-red-700 mb-4 border-b-2 border-red-200 pb-2">
           {t.emergencyNumbers}
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg">
-          <div className="bg-red-50 p-4 rounded border-2 border-red-200">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-lg">
+          <div className="bg-red-50 p-5 rounded-xl border-2 border-red-200 shadow-sm text-center">
+            <div className="w-8 h-8 mx-auto mb-2">
+              <svg className="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-14 0a6 6 0 0012 0 6 6 0 00-12 0zm7-3a1 1 0 10-2 0v3a1 1 0 001 1h3a1 1 0 100-2h-2V7z" clipRule="evenodd" />
+              </svg>
+            </div>
             <div className="font-bold text-red-800 mb-2">{t.emergency}</div>
-            <div className="font-mono text-xl">911</div>
+            <div className="font-mono text-2xl text-red-700 font-black">911</div>
           </div>
           
-          <div className="bg-blue-50 p-4 rounded border-2 border-blue-200">
+          <div className="bg-blue-50 p-5 rounded-xl border-2 border-blue-200 shadow-sm text-center">
+            <div className="w-8 h-8 mx-auto mb-2">
+              <svg className="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+              </svg>
+            </div>
             <div className="font-bold text-blue-800 mb-2">{t.crisis}</div>
-            <div className="font-mono text-xl">988</div>
+            <div className="font-mono text-2xl text-blue-700 font-black">988</div>
           </div>
           
-          <div className="bg-green-50 p-4 rounded border-2 border-green-200">
+          <div className="bg-green-50 p-5 rounded-xl border-2 border-green-200 shadow-sm text-center">
+            <div className="w-8 h-8 mx-auto mb-2">
+              <svg className="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clipRule="evenodd" />
+              </svg>
+            </div>
             <div className="font-bold text-green-800 mb-2">{t.info}</div>
-            <div className="font-mono text-xl">211</div>
+            <div className="font-mono text-2xl text-green-700 font-black">211</div>
           </div>
           
-          <div className="bg-purple-50 p-4 rounded border-2 border-purple-200">
+          <div className="bg-purple-50 p-5 rounded-xl border-2 border-purple-200 shadow-sm text-center">
+            <div className="w-8 h-8 mx-auto mb-2">
+              <svg className="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clipRule="evenodd" />
+              </svg>
+            </div>
             <div className="font-bold text-purple-800 mb-2">{t.domestic}</div>
-            <div className="font-mono text-xl">512-267-SAFE</div>
+            <div className="font-mono text-lg text-purple-700 font-black">512-267-SAFE</div>
           </div>
         </div>
         
