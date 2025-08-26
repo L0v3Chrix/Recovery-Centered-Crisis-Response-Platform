@@ -6,10 +6,10 @@ import Link from 'next/link'
 import ShareButton from '@/components/ShareButton'
 import { Resource, ResourceCategory, RecoveryStage } from '@/types/resources'
 
-// Import recovery resources from database
-import { recoveryResources } from '@/data/all-resources-database'
+// Import legal resources from database
+import { legalResources } from '@/data/all-resources-database'
 
-export default function RecoveryPage() {
+export default function LegalPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedSort, setSelectedSort] = useState('distance')
   const [activeFilters, setActiveFilters] = useState<string[]>([])
@@ -31,7 +31,7 @@ export default function RecoveryPage() {
     })
   }, [])
   
-  const filteredResources = recoveryResources.filter(resource => {
+  const filteredResources = legalResources.filter(resource => {
     if (searchTerm && !resource.name.toLowerCase().includes(searchTerm.toLowerCase()) && 
         !resource.services.some(service => service.toLowerCase().includes(searchTerm.toLowerCase()))) {
       return false
@@ -42,7 +42,7 @@ export default function RecoveryPage() {
   return (
     <div className="min-h-screen bg-soft-cream-50">
       {/* Header following wireframe */}
-      <div className="bg-recovery-purple-400 text-white py-4 px-4">
+      <div className="bg-warning-amber-400 text-white py-4 px-4">
         <div className="max-w-4xl mx-auto">
           <Link 
             href="/" 
@@ -52,8 +52,8 @@ export default function RecoveryPage() {
             Back
           </Link>
           
-          <h1 className="text-2xl font-bold mb-2">💜 Recovery Resources ({recoveryResources.length})</h1>
-          <p className="text-white/90">Addiction treatment, support groups, and recovery services</p>
+          <h1 className="text-2xl font-bold mb-2">⚖️ Legal Resources ({legalResources.length})</h1>
+          <p className="text-white/90">Legal aid, documentation assistance, and benefits guidance</p>
         </div>
       </div>
 
@@ -64,8 +64,8 @@ export default function RecoveryPage() {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-warm-slate-400" />
             <input
               type="text"
-              placeholder="Search within recovery resources..."
-              className="w-full pl-10 pr-4 py-3 border border-warm-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-recovery-purple-400/20 focus:border-recovery-purple-400"
+              placeholder="Search within legal resources..."
+              className="w-full pl-10 pr-4 py-3 border border-warm-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-warning-amber-400/20 focus:border-warning-amber-400"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -77,21 +77,21 @@ export default function RecoveryPage() {
           <div className="flex items-center gap-2">
             <Filter className="w-4 h-4 text-warm-slate-500" />
             <span className="text-warm-slate-600 font-medium">Filters:</span>
-            <button className="px-3 py-1 bg-white border border-warm-slate-200 rounded-full text-sm hover:border-recovery-purple-300 transition-colors">
-              Crisis
-            </button>
-            <button className="px-3 py-1 bg-white border border-warm-slate-200 rounded-full text-sm hover:border-recovery-purple-300 transition-colors">
-              24/7
-            </button>
-            <button className="px-3 py-1 bg-white border border-warm-slate-200 rounded-full text-sm hover:border-recovery-purple-300 transition-colors">
+            <button className="px-3 py-1 bg-white border border-warm-slate-200 rounded-full text-sm hover:border-warning-amber-300 transition-colors">
               Free
+            </button>
+            <button className="px-3 py-1 bg-white border border-warm-slate-200 rounded-full text-sm hover:border-warning-amber-300 transition-colors">
+              Emergency
+            </button>
+            <button className="px-3 py-1 bg-white border border-warm-slate-200 rounded-full text-sm hover:border-warning-amber-300 transition-colors">
+              No ID Required
             </button>
           </div>
           
           <div className="flex items-center gap-2 ml-auto">
             <span className="text-warm-slate-600 font-medium">🗂️ Sort:</span>
             <select 
-              className="px-3 py-1 bg-white border border-warm-slate-200 rounded text-sm focus:outline-none focus:ring-2 focus:ring-recovery-purple-400/20"
+              className="px-3 py-1 bg-white border border-warm-slate-200 rounded text-sm focus:outline-none focus:ring-2 focus:ring-warning-amber-400/20"
               value={selectedSort}
               onChange={(e) => setSelectedSort(e.target.value)}
             >
@@ -127,7 +127,7 @@ export default function RecoveryPage() {
             }
             
             return (
-              <div key={resource.id} className="bg-white rounded-lg border border-warm-slate-200 hover:border-recovery-purple-300 transition-all duration-200">
+              <div key={resource.id} className="bg-white rounded-lg border border-warm-slate-200 hover:border-warning-amber-300 transition-all duration-200">
                 {/* Main Card Content */}
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-3">
@@ -139,7 +139,7 @@ export default function RecoveryPage() {
                         </span>
                       </div>
                       
-                      <p className="text-recovery-purple-600 font-medium text-sm mb-2">
+                      <p className="text-warning-amber-600 font-medium text-sm mb-2">
                         {resource.type} • {resource.eligibility}
                       </p>
                       
@@ -200,7 +200,7 @@ export default function RecoveryPage() {
                         id: resource.id,
                         name: resource.name,
                         description: resource.description,
-                        category: ResourceCategory.RECOVERY,
+                        category: ResourceCategory.LEGAL,
                         address: resource.address,
                         phone: resource.phone,
                         services: resource.services,
@@ -214,7 +214,7 @@ export default function RecoveryPage() {
                           sunday: { open: '00:00', close: '00:00' }
                         },
                         eligibility: [resource.eligibility],
-                        recoveryStage: [RecoveryStage.TREATMENT],
+                        recoveryStage: [RecoveryStage.SUPPORT],
                         lastVerified: new Date(resource.lastUpdated),
                         coordinates: resource.coordinates || { lat: 30.2672, lng: -97.7431 }
                       }}
@@ -296,7 +296,7 @@ export default function RecoveryPage() {
                         </div>
                         <div className="flex flex-wrap gap-2">
                           <a
-                            href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`${resource.name}\\n${resource.address}\\nPhone: ${resource.phone}\\n\\nFound via Central Texas Resources`)}`}
+                            href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`${resource.name}\n${resource.address}\nPhone: ${resource.phone}\n\nFound via Central Texas Resources`)}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1 px-3 py-2 bg-green-100 text-green-700 text-sm rounded-lg hover:bg-green-200 transition-colors"
@@ -304,13 +304,13 @@ export default function RecoveryPage() {
                             📱 WhatsApp
                           </a>
                           <a
-                            href={`mailto:?subject=${encodeURIComponent(resource.name)}&body=${encodeURIComponent(`${resource.name}\\n${resource.address}\\nPhone: ${resource.phone}\\n\\n${resource.description}\\n\\nFound via Central Texas Resources`)}`}
+                            href={`mailto:?subject=${encodeURIComponent(resource.name)}&body=${encodeURIComponent(`${resource.name}\n${resource.address}\nPhone: ${resource.phone}\n\n${resource.description}\n\nFound via Central Texas Resources`)}`}
                             className="inline-flex items-center gap-1 px-3 py-2 bg-blue-100 text-blue-700 text-sm rounded-lg hover:bg-blue-200 transition-colors"
                           >
                             📧 Email
                           </a>
                           <a
-                            href={`sms:?body=${encodeURIComponent(`${resource.name}\\n${resource.address}\\nPhone: ${resource.phone}`)}`}
+                            href={`sms:?body=${encodeURIComponent(`${resource.name}\n${resource.address}\nPhone: ${resource.phone}`)}`}
                             className="inline-flex items-center gap-1 px-3 py-2 bg-purple-100 text-purple-700 text-sm rounded-lg hover:bg-purple-200 transition-colors"
                           >
                             💬 SMS

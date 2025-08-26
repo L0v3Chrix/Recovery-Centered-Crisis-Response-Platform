@@ -1,7 +1,8 @@
 'use client'
 
-import { Phone, MapPin, Clock, Share2, ExternalLink, Navigation } from 'lucide-react'
+import { Phone, MapPin, Clock, ExternalLink, Navigation } from 'lucide-react'
 import { Resource } from '@/types/resources'
+import ShareButton from './ShareButton'
 
 interface ResourceCardProps {
   resource: Resource
@@ -27,25 +28,6 @@ export default function ResourceCard({ resource, showDistance, distance, classNa
     }
   }
 
-  const handleShare = async () => {
-    const shareData = {
-      title: resource.name,
-      text: `${resource.description} - ${resource.address}`,
-      url: window.location.href
-    }
-
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData)
-      } catch (error) {
-        // Fallback to clipboard
-        navigator.clipboard.writeText(`${resource.name} - ${resource.phone} - ${resource.address}`)
-      }
-    } else {
-      // Fallback for older browsers
-      navigator.clipboard.writeText(`${resource.name} - ${resource.phone} - ${resource.address}`)
-    }
-  }
 
   const isOpenNow = () => {
     if (resource.isOpen24Hours) return true
@@ -102,13 +84,12 @@ export default function ResourceCard({ resource, showDistance, distance, classNa
             )}
           </div>
         </div>
-        <button
-          onClick={handleShare}
-          className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-          aria-label="Share resource"
-        >
-          <Share2 className="w-5 h-5" />
-        </button>
+        <ShareButton 
+          resource={resource} 
+          size="sm" 
+          showText={false} 
+          className="text-gray-400 hover:text-gray-600"
+        />
       </div>
 
       {/* Description */}
