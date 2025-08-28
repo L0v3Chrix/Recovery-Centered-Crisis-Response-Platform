@@ -64,20 +64,20 @@ export default function HomePage() {
       </div>
 
       {/* Brand Header Section with ambient glow */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden bg-gradient-to-b from-slate-900/60 to-transparent">
         {/* Ambient glow effects */}
-        <div className="absolute -top-20 -left-10 h-72 w-72 rounded-full bg-sky-400/25 blur-3xl"></div>
-        <div className="absolute -top-32 right-0 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl"></div>
+        <div className="absolute -top-20 -left-10 h-72 w-72 rounded-full bg-sky-400/15 blur-3xl"></div>
+        <div className="absolute -top-32 right-0 h-96 w-96 rounded-full bg-indigo-500/10 blur-3xl"></div>
         
         <div className="py-16 text-center text-white relative">
           <div className="mb-6">
             {/* Logo Image with depth */}
             <div className="mb-6 flex justify-center">
               <Image 
-                src="/brand/helpnowatx_logo_final.png" 
+                src="/brand/wordmark-horizontal.svg" 
                 alt="HelpNow ATX - Real help, verified daily"
-                width={1400}
-                height={500}
+                width={360}
+                height={110}
                 className="h-16 md:h-20 w-auto drop-shadow-[0_6px_24px_rgba(0,0,0,0.45)]"
                 priority
               />

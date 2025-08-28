@@ -7,6 +7,7 @@ export function middleware(request: NextRequest) {
   // Security headers for mixed content prevention
   response.headers.set('Content-Security-Policy', 
     "upgrade-insecure-requests; " +
+    "block-all-mixed-content; " +
     "default-src 'self' https:; " +
     "script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; " +
     "style-src 'self' 'unsafe-inline' https:; " +
