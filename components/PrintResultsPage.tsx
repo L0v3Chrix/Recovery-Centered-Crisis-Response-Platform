@@ -3,8 +3,26 @@
 import { useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { Phone, MapPin, Globe, Clock } from 'lucide-react'
-import { database } from '@/lib/database'
-import { QuizScorer, type ScoredResource, type QuizAnswer } from '@/lib/scorer'
+
+interface Resource {
+  id: string
+  name: string
+  category: string
+  description: string
+  phone?: string
+  address?: string
+  website?: string
+  services?: string[]
+  isOpen24Hours?: boolean
+  acceptsWalkIns?: boolean
+  hasCrisisSupport?: boolean
+}
+
+interface ScoredResource {
+  resource: Resource
+  score: number
+  reasons: string[]
+}
 
 interface GroupedResults {
   [category: string]: ScoredResource[]
@@ -20,29 +38,41 @@ export default function PrintResultsPage() {
     const answersParam = searchParams.get('answers')
     
     if (answersParam) {
-      try {
-        const answers: QuizAnswer[] = JSON.parse(answersParam)
-        const allResources = database.getAllResources()
-        const scoredResults = QuizScorer.scoreResources(allResources, answers)
-        const topResults = scoredResults.slice(0, 20)
-        
-        const grouped = topResults.reduce((acc: GroupedResults, item) => {
-          const category = item.resource.category
-          if (!acc[category]) {
-            acc[category] = []
+      const fetchResults = async () => {
+        try {
+          const answers = JSON.parse(answersParam)
+          const response = await fetch('/api/quiz/recommendations', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ answers })
+          })
+          
+          if (response.ok) {
+            const data = await response.json()
+            const topResults = data.recommendations || []
+            
+            const grouped = topResults.reduce((acc: GroupedResults, item: ScoredResource) => {
+              const category = item.resource.category
+              if (!acc[category]) {
+                acc[category] = []
+              }
+              acc[category].push(item)
+              return acc
+            }, {})
+            
+            setResults(topResults)
+            setGroupedResults(grouped)
           }
-          acc[category].push(item)
-          return acc
-        }, {})
-        
-        setResults(topResults)
-        setGroupedResults(grouped)
-      } catch (error) {
-        console.error('Error processing quiz results:', error)
+        } catch (error) {
+          console.error('Error processing quiz results:', error)
+        }
+        setLoading(false)
       }
+      
+      fetchResults()
+    } else {
+      setLoading(false)
     }
-    
-    setLoading(false)
     
     // Auto-print when page loads
     if (typeof window !== 'undefined') {
