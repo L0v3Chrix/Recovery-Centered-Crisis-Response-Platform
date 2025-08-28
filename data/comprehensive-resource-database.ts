@@ -71,6 +71,8 @@ export const crisisResources: Resource[] = [
     address: '1430 Collier Street, Austin, TX 78702',
     phone: '(512) 472-4357',
     website: 'https://integralcare.org',
+    area: 'east',
+    zipCode: '78702',
     hours: {
       isOpen24Hours: true,
       monday: { open: '00:00', close: '23:59' },
@@ -135,6 +137,8 @@ export const crisisResources: Resource[] = [
     address: '3700 S 1st St, Austin, TX 78704',
     phone: '(512) 441-6914',
     website: 'https://lifeworksaustin.org',
+    area: 'south',
+    zipCode: '78704',
     hours: {
       monday: { open: '00:00', close: '23:59' },
       tuesday: { open: '00:00', close: '23:59' },
@@ -198,6 +202,8 @@ export const foodResources: Resource[] = [
     category: ResourceCategory.FOOD,
     address: '908 E Cesar Chavez St, Austin, TX 78702',
     phone: '(512) 478-0447',
+    area: 'east',
+    zipCode: '78702',
     hours: {
       monday: { open: '07:00', close: '14:00' },
       tuesday: { open: '07:00', close: '14:00' },
@@ -225,6 +231,8 @@ export const foodResources: Resource[] = [
     address: '611 Neches Street, Austin, TX 78701',
     phone: '(512) 479-4610',
     website: 'https://caritasofaustin.org',
+    area: 'central',
+    zipCode: '78701',
     hours: {
       monday: { open: '11:00', close: '12:30' },
       tuesday: { open: '11:00', close: '12:30' },
@@ -251,6 +259,8 @@ export const foodResources: Resource[] = [
     address: '304 E 7th St, Austin, TX 78701',
     phone: '(512) 610-3500',
     website: 'https://www.trinitycentertx.org',
+    area: 'central',
+    zipCode: '78701',
     hours: {
       monday: { open: '09:00', close: '12:00' },
       tuesday: { open: '09:00', close: '12:00' },
@@ -275,6 +285,8 @@ export const foodResources: Resource[] = [
     category: ResourceCategory.FOOD,
     address: '4430 Menchaca Rd, Austin, TX 78745',
     phone: '(512) 522-1097',
+    area: 'south',
+    zipCode: '78745',
     hours: {
       monday: { open: '09:00', close: '13:00' },
       tuesday: { open: '09:00', close: '13:00' },

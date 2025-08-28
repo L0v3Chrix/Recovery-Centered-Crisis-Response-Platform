@@ -1,7 +1,8 @@
 'use client'
 
 import React from 'react'
-import { Heart, DollarSign, Users, Zap } from 'lucide-react'
+import { Heart, DollarSign, Users, Zap, MapPin, Clock } from 'lucide-react'
+import Link from 'next/link'
 
 export default function SupportPage() {
   // Track GA events for support clicks
@@ -17,174 +18,205 @@ export default function SupportPage() {
 
   const handleSquareClick = () => {
     trackSupportClick('square')
-    window.open(process.env.NEXT_PUBLIC_SQUARE_CHECKOUT, '_blank')
+    window.open('https://square.link/u/hdeWZna4', '_blank')
   }
 
   const handleCashAppClick = () => {
     trackSupportClick('cashapp') 
-    window.open(`https://cash.app/${process.env.NEXT_PUBLIC_CASH_APP_HANDLE}`, '_blank')
+    window.open('https://cash.app/$helpnowatx', '_blank')
   }
 
   const handleMoreClick = () => {
     trackSupportClick('more')
   }
 
-  // Sample updates data - in real implementation this would come from data/updates.ts
-  const weeklyUpdates = [
-    {
-      title: 'Server hosting & CDN',
-      description: 'Keep the site fast and available 24/7',
-      cost: '~$30/week'
-    },
-    {
-      title: 'Data verification calls', 
-      description: 'Weekly calls to verify 500+ resources are still active',
-      cost: '~$50/week'
-    },
-    {
-      title: 'Emergency updates',
-      description: 'Real-time updates when resources change or close',
-      cost: '~$20/week'
-    }
-  ]
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-canvas-tint to-white">
       {/* Hero Section */}
       <div className="bg-support py-16">
         <div className="container mx-auto px-4 text-center text-white">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <Heart className="w-16 h-16 mx-auto mb-6 text-white/90" />
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Help keep this project alive
+              About This Project
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-white/90 font-medium leading-relaxed">
-              Back the signal—your tip funds fresh updates & uptime.
+              A free, comprehensive guide to verified help resources in Central Texas
             </p>
-            
-            {/* Primary & Secondary CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-              <button
-                onClick={handleSquareClick}
-                className="btn bg-white text-aurora-indigo700 hover:bg-gray-100 text-lg px-8 py-4 font-bold min-w-[200px]"
-              >
-                <DollarSign className="w-5 h-5 mr-2" />
-                Support via Square
-              </button>
-              
-              <button
-                onClick={handleCashAppClick}
-                className="btn-ghost border-white text-white hover:bg-white/10 text-lg px-8 py-4 font-semibold min-w-[200px]"
-              >
-                💰 Cash App
-              </button>
-            </div>
-
-            <button
-              onClick={handleMoreClick}
-              className="btn-quiet text-white/80 hover:text-white hover:bg-white/5 underline"
-            >
-              More ways to support →
-            </button>
           </div>
         </div>
       </div>
 
-      {/* What Your Support Funds Section */}
+      {/* About Section */}
       <div className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-aurora-indigo700 text-center mb-12">
-              What your support funds this week
-            </h2>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              {weeklyUpdates.map((update, index) => (
-                <div key={index} className="card text-center">
-                  <div className="w-12 h-12 bg-aurora-emerald500 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-white font-bold">{index + 1}</span>
+            <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+              <div>
+                <h2 className="text-3xl font-bold text-aurora-indigo700 mb-6">
+                  Why we built this
+                </h2>
+                <p className="text-lg text-warm-slate-700 mb-6 leading-relaxed">
+                  When you need help, you need it now. Not after calling 10 numbers, 
+                  not after waiting on hold, and definitely not after being passed around 
+                  between agencies that may or may not still exist.
+                </p>
+                <p className="text-lg text-warm-slate-700 mb-6 leading-relaxed">
+                  <strong>Central Texas Resources</strong> cuts through the noise. Every resource 
+                  is verified weekly. Every phone number works. Every address is current. 
+                  When someone is in crisis, they get accurate information instantly.
+                </p>
+                <div className="flex items-center gap-4 text-sm text-aurora-indigo600">
+                  <div className="flex items-center">
+                    <MapPin className="w-4 h-4 mr-1" />
+                    Austin, TX
                   </div>
-                  <h3 className="text-xl font-semibold text-aurora-indigo700 mb-3">
-                    {update.title}
-                  </h3>
-                  <p className="text-warm-slate-600 mb-4 leading-relaxed">
-                    {update.description}
-                  </p>
-                  <div className="text-aurora-emerald500 font-bold">
-                    {update.cost}
+                  <div className="flex items-center">
+                    <Clock className="w-4 h-4 mr-1" />
+                    Updated weekly
+                  </div>
+                  <div className="flex items-center">
+                    <span className="w-2 h-2 bg-aurora-emerald500 rounded-full mr-1"></span>
+                    516+ verified resources
                   </div>
                 </div>
-              ))}
-            </div>
-
-            <div className="text-center mt-12">
-              <div className="panel bg-gradient-to-br from-aurora-azure400/10 to-aurora-emerald500/10 border-aurora-azure400/20">
-                <p className="text-lg text-warm-slate-700 mb-4">
-                  <strong>Total weekly operating cost:</strong> ~$100
+              </div>
+              <div className="bg-aurora-azure50 rounded-xl p-8 border border-aurora-azure200">
+                <h3 className="text-xl font-semibold text-aurora-indigo700 mb-4">
+                  Built by the community, for the community
+                </h3>
+                <p className="text-warm-slate-600 mb-4">
+                  This project is maintained by <strong>Raise the Vibe</strong>, a local 
+                  Austin team dedicated to using technology to solve real problems for real people.
                 </p>
                 <p className="text-warm-slate-600">
-                  Every dollar goes directly to keeping resources verified, updated, and accessible 
-                  when people need them most. No fancy offices, no admin overhead—just the essentials.
+                  We believe access to help shouldn&apos;t depend on knowing the right person 
+                  or having the right connections. It should be simple, fast, and always available.
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* More Ways to Support Section (Stub) */}
-      <div className="bg-canvas-tint py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-aurora-indigo700 mb-8">
-              More ways to support
+            {/* Ways to Support Grid */}
+            <h2 className="text-3xl font-bold text-aurora-indigo700 text-center mb-12">
+              Ways to support this project
             </h2>
             
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="card">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+              {/* Financial Support */}
+              <div className="card text-center">
+                <DollarSign className="w-12 h-12 text-aurora-emerald500 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-aurora-indigo700 mb-3">
+                  Fund the updates
+                </h3>
+                <p className="text-warm-slate-600 mb-4">
+                  Server costs, weekly verification calls, and emergency updates cost ~$100/week.
+                </p>
+                <div className="space-y-2">
+                  <button
+                    onClick={handleSquareClick}
+                    className="btn-sm bg-aurora-emerald500 text-white hover:bg-aurora-emerald600 w-full"
+                  >
+                    Support via Square
+                  </button>
+                  <button
+                    onClick={handleCashAppClick}
+                    className="btn-sm btn-outline w-full"
+                  >
+                    Cash App
+                  </button>
+                </div>
+              </div>
+
+              {/* Share */}
+              <div className="card text-center">
                 <Users className="w-12 h-12 text-aurora-fuchsia500 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-aurora-indigo700 mb-3">
                   Spread the word
                 </h3>
                 <p className="text-warm-slate-600 mb-4">
-                  Share helpnowatx.org with anyone who might need it. 
-                  Word of mouth is the most powerful support.
+                  Share helpnowatx.org with anyone who might need it. Word of mouth saves lives.
                 </p>
-                <a href="/share" className="btn-primary">
+                <Link href="/share" className="btn-sm btn-primary w-full">
                   Get share tools
-                </a>
+                </Link>
               </div>
-              
-              <div className="card">
+
+              {/* Submit Updates */}
+              <div className="card text-center">
                 <Zap className="w-12 h-12 text-aurora-azure400 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-aurora-indigo700 mb-3">
                   Submit updates
                 </h3>
                 <p className="text-warm-slate-600 mb-4">
-                  Know a resource that&apos;s missing or outdated? 
-                  Help keep the database fresh and accurate.
+                  Know a resource that&apos;s missing or outdated? Help keep our database fresh.
                 </p>
-                <a href="/submit" className="btn-primary">
+                <Link href="/submit" className="btn-sm btn-primary w-full">
                   Submit resource
-                </a>
+                </Link>
+              </div>
+
+              {/* Partners */}
+              <div className="card text-center">
+                <Heart className="w-12 h-12 text-aurora-indigo500 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-aurora-indigo700 mb-3">
+                  Partner with us
+                </h3>
+                <p className="text-warm-slate-600 mb-4">
+                  Organizations and volunteers who help verify and maintain resources.
+                </p>
+                <Link href="/partners" className="btn-sm btn-primary w-full">
+                  Learn about partnerships
+                </Link>
               </div>
             </div>
 
-            {/* Trust Notes */}
-            <div className="mt-12">
-              <div className="text-sm text-warm-slate-500 space-y-2">
-                <p>
-                  <strong>100% transparent:</strong> All contributions go directly to server costs, 
-                  data verification, and emergency updates.
+            {/* Operating Transparency */}
+            <div className="bg-gradient-to-br from-aurora-azure400/10 to-aurora-emerald500/10 rounded-xl p-8 border border-aurora-azure400/20">
+              <h3 className="text-2xl font-semibold text-aurora-indigo700 mb-6 text-center">
+                How your support keeps this running
+              </h3>
+              
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-aurora-emerald500 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <span className="text-white font-bold">$30</span>
+                  </div>
+                  <h4 className="font-semibold text-aurora-indigo700 mb-2">Server & CDN</h4>
+                  <p className="text-sm text-warm-slate-600">Keep the site fast and available 24/7</p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-aurora-azure400 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <span className="text-white font-bold">$50</span>
+                  </div>
+                  <h4 className="font-semibold text-aurora-indigo700 mb-2">Verification calls</h4>
+                  <p className="text-sm text-warm-slate-600">Weekly calls to verify 500+ resources are active</p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-aurora-fuchsia500 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <span className="text-white font-bold">$20</span>
+                  </div>
+                  <h4 className="font-semibold text-aurora-indigo700 mb-2">Emergency updates</h4>
+                  <p className="text-sm text-warm-slate-600">Real-time updates when resources change</p>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <p className="text-lg text-warm-slate-700 mb-4">
+                  <strong>Total weekly cost: ~$100</strong>
                 </p>
-                <p>
-                  <strong>No recurring fees:</strong> Support when you can, as much as you can. 
-                  No pressure, no subscriptions.
-                </p>
-                <p>
-                  <strong>Open book:</strong> Monthly expense reports available on request. 
-                  This project runs lean and stays accountable.
-                </p>
+                <div className="grid md:grid-cols-3 gap-6 text-sm text-warm-slate-600">
+                  <p>
+                    <strong>100% transparent:</strong> All contributions go directly to operations
+                  </p>
+                  <p>
+                    <strong>No overhead:</strong> No salaries, offices, or administrative costs
+                  </p>
+                  <p>
+                    <strong>Open books:</strong> Monthly reports available on request
+                  </p>
+                </div>
               </div>
             </div>
           </div>

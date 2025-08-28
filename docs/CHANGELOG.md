@@ -117,6 +117,61 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Environment Variables**: NEXT_PUBLIC_SQUARE_CHECKOUT, NEXT_PUBLIC_CASH_APP_HANDLE
 - **Analytics**: Google Analytics event tracking implemented
 
+### Step 5: GHL API v2 Integration - 2025-08-28
+
+#### Added
+- **GHL API Route (app/api/submit/route.ts)**: Complete GoHighLevel API v2 integration
+  - PIT + Location ID architecture for contact creation and opportunity management
+  - Contact creation with custom fields for all resource metadata
+  - Opportunity creation in GHL pipeline for submission tracking
+  - Comprehensive error handling with detailed logging
+  - Webhook fallback system that logs submissions when GHL API fails
+  - Health check endpoint at /api/submit for monitoring
+- **Resource Submission Form (app/submit/page.tsx)**: Complete submission interface
+  - Full form validation with client-side and server-side checks
+  - Progress states, loading indicators, success/error handling
+  - Comprehensive resource fields: contact info, details, additional information
+  - 15 resource categories from Crisis Support to Other
+  - GA event tracking for resource_submitted with category parameter
+  - Success page with submission confirmation and next steps
+
+#### Technical Details
+- **Commit**: `feat(ghl): GHL API v2 integration with resource submission system`
+- **Files Added**: app/api/submit/route.ts, app/submit/page.tsx
+- **Environment Variables**: GHL_BASE_URL, GHL_PIT, GHL_LOCATION_ID, GHL_PIPELINE_ID
+- **API Integration**: GoHighLevel API v2 with Bearer token authentication
+- **Error Handling**: Webhook fallback, comprehensive logging, graceful degradation
+
+### Step 6: Admin Reports Dashboard - 2025-08-28
+
+#### Added
+- **Admin Reports Page (app/admin/reports/page.tsx)**: Password-protected analytics dashboard
+  - Simple authentication with configurable password (ADMIN_PASSWORD env variable)
+  - Complete submission analytics with stats overview
+  - Real-time metrics: total submissions, weekly/monthly trends, verification rates
+  - Category distribution with visual progress bars and sorting
+  - Status distribution with color-coded indicators and icons
+  - Recent submissions table with detailed metadata display
+  - Refresh functionality and export data capabilities
+  - Hidden from navigation and sitemaps for security
+- **Admin Analytics API (app/api/admin/stats/route.ts)**: Secure analytics endpoint
+  - Bearer token authentication for admin API access
+  - Mock data system ready for GHL API integration
+  - GET endpoint for analytics data retrieval
+  - POST endpoint for real-time data refresh
+  - Error handling and fallback to mock data
+
+#### Changed
+- **Security Model**: Password-protected admin access with environment variables
+- **Analytics Architecture**: Structured for real GHL data integration
+
+#### Technical Details
+- **Commit**: `feat(admin): hidden admin reports page with analytics dashboard`
+- **Files Added**: app/admin/reports/page.tsx, app/api/admin/stats/route.ts
+- **Authentication**: Simple password-based auth with environment configuration
+- **Data Source**: Mock analytics ready for GHL API/database integration
+- **Security**: Hidden URL, password protection, no navigation links
+
 ### Planning Phase - 2025-08-28
 
 #### Added

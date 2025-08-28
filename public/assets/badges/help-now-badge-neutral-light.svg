@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="240" height="64" viewBox="0 0 240 64" role="img" aria-label="Get Help Now: Central Texas Resources">
-  <rect rx="12" width="240" height="64" fill="#6b7280"/>
-  <text x="20" y="38" font-family="Inter, system-ui" font-size="18" fill="white" font-weight="700">Get Help Now</text>
-  <text x="20" y="55" font-family="Inter, system-ui" font-size="12" fill="#d1d5db">Central Texas Resources</text>
-  <circle cx="204" cy="32" r="18" fill="white"/>
-  <path d="M204 22 v20 M194 32 h20" stroke="#6b7280" stroke-width="4" stroke-linecap="round"/>
-</svg>

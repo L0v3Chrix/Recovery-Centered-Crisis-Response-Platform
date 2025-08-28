@@ -1,0 +1,18 @@
+<svg width="360" height="110" viewBox="0 0 360 110" xmlns="http://www.w3.org/2000/svg">
+        <rect width="360" height="110" rx="12" fill="#1B2A5B" />
+        
+        <!-- Mini logo -->
+        <g transform="translate(20, 25) scale(0.3)">
+          <rect x="40" y="30" width="50" height="140" rx="26" fill="#3EC6FF" />
+          <rect x="110" y="30" width="50" height="140" rx="26" fill="#3EC6FF" />
+          <polyline points="20,100 50,100 65,85 70,115 75,85 80,100 120,100 135,85 140,115 145,85 150,100 180,100" 
+            stroke="white" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        </g>
+        
+        <text x="90" y="45" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="800" fill="white">
+          Get Help Now
+        </text>
+        <text x="90" y="70" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="#3EC6FF">
+          HelpNow ATX • Verified resources
+        </text>
+      </svg>

@@ -18,6 +18,9 @@ export interface Resource {
   languages?: string[]
   accessibilityNotes?: string
   notes?: string
+  // Geographical enhancements
+  area?: 'north' | 'south' | 'east' | 'west' | 'central' | 'other'
+  zipCode?: string
 }
 
 export enum ResourceCategory {

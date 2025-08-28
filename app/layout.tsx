@@ -1,22 +1,45 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 import SiteFooter from '../components/SiteFooter'
 
-const inter = Inter({ subsets: ['latin'] })
-
 export const metadata: Metadata = {
-  title: 'Central Texas Real Life Resources',
-  description: 'Connect to what you need when you need it - Recovery and support resources for Central Texas residents',
-  keywords: ['recovery', 'resources', 'Austin', 'Travis County', 'addiction', 'support', 'crisis'],
-  authors: [{ name: 'Raize The Vibe' }],
+  title: 'HelpNow ATX - Real help, verified daily',
+  description: 'Find verified crisis, food, shelter, and recovery resources in Central Texas. 516+ resources updated weekly.',
+  keywords: ['crisis', 'food', 'shelter', 'recovery', 'resources', 'Austin', 'Travis County', 'Central Texas', 'help', 'emergency'],
+  authors: [{ name: 'Raise the Vibe' }],
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
-  themeColor: '#3b82f6',
+  themeColor: '#2B50E2',
   manifest: '/manifest.json',
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
+    other: [
+      { rel: 'icon', url: '/android-chrome-192x192.png', sizes: '192x192' },
+      { rel: 'icon', url: '/android-chrome-512x512.png', sizes: '512x512' }
+    ]
+  },
+  openGraph: {
+    title: 'HelpNow ATX - Real help, verified daily',
+    description: 'Find verified crisis, food, shelter, and recovery resources in Central Texas.',
+    url: 'https://helpnowatx.org',
+    siteName: 'HelpNow ATX',
+    images: ['/og/default-1200x630.png'],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'HelpNow ATX - Real help, verified daily',
+    description: 'Find verified crisis, food, shelter, and recovery resources in Central Texas.',
+    images: ['/og/default-1200x675.png'],
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'TX Resources'
+    title: 'HelpNow ATX'
   }
 }
 
@@ -36,7 +59,7 @@ export default function RootLayout({
         <meta name="format-detection" content="telephone=yes" />
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
-      <body className={`${inter.className} flex flex-col min-h-screen antialiased tracking-tight`}>
+      <body className="flex flex-col min-h-screen antialiased tracking-tight font-sans">
         {/* Skip to content link for accessibility */}
         <a 
           href="#main-content" 

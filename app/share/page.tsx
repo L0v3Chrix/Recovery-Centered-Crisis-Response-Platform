@@ -12,14 +12,15 @@ export default function SharePage() {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
   const [copiedWebShare, setCopiedWebShare] = useState(false)
   
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://YOURDOMAIN'
+  const siteUrl = 'https://helpnowatx.org'
   const shareUrl = `${siteUrl}/?utm_source=social&utm_medium=share&utm_campaign=launch`
+  const shareImage = '/og/default-1200x630.png'
   
   const captions = [
-    `Need help now? Crisis, food, shelter, recovery—verified & mobile-friendly. Save this. Share this. ❤️ ${shareUrl}`,
-    `Know someone struggling? One link to real help in Austin/Travis County. ${shareUrl}`,
-    `Meals today. Shelter tonight. Recovery support. Central Texas resources in one place. ${shareUrl}`,
-    `988, crisis text, shelters, clinics, MAT, legal aid—fast access. ${shareUrl}`
+    `Real help, verified daily in Central Texas. Save & share: ${shareUrl}`,
+    `Know someone struggling? One link to food, shelter, recovery, healthcare: ${shareUrl}`,
+    `Tonight's shelter, today's meals, recovery options—on your phone: ${shareUrl}`,
+    `988 crisis line, food banks, shelters, clinics, legal aid—all verified: ${shareUrl}`
   ]
 
   const platformLinks = [
@@ -33,13 +34,13 @@ export default function SharePage() {
       name: 'Facebook',
       icon: '📘',
       color: 'bg-blue-600',
-      url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent('Need help now? Crisis, food, shelter, recovery—verified & mobile-friendly. Save this. Share this. ❤️')}`
+      url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent('Real help, verified daily in Central Texas. Save & share.')}`
     },
     {
       name: 'LinkedIn',
       icon: '💼',
       color: 'bg-blue-700',
-      url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}&summary=${encodeURIComponent('Central Texas resources for crisis, food, shelter, and recovery support.')}`
+      url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}&summary=${encodeURIComponent('HelpNow ATX - Verified resources for crisis, food, shelter, and recovery support in Central Texas.')}`
     },
     {
       name: 'WhatsApp',
@@ -57,14 +58,14 @@ export default function SharePage() {
       name: 'Email',
       icon: '✉️',
       color: 'bg-purple-600',
-      url: `mailto:?subject=${encodeURIComponent('Central Texas Resources - Help When You Need It')}&body=${encodeURIComponent(captions[0])}`
+      url: `mailto:?subject=${encodeURIComponent('HelpNow ATX - Help When You Need It')}&body=${encodeURIComponent(captions[0])}`
     }
   ]
 
   const handleWebShare = async () => {
     const shareData = {
-      title: 'Central Texas Resources',
-      text: 'Crisis, food, shelter, recovery—verified & mobile-friendly resources for Central Texas.',
+      title: 'HelpNow ATX - Real help, verified daily',
+      text: 'Find verified crisis, food, shelter, and recovery resources in Central Texas.',
       url: shareUrl
     }
 
@@ -139,13 +140,13 @@ export default function SharePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-gradient-to-br from-green-50 to-blue-50 py-16">
+      <div className="bg-aurora text-white py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Share Resources
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            Share HelpNow ATX
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
-            Help your community find verified crisis, food, shelter, and recovery resources.
+          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
+            Help spread the word about verified crisis, food, shelter, and recovery resources in Central Texas.
           </p>
         </div>
       </div>

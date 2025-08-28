@@ -1,359 +1,169 @@
-# Aurora Hope Design System Styleguide
+# HelpNow ATX Brand Style Guide
 
-**Version**: 1.1  
-**Last Updated**: 2025-08-28  
-**Status**: Step 1 Implemented - Tokens & Component Layer Active  
+## Brand Identity
 
-This styleguide documents the Aurora Hope Design System for Central Texas Resources, providing clear guidelines for consistent implementation across all components and pages.
+**Name:** HelpNow ATX  
+**Tagline:** Real help • Verified daily  
+**URL:** https://helpnowatx.org
+
+## Logo Usage
+
+### Primary Logo
+The HelpNow ATX logo consists of two elements:
+1. **Icon:** Two vertical pillars forming an "H" with an ECG heartbeat line across the center
+2. **Wordmark:** "elpNow ATX" text completing the word "HelpNow ATX"
+
+### Logo Files
+- **SVG (Scalable):** `/public/brand/logo-hlifeline.svg` - Primary logo mark
+- **Horizontal Wordmark:** `/public/brand/wordmark-horizontal.svg` - Logo with text
+- **Stacked Wordmark:** `/public/brand/wordmark-stacked.svg` - Vertical layout
+
+### Clear Space
+Maintain minimum clear space around the logo equal to the width of one pillar (1× pillar width on all sides).
+
+### Minimum Sizes
+- **Digital:** 48px minimum height
+- **Print:** 0.5 inches minimum height
+- **Favicon:** 16px (simplified version)
+
+## Color Palette
+
+### Primary Colors
+```css
+--aurora-indigo-700: #1B2A5B    /* Deep Blue - Primary brand color */
+--aurora-blue-500: #2B50E2      /* Bright Blue - Links and CTAs */
+--aurora-cyan-400: #6BA9FF      /* Light Blue - Accents */
+--heartbeat-cyan: #3EC6FF       /* Cyan - ECG line color */
+```
+
+### Supporting Colors
+```css
+--aurora-emerald-500: #10b981   /* Success/Verified */
+--aurora-crimson-600: #dc2626   /* Crisis/Urgent */
+--aurora-fuchsia-500: #d946ef   /* Recovery/Support */
+--aurora-azure-400: #38bdf8     /* Healthcare/Info */
+```
+
+### Gradients
+```css
+/* Primary Brand Gradient */
+background: linear-gradient(135deg, #1B2A5B 0%, #2B50E2 50%, #6BA9FF 100%);
+
+/* Aurora Background */
+background: linear-gradient(135deg, #1B2A5B 0%, #2B50E2 25%, #6BA9FF 75%, #3EC6FF 100%);
+```
+
+## Typography
+
+### Font Stack
+```css
+font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+```
+
+### Font Weights
+- **Black (900):** Logo wordmark, main headings
+- **Bold (700):** Section headings, CTAs
+- **Semibold (600):** Subheadings, emphasis
+- **Medium (500):** Body text, taglines
+- **Regular (400):** Secondary text
+
+## Partner Badges
+
+### Available Styles
+1. **Gradient Pill** (Recommended) - Aurora gradient background
+2. **Dark Background** - Solid dark blue background
+3. **Outline Style** - White background with border
+
+### Badge Implementation
+```html
+<!-- HelpNow ATX Partner Badge -->
+<a href="https://helpnowatx.org/?utm_source=partner&utm_medium=badge&utm_campaign=backlink"
+   target="_blank" rel="noopener noreferrer"
+   aria-label="HelpNow ATX — Find verified help">
+  <img src="https://helpnowatx.org/partner-badges/badge-pill.svg"
+       alt="Get Help Now — HelpNow ATX (verified resources)"
+       width="360" height="110"
+       style="max-width:100%;height:auto;border:0;border-radius:18px" />
+</a>
+```
+
+### Badge Rules
+- Always link to https://helpnowatx.org/
+- Include UTM parameters for tracking
+- Maintain original aspect ratio
+- Do not modify colors or text
+- Do not use for commercial promotion
+
+## Social Media Images
+
+### Dimensions
+- **Facebook/LinkedIn:** 1200×630px
+- **X/Twitter:** 1200×675px
+- **Instagram Square:** 1080×1080px
+- **Instagram Portrait:** 1080×1350px
+- **Stories:** 1080×1920px
+
+### Files
+All social media images are available in `/public/og/`
+
+## Voice & Tone
+
+### Brand Voice
+- **Direct:** Get to the point quickly
+- **Compassionate:** Acknowledge difficult situations
+- **Trustworthy:** Verified information only
+- **Accessible:** Plain language, no jargon
+- **Action-oriented:** Clear next steps
+
+### Messaging Principles
+1. Lead with help, not problems
+2. Focus on "verified" and "current"
+3. Be specific about locations (Central Texas, Austin)
+4. Include clear calls-to-action
+5. Respect privacy and dignity
+
+### Example Messages
+- ✅ "Real help, verified daily in Central Texas"
+- ✅ "Find food, shelter, and recovery resources now"
+- ✅ "516+ verified resources for Central Texas"
+- ❌ "Are you struggling with addiction?"
+- ❌ "Homeless? We can help!"
+
+## Accessibility
+
+### Color Contrast
+- Maintain WCAG AA compliance (4.5:1 for normal text)
+- White text on aurora gradient backgrounds
+- Dark text (#1B2A5B) on light backgrounds
+
+### Interactive Elements
+- Minimum touch target: 44×44px
+- Focus indicators on all interactive elements
+- Keyboard navigation support
+- Screen reader friendly markup
+
+## Do's and Don'ts
+
+### Do's
+- ✅ Use the official logo files
+- ✅ Maintain brand colors
+- ✅ Include proper attribution
+- ✅ Link to helpnowatx.org
+- ✅ Verify information before sharing
+
+### Don'ts
+- ❌ Stretch or distort the logo
+- ❌ Change logo colors
+- ❌ Add effects or shadows
+- ❌ Use old branding assets
+- ❌ Imply official endorsement without permission
+
+## Contact
+
+For brand questions or custom implementations:
+- Email: partners@helpnowatx.org
+- Website: https://helpnowatx.org/partners
 
 ---
 
-## ✅ **IMPLEMENTED - Step 1 Complete**
-
-### **Active CSS Variables** (globals.css)
-```css
-:root {
-  --aurora-indigo700: #1B2A5B;  /* Trust, primary brand */
-  --aurora-indigo500: #2B50E2;  /* Action buttons, CTAs */
-  --aurora-azure400: #3EC6FF;   /* Focus states, hover effects */
-  --aurora-emerald500: #14B8A6; /* Support actions, positive */
-  --aurora-fuchsia500: #A855F7; /* Education highlights */
-  --aurora-crimson600: #E11D48; /* EMERGENCY ONLY */
-  --ink900: #0F172A;            /* Deep text */
-  --canvas-tint: #F6F8FF;       /* Subtle backgrounds */
-}
-```
-
-### **Active Gradients** (globals.css)
-```css
-.bg-aurora {
-  background: linear-gradient(135deg, #1B2A5B 0%, #2B50E2 35%, #6BA9FF 100%);
-}
-
-.bg-support {
-  background: linear-gradient(135deg, #2B50E2 0%, #14B8A6 50%, #3EC6FF 100%);
-}
-```
-
-### **Active Component Classes** (globals.css)
-```css
-/* Button System */
-.btn          /* Base button with focus ring */
-.btn-primary  /* Aurora Indigo primary actions */
-.btn-ghost    /* Transparent with border */
-.btn-quiet    /* Subtle navigation buttons */
-
-/* Layout Components */
-.chip         /* Small status/category indicators */
-.card         /* Content cards with rounded corners */
-.panel        /* Background panels with tinted fill */
-.support      /* Support action elements */
-```
-
-### **Active Tailwind Classes** (tailwind.config.js)
-```css
-/* Colors available as Tailwind utilities */
-bg-aurora-indigo700, text-aurora-indigo500, border-aurora-azure400
-bg-aurora-emerald500, text-aurora-fuchsia500, bg-aurora-crimson600
-bg-canvas-tint, text-ink900
-
-/* Custom border radius */
-rounded-2xl  /* 1.25rem for modern card appearance */
-```
-
----
-
-## 🎨 **Aurora Hope Color Palette**
-
-### **Primary Colors**
-
-#### Aurora Indigo (Trust & Primary Brand)
-```css
---aurora-indigo-700: #1B2A5B; /* Primary brand, navigation */
---aurora-indigo-500: #2B50E2; /* Action buttons, CTAs */
-```
-**Usage**: Primary branding, navigation elements, trust-building sections, main CTAs
-**Avoid**: Large backgrounds, emergency content
-
-#### Azure Glow (Interaction & Focus)
-```css
---azure-glow-400: #3EC6FF; /* Focus states, hover effects */
-```
-**Usage**: Focus indicators, hover states, interactive feedback, progress indicators
-**Avoid**: Primary buttons, large text blocks
-
-#### Emerald Lift (Support & Positive Actions)
-```css
---emerald-lift-500: #14B8A6; /* Support buttons, positive feedback */
-```
-**Usage**: Support actions, success states, positive feedback, growth indicators
-**Avoid**: Warning messages, neutral content
-
-#### Fuchsia Pulse (Education & Highlights)
-```css
---fuchsia-pulse-500: #A855F7; /* Educational content, highlights */
-```
-**Usage**: Educational highlights, creative elements, feature callouts, learning sections
-**Avoid**: Emergency content, primary navigation
-
-### **Critical Emergency Color**
-
-#### Crisis Crimson (Emergency Only)
-```css
---crisis-crimson-600: #E11D48; /* EMERGENCY CONTENT ONLY */
-```
-**Usage**: **ONLY** for crisis hotlines, emergency numbers, urgent safety information
-**Critical Rule**: Never use for general errors, warnings, or non-emergency content
-
-### **Surface & Background**
-
-#### Canvas Tint
-```css
---canvas-tint: #F6F8FF; /* Subtle backgrounds, cards */
-```
-**Usage**: Page backgrounds, card surfaces, subtle section dividers
-**Pairs with**: All Aurora colors for contrast
-
----
-
-## 🌈 **Gradient System**
-
-### **Radial Gradients** (Hero sections, depth)
-```css
-.aurora-radial-primary {
-  background: radial-gradient(ellipse at center, #2B50E2 0%, #1B2A5B 100%);
-}
-
-.aurora-radial-support {
-  background: radial-gradient(ellipse at center, #14B8A6 0%, #0F766E 100%);
-}
-```
-
-### **Linear Gradients** (Buttons, progress)
-```css
-.aurora-linear-primary {
-  background: linear-gradient(135deg, #2B50E2 0%, #3EC6FF 100%);
-}
-
-.aurora-linear-support {
-  background: linear-gradient(135deg, #14B8A6 0%, #0EA5E9 100%);
-}
-```
-
-### **Subtle Overlays** (Content blocks)
-```css
-.aurora-overlay-light {
-  background: linear-gradient(180deg, rgba(246, 248, 255, 0) 0%, rgba(246, 248, 255, 0.8) 100%);
-}
-```
-
----
-
-## 🎭 **Typography Scale**
-
-### **Headings**
-```css
-.aurora-heading-1 { @apply text-4xl md:text-5xl font-bold text-aurora-indigo-700; }
-.aurora-heading-2 { @apply text-3xl md:text-4xl font-bold text-aurora-indigo-700; }
-.aurora-heading-3 { @apply text-2xl md:text-3xl font-semibold text-aurora-indigo-500; }
-.aurora-heading-4 { @apply text-xl font-semibold text-aurora-indigo-500; }
-```
-
-### **Body Text**
-```css
-.aurora-body-large { @apply text-lg text-gray-700 leading-relaxed; }
-.aurora-body-base { @apply text-base text-gray-700 leading-normal; }
-.aurora-body-small { @apply text-sm text-gray-600; }
-```
-
-### **Special Text**
-```css
-.aurora-text-support { @apply text-emerald-lift-500 font-semibold; }
-.aurora-text-highlight { @apply text-fuchsia-pulse-500 font-medium; }
-.aurora-text-emergency { @apply text-crisis-crimson-600 font-bold; }
-```
-
----
-
-## 🔘 **Component Patterns**
-
-### **Button System**
-
-#### Primary Action Button
-```css
-.btn-aurora-primary {
-  @apply bg-aurora-indigo-500 hover:bg-aurora-indigo-700 
-         text-white px-6 py-3 rounded-lg font-semibold
-         transition-all duration-200 hover:shadow-lg
-         focus:ring-2 focus:ring-azure-glow-400;
-}
-```
-
-#### Support Action Button  
-```css
-.btn-aurora-support {
-  @apply bg-emerald-lift-500 hover:bg-emerald-600
-         text-white px-6 py-3 rounded-lg font-semibold
-         transition-all duration-200 hover:shadow-lg
-         focus:ring-2 focus:ring-emerald-300;
-}
-```
-
-#### Emergency Button (Use Sparingly)
-```css
-.btn-aurora-emergency {
-  @apply bg-crisis-crimson-600 hover:bg-crisis-crimson-700
-         text-white px-6 py-3 rounded-lg font-bold
-         transition-all duration-200 hover:shadow-lg
-         animate-pulse focus:ring-2 focus:ring-crisis-crimson-300;
-}
-```
-
-### **Card System**
-
-#### Standard Card
-```css
-.card-aurora-base {
-  @apply bg-white rounded-xl p-6 shadow-sm border border-gray-100
-         hover:shadow-md transition-shadow duration-200;
-}
-```
-
-#### Support Card (with gradient)
-```css
-.card-aurora-support {
-  @apply bg-gradient-to-br from-emerald-50 to-teal-50
-         rounded-xl p-6 border border-emerald-200
-         hover:shadow-lg transition-all duration-300;
-}
-```
-
-#### Emergency Card
-```css
-.card-aurora-emergency {
-  @apply bg-gradient-to-br from-red-50 to-rose-50
-         rounded-xl p-6 border-l-4 border-l-crisis-crimson-600
-         shadow-md;
-}
-```
-
----
-
-## 🎬 **Motion Guidelines**
-
-### **Animation Principles**
-- **Purposeful**: Every animation serves user understanding
-- **Respectful**: Always honor `prefers-reduced-motion`
-- **Subtle**: Enhance, don't distract from content
-- **Consistent**: Use established timing and easing
-
-### **Timing Scale**
-```css
---aurora-duration-fast: 150ms;    /* Hover states, micro-interactions */
---aurora-duration-base: 300ms;    /* Standard transitions */  
---aurora-duration-slow: 500ms;    /* Page transitions, large movements */
---aurora-duration-lazy: 800ms;    /* Scroll-triggered animations */
-```
-
-### **Easing Functions**
-```css
---aurora-ease-out: cubic-bezier(0.16, 1, 0.3, 1);      /* Smooth deceleration */
---aurora-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Playful bounce */
---aurora-ease-linear: linear;                            /* Progress indicators */
-```
-
-### **Reduced Motion Compliance**
-```css
-@media (prefers-reduced-motion: reduce) {
-  .aurora-motion {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-```
-
----
-
-## 📱 **Responsive Guidelines**
-
-### **Breakpoint System**
-```css
-/* Mobile First Approach */
-@media (min-width: 640px)  { /* sm */ }
-@media (min-width: 768px)  { /* md */ }
-@media (min-width: 1024px) { /* lg */ }
-@media (min-width: 1280px) { /* xl */ }
-```
-
-### **Mobile Considerations**
-- Touch targets minimum 44px
-- Reduce motion complexity on mobile
-- Prioritize content hierarchy
-- Ensure crisis information remains prominent
-
----
-
-## ✅ **Accessibility Standards**
-
-### **Color Contrast Requirements**
-- **Normal text**: 4.5:1 minimum contrast ratio
-- **Large text**: 3:1 minimum contrast ratio  
-- **Interactive elements**: 3:1 for non-text elements
-- **Emergency content**: Must meet highest contrast standards
-
-### **Focus Management**
-```css
-.aurora-focus {
-  @apply focus:outline-none focus:ring-2 focus:ring-azure-glow-400 
-         focus:ring-offset-2 focus:ring-offset-white;
-}
-```
-
-### **Screen Reader Support**
-- All interactive elements have proper ARIA labels
-- Color never conveys information alone
-- Emergency content includes text alternatives
-
----
-
-## 🚫 **Usage Don'ts**
-
-### **Color Don'ts**
-- ❌ Never use Crisis Crimson for general errors or warnings
-- ❌ Don't use Aurora Indigo for emergency content  
-- ❌ Avoid high-contrast combinations that create vibration
-- ❌ Don't mix more than 3 Aurora colors in single component
-
-### **Motion Don'ts**
-- ❌ No animations on critical emergency information
-- ❌ Don't animate more than 3 elements simultaneously
-- ❌ Avoid motion that could trigger vestibular disorders
-- ❌ No infinite animations without user control
-
-### **Typography Don'ts**
-- ❌ Don't use body text smaller than 16px on mobile
-- ❌ Avoid all-caps text for more than 3 words
-- ❌ Don't stack more than 3 font weights in single view
-
----
-
-## 📋 **Implementation Checklist**
-
-### **Before Using Aurora Components**
-- [ ] Confirm color choice aligns with content purpose
-- [ ] Verify contrast ratios meet accessibility standards
-- [ ] Test with `prefers-reduced-motion` setting
-- [ ] Validate mobile touch target sizes
-- [ ] Ensure emergency content uses Crisis Crimson appropriately
-
-### **Design Review Criteria**
-- [ ] Colors used according to psychological purpose
-- [ ] Motion enhances rather than distracts
-- [ ] Emergency content is immediately recognizable  
-- [ ] Support-first language implemented
-- [ ] Mobile experience prioritized
-
----
-
-**Next Update**: After Phase 1 implementation with real component examples and usage screenshots.
+*Last updated: January 2025*

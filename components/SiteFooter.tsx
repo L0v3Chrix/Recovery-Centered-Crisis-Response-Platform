@@ -29,28 +29,10 @@ export default function SiteFooter() {
           {/* Right: Navigation Links */}
           <nav className="flex flex-wrap justify-center sm:justify-end gap-2">
             <Link
-              href="/support"
-              className="btn-quiet min-h-[44px]"
-            >
-              Support
-            </Link>
-            <Link
               href="/share"
               className="btn-quiet min-h-[44px]"
             >
               Share
-            </Link>
-            <Link
-              href="/partners"
-              className="btn-quiet min-h-[44px]"
-            >
-              Partners
-            </Link>
-            <Link
-              href="/submit"
-              className="btn-quiet min-h-[44px]"
-            >
-              Submit
             </Link>
           </nav>
         </div>

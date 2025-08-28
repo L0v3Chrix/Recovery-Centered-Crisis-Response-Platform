@@ -1,0 +1,43 @@
+<svg width="600" height="150" viewBox="0 0 600 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Logo Mark -->
+  <g transform="translate(0, 25)">
+    <!-- Gradient definition -->
+    <defs>
+      <linearGradient id="pillarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#1B2A5B" />
+        <stop offset="50%" style="stop-color:#2B50E2" />
+        <stop offset="100%" style="stop-color:#6BA9FF" />
+      </linearGradient>
+      <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#1B2A5B" />
+        <stop offset="100%" style="stop-color:#2B50E2" />
+      </linearGradient>
+    </defs>
+    
+    <!-- Left pillar -->
+    <rect x="20" y="15" width="35" height="70" rx="18" fill="url(#pillarGrad)" />
+    
+    <!-- Right pillar -->
+    <rect x="65" y="15" width="35" height="70" rx="18" fill="url(#pillarGrad)" />
+    
+    <!-- ECG heartbeat line -->
+    <polyline 
+      points="5,50 30,50 35,50 38,42 41,58 44,42 47,50 73,50 78,50 81,42 84,58 87,42 90,50 115,50"
+      stroke="#3EC6FF"
+      stroke-width="8"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      fill="none"
+    />
+  </g>
+  
+  <!-- Text: elpNow ATX -->
+  <text x="140" y="70" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="48" font-weight="900" fill="url(#textGrad)">
+    elpNow ATX
+  </text>
+  
+  <!-- Tagline -->
+  <text x="140" y="105" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="20" font-weight="500" fill="#3EC6FF">
+    Real help • Verified daily
+  </text>
+</svg>

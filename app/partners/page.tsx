@@ -1,215 +1,276 @@
 'use client'
 
-import { useState } from 'react'
-import Image from 'next/image'
-
-declare global {
-  interface Window {
-    gtag?: (...args: any[]) => void;
-  }
-}
+import React, { useState } from 'react'
+import { Download, Copy, Check, ExternalLink } from 'lucide-react'
 
 export default function PartnersPage() {
-  const [copiedEmbed, setCopiedEmbed] = useState<string | null>(null)
-  
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://YOURDOMAIN'
+  const [copiedBadge, setCopiedBadge] = useState<string | null>(null)
   
   const badges = [
     {
-      id: 'blue-light',
-      name: 'Blue Light',
-      path: '/assets/badges/help-now-badge-blue-light.svg'
+      name: 'Gradient Pill (Recommended)',
+      id: 'pill',
+      file: '/partner-badges/badge-pill.svg',
+      embed: `<!-- HelpNow ATX Partner Badge -->
+<a href="https://helpnowatx.org/?utm_source=partner&utm_medium=badge&utm_campaign=backlink"
+   target="_blank" rel="noopener noreferrer"
+   aria-label="HelpNow ATX — Find verified help">
+  <img src="https://helpnowatx.org/partner-badges/badge-pill.svg"
+       alt="Get Help Now — HelpNow ATX (verified resources)"
+       width="360" height="110"
+       style="max-width:100%;height:auto;border:0;border-radius:18px" />
+</a>`
     },
     {
-      id: 'blue-dark', 
-      name: 'Blue Dark',
-      path: '/assets/badges/help-now-badge-blue-dark.svg'
+      name: 'Dark Background',
+      id: 'dark',
+      file: '/partner-badges/badge-dark.svg',
+      embed: `<!-- HelpNow ATX Partner Badge (Dark) -->
+<a href="https://helpnowatx.org/?utm_source=partner&utm_medium=badge&utm_campaign=backlink"
+   target="_blank" rel="noopener noreferrer"
+   aria-label="HelpNow ATX — Find verified help">
+  <img src="https://helpnowatx.org/partner-badges/badge-dark.svg"
+       alt="Get Help Now — HelpNow ATX (verified resources)"
+       width="360" height="110"
+       style="max-width:100%;height:auto;border:0;border-radius:12px" />
+</a>`
     },
     {
-      id: 'neutral-light',
-      name: 'Neutral Light',
-      path: '/assets/badges/help-now-badge-neutral-light.svg'
-    },
-    {
-      id: 'neutral-dark',
-      name: 'Neutral Dark', 
-      path: '/assets/badges/help-now-badge-neutral-dark.svg'
+      name: 'Outline Style',
+      id: 'outline',
+      file: '/partner-badges/badge-outline.svg',
+      embed: `<!-- HelpNow ATX Partner Badge (Outline) -->
+<a href="https://helpnowatx.org/?utm_source=partner&utm_medium=badge&utm_campaign=backlink"
+   target="_blank" rel="noopener noreferrer"
+   aria-label="HelpNow ATX — Find verified help">
+  <img src="https://helpnowatx.org/partner-badges/badge-outline.svg"
+       alt="Get Help Now — HelpNow ATX (verified resources)"
+       width="360" height="110"
+       style="max-width:100%;height:auto;border:0;border-radius:12px" />
+</a>`
     }
   ]
-
-  const generateEmbedCode = (badgePath: string) => {
-    return `<a href="${siteUrl}/?utm_source=partner&utm_medium=badge&utm_campaign=backlink" aria-label="Central Texas Resources">
-  <img src="${siteUrl}${badgePath}" alt="Get Help Now — Central Texas Resources" width="240" height="64" />
-</a>`
-  }
-
-  const copyEmbedCode = async (badgeId: string, badgePath: string) => {
-    try {
-      const embedCode = generateEmbedCode(badgePath)
-      await navigator.clipboard.writeText(embedCode)
-      setCopiedEmbed(badgeId)
-      setTimeout(() => setCopiedEmbed(null), 2000)
-      
-      // GA event tracking
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'partner_embed_copy', {
-          badge_style: badgeId,
-          event_category: 'engagement'
-        })
-      }
-    } catch (err) {
-      console.error('Failed to copy embed code:', err)
-    }
-  }
-
-  const handlePressKitDownload = () => {
-    // GA event tracking
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'badge_download', {
-        download_type: 'press_kit',
-        event_category: 'engagement'
+  
+  const handleCopy = async (badgeId: string, embedCode: string) => {
+    await navigator.clipboard.writeText(embedCode)
+    setCopiedBadge(badgeId)
+    
+    // Track GA event
+    if (typeof window !== 'undefined' && 'gtag' in window) {
+      (window as any).gtag('event', 'partner_embed_copy', {
+        badge_type: badgeId
       })
     }
     
-    // Trigger download
+    setTimeout(() => setCopiedBadge(null), 2000)
+  }
+  
+  const handleDownload = () => {
+    // Track GA event
+    if (typeof window !== 'undefined' && 'gtag' in window) {
+      (window as any).gtag('event', 'badge_download', {
+        type: 'press_kit'
+      })
+    }
+    
+    // Download the press kit
     const link = document.createElement('a')
     link.href = '/press-kit.zip'
-    link.download = 'central-texas-resources-press-kit.zip'
-    document.body.appendChild(link)
+    link.download = 'helpnow-atx-press-kit.zip'
     link.click()
-    document.body.removeChild(link)
   }
-
+  
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <div className="bg-gradient-to-br from-blue-50 to-gray-50 py-16">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Partner Resources
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
-            Add our badge to your website to help neighbors find verified help.
-          </p>
+    <div className="min-h-screen bg-gradient-to-b from-canvas-tint to-white">
+      {/* Hero Section */}
+      <div className="bg-aurora text-white py-16">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              Partner with HelpNow ATX
+            </h1>
+            <p className="text-xl text-white/90 mb-8 leading-relaxed">
+              Help spread awareness by adding our badge to your website. 
+              Every link helps connect someone to verified resources when they need it most.
+            </p>
+            <button
+              onClick={handleDownload}
+              className="btn bg-white text-aurora-indigo700 hover:bg-gray-100 font-semibold"
+            >
+              <Download className="w-5 h-5 mr-2" />
+              Download Press Kit (ZIP)
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Badge Gallery */}
       <div className="py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Choose Your Badge
-          </h2>
-          
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
-            {badges.map((badge) => (
-              <div key={badge.id} className="bg-gray-50 rounded-xl p-8">
-                <div className="text-center mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                    {badge.name}
-                  </h3>
-                  <div className="bg-white p-4 rounded-lg inline-block shadow-sm">
-                    <Image
-                      src={badge.path}
-                      alt={`${badge.name} badge`}
-                      width={240}
-                      height={64}
-                    />
-                  </div>
-                </div>
-                
-                <div className="space-y-4">
-                  {/* Embed Code Display */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Embed Code:
-                    </label>
-                    <div className="bg-gray-100 rounded-lg p-4 font-mono text-sm overflow-x-auto">
-                      <code className="text-gray-800 break-all">
-                        {generateEmbedCode(badge.path)}
-                      </code>
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl font-bold text-aurora-indigo700 text-center mb-12">
+              Choose Your Badge Style
+            </h2>
+            
+            <div className="space-y-12">
+              {badges.map((badge) => (
+                <div key={badge.id} className="card">
+                  <div className="flex flex-col lg:flex-row lg:items-center gap-8">
+                    {/* Badge Preview */}
+                    <div className="lg:w-1/2">
+                      <h3 className="text-xl font-semibold text-aurora-indigo700 mb-4">
+                        {badge.name}
+                      </h3>
+                      <div className="bg-gray-50 rounded-lg p-6 flex items-center justify-center">
+                        <img
+                          src={badge.file}
+                          alt={`${badge.name} badge`}
+                          className="max-w-full h-auto"
+                          style={{ maxHeight: '110px' }}
+                        />
+                      </div>
+                    </div>
+                    
+                    {/* Embed Code */}
+                    <div className="lg:w-1/2">
+                      <h4 className="text-sm font-semibold text-gray-700 mb-2">
+                        Embed Code:
+                      </h4>
+                      <div className="relative">
+                        <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs overflow-x-auto">
+                          <code>{badge.embed}</code>
+                        </pre>
+                        <button
+                          onClick={() => handleCopy(badge.id, badge.embed)}
+                          className="absolute top-2 right-2 btn-sm bg-aurora-emerald500 text-white hover:bg-aurora-emerald600"
+                        >
+                          {copiedBadge === badge.id ? (
+                            <>
+                              <Check className="w-4 h-4 mr-1" />
+                              Copied!
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-4 h-4 mr-1" />
+                              Copy
+                            </>
+                          )}
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  
-                  {/* Copy Button */}
-                  <button
-                    onClick={() => copyEmbedCode(badge.id, badge.path)}
-                    className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                  >
-                    {copiedEmbed === badge.id ? '✓ Copied!' : '📋 Copy Embed Code'}
-                  </button>
+                </div>
+              ))}
+            </div>
+
+            {/* Partnership Benefits */}
+            <div className="mt-16 bg-aurora-azure50 rounded-xl p-8">
+              <h3 className="text-2xl font-bold text-aurora-indigo700 mb-6 text-center">
+                Why Partner with Us?
+              </h3>
+              
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-aurora-emerald500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white text-2xl">🤝</span>
+                  </div>
+                  <h4 className="font-semibold text-aurora-indigo700 mb-2">
+                    Community Impact
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    Help connect neighbors to 516+ verified resources across Central Texas
+                  </p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-aurora-azure400 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white text-2xl">✅</span>
+                  </div>
+                  <h4 className="font-semibold text-aurora-indigo700 mb-2">
+                    Always Current
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    Resources verified weekly, so your referrals always lead to active help
+                  </p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-aurora-fuchsia500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white text-2xl">📊</span>
+                  </div>
+                  <h4 className="font-semibold text-aurora-indigo700 mb-2">
+                    Track Your Impact
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    UTM tracking shows how many people you've helped connect to resources
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Press Kit Section */}
-      <div className="py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">
-            Complete Press Kit
-          </h2>
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            Download our complete press kit including SVG and PNG badges, 
-            favicon, embed code, and brand usage guidelines.
-          </p>
-          
-          <button
-            onClick={handlePressKitDownload}
-            className="inline-flex items-center gap-3 bg-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-purple-700 transition-colors shadow-lg hover:shadow-xl"
-          >
-            📦 Download Press Kit
-          </button>
-          
-          <div className="mt-6 text-sm text-gray-500">
-            <p>Includes: SVG & PNG badges • Favicon • Brand guidelines • Embed templates</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Usage Guidelines */}
-      <div className="py-16">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Badge Usage Guidelines
-          </h2>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-green-50 border border-green-200 rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-green-800 mb-4">✅ Do</h3>
-              <ul className="space-y-2 text-green-700">
-                <li>• Use badges to help people find crisis resources</li>
-                <li>• Link directly to our homepage</li>
-                <li>• Use provided UTM parameters</li>
-                <li>• Maintain original proportions</li>
-                <li>• Choose appropriate color for your site</li>
-              </ul>
             </div>
-            
-            <div className="bg-red-50 border border-red-200 rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-red-800 mb-4">❌ Don&apos;t</h3>
-              <ul className="space-y-2 text-red-700">
-                <li>• Modify badge colors or text</li>
-                <li>• Use badges for commercial promotion</li>
-                <li>• Link to pages other than our homepage</li>
-                <li>• Stretch or distort badge dimensions</li>
-                <li>• Remove attribution or UTM parameters</li>
-              </ul>
+
+            {/* Implementation Guide */}
+            <div className="mt-12 card">
+              <h3 className="text-xl font-semibold text-aurora-indigo700 mb-6">
+                How to Add the Badge
+              </h3>
+              
+              <ol className="space-y-4">
+                <li className="flex">
+                  <span className="flex-shrink-0 w-8 h-8 bg-aurora-emerald500 text-white rounded-full flex items-center justify-center font-bold mr-4">
+                    1
+                  </span>
+                  <div>
+                    <p className="font-medium text-gray-800">Choose your preferred badge style</p>
+                    <p className="text-sm text-gray-600">Pick the design that best fits your website's aesthetic</p>
+                  </div>
+                </li>
+                
+                <li className="flex">
+                  <span className="flex-shrink-0 w-8 h-8 bg-aurora-emerald500 text-white rounded-full flex items-center justify-center font-bold mr-4">
+                    2
+                  </span>
+                  <div>
+                    <p className="font-medium text-gray-800">Copy the embed code</p>
+                    <p className="text-sm text-gray-600">Click the "Copy" button to copy the HTML to your clipboard</p>
+                  </div>
+                </li>
+                
+                <li className="flex">
+                  <span className="flex-shrink-0 w-8 h-8 bg-aurora-emerald500 text-white rounded-full flex items-center justify-center font-bold mr-4">
+                    3
+                  </span>
+                  <div>
+                    <p className="font-medium text-gray-800">Paste into your website</p>
+                    <p className="text-sm text-gray-600">Add the code to your footer, sidebar, or resources page</p>
+                  </div>
+                </li>
+                
+                <li className="flex">
+                  <span className="flex-shrink-0 w-8 h-8 bg-aurora-emerald500 text-white rounded-full flex items-center justify-center font-bold mr-4">
+                    4
+                  </span>
+                  <div>
+                    <p className="font-medium text-gray-800">That's it!</p>
+                    <p className="text-sm text-gray-600">The badge automatically links to helpnowatx.org with tracking</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+
+            {/* Contact Section */}
+            <div className="mt-12 text-center">
+              <p className="text-gray-600 mb-4">
+                Questions about partnering or need a custom integration?
+              </p>
+              <a
+                href="mailto:partners@helpnowatx.org"
+                className="btn btn-primary"
+              >
+                Contact Partnership Team
+              </a>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Back to Home */}
-      <div className="py-8 bg-white text-center">
-        <a
-          href="/"
-          className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium"
-        >
-          ← Back to Resources
-        </a>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import { AlertTriangle, Utensils, Home, Heart, Phone, MapPin, Search, Gavel, Activity } from 'lucide-react'
 import LocationPrompt from '@/components/LocationPrompt'
-import GuidedPaths from '@/components/GuidedPaths'
+import Link from 'next/link'
 
 interface CategoryCardProps {
   title: string
@@ -62,11 +62,18 @@ export default function HomePage() {
       <div className="py-12 text-center text-white">
         <div className="mb-6">
           <div className="inline-flex items-center gap-3 mb-4">
-            <span className="text-4xl">🏠</span>
+            <div className="w-20 h-20 relative">
+              <img 
+                src="/brand/logo-hlifeline.svg" 
+                alt="HelpNow ATX"
+                className="w-full h-full"
+              />
+            </div>
             <div className="text-left">
               <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                Central Texas Resources
+                HelpNow ATX
               </h1>
+              <p className="text-lg text-white/80 font-medium">Real help • Verified daily</p>
               <div className="flex items-center gap-4 mt-2">
                 <span className="chip bg-white/20 text-white border-white/30">
                   <MapPin className="w-3 h-3 mr-1" />
@@ -82,6 +89,17 @@ export default function HomePage() {
           <p className="text-xl text-white/90 max-w-2xl mx-auto font-medium">
             Connect instantly to verified help, when you need it most
           </p>
+          
+          {/* Support Button in Hero */}
+          <div className="mt-6">
+            <Link 
+              href="/support"
+              className="inline-flex items-center px-6 py-3 text-base font-semibold text-aurora-indigo700 bg-white hover:bg-gray-100 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+            >
+              <Heart className="w-5 h-5 mr-2" />
+              Help keep this project alive
+            </Link>
+          </div>
         </div>
 
         {/* Search with Mode Toggle */}
@@ -102,6 +120,22 @@ export default function HomePage() {
               className="w-full pl-12 pr-4 py-4 text-lg border border-white/20 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 rounded-xl focus:ring-2 focus:ring-aurora-azure400 focus:border-transparent shadow-sm"
             />
           </div>
+
+          {/* Action Buttons */}
+          <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link 
+              href="/quiz"
+              className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-aurora-emerald500 hover:bg-teal-600 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+            >
+              📋 Take Assessment
+            </Link>
+            <Link 
+              href="/printable"
+              className="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-white/10 hover:bg-white/20 border border-white/30 rounded-lg transition-colors duration-200"
+            >
+              🖨️ Print Resources
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -111,7 +145,7 @@ export default function HomePage() {
           <h2 className="text-2xl font-semibold text-aurora-indigo700 mb-6 text-center">
             Quick Access
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
             <CategoryCard
               title="Crisis"
               subtitle="NOW"
@@ -132,25 +166,16 @@ export default function HomePage() {
             />
             
             <CategoryCard
-              title="Shelter"
+              title="Housing"
               subtitle=""
-              description="Housing | Emergency"
+              description="Shelter | Emergency"
               icon="🏠"
               bgColor="bg-aurora-indigo500 hover:bg-aurora-indigo700"
               href="/housing"
             />
             
             <CategoryCard
-              title="Recovery"
-              subtitle=""
-              description="Treatment | MAT"
-              icon="💜"
-              bgColor="bg-aurora-fuchsia500 hover:bg-purple-600"
-              href="/recovery"
-            />
-            
-            <CategoryCard
-              title="Health"
+              title="Healthcare"
               subtitle=""
               description="Medical | Mental"
               icon="🏥"
@@ -166,16 +191,37 @@ export default function HomePage() {
               bgColor="bg-warm-slate-600 hover:bg-gray-700"
               href="/legal"
             />
+            
+            <CategoryCard
+              title="Employment"
+              subtitle=""
+              description="Jobs | Training"
+              icon="💼"
+              bgColor="bg-aurora-fuchsia500 hover:bg-purple-600"
+              href="/employment"
+            />
+            
+            <CategoryCard
+              title="Transportation"
+              subtitle=""
+              description="Bus Passes | Transit"
+              icon="🚌"
+              bgColor="bg-aurora-emerald500 hover:bg-emerald-600"
+              href="/transportation"
+            />
+            
+            <CategoryCard
+              title="Recovery"
+              subtitle=""
+              description="Treatment | MAT"
+              icon="💜"
+              bgColor="bg-aurora-fuchsia500 hover:bg-purple-600"
+              href="/recovery"
+            />
           </div>
         </div>
       </div>
 
-      {/* Guided Paths Section */}
-      <div className="py-16">
-        <div className="container mx-auto px-4">
-          <GuidedPaths />
-        </div>
-      </div>
 
       {/* How to Use Section */}
       <div className="bg-canvas-tint py-12">
@@ -228,17 +274,16 @@ export default function HomePage() {
             Your support keeps this lifeline available 24/7.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="/support" className="btn bg-white text-aurora-indigo700 hover:bg-gray-100 font-semibold">
-              Help keep this project alive
-            </a>
-            <a href="/support" className="btn-ghost border-white text-white hover:bg-white/10">
-              Tip your dev
-            </a>
-            <a href="/support" className="btn-quiet text-white hover:bg-white/10">
-              Fuel the updates
-            </a>
-            <a href="/support" className="btn-quiet text-white hover:bg-white/10">
-              More ways to support
+            <Link href="/support" className="btn bg-white text-aurora-indigo700 hover:bg-gray-100 font-semibold">
+              💙 Support via Square
+            </Link>
+            <a 
+              href="https://cash.app/$helpnowatx" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="btn-ghost border-white text-white hover:bg-white/10"
+            >
+              💰 Cash App
             </a>
           </div>
         </div>

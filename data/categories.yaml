@@ -1,0 +1,248 @@
+crisis:
+  subcategories:
+    - emergency_services
+    - crisis_hotlines
+    - domestic_violence
+    - suicide_prevention
+  keywords:
+    - crisis
+    - emergency
+    - hotline
+    - 988
+    - suicide
+    - domestic violence
+    - SAFE
+
+food:
+  subcategories:
+    - pantries
+    - hot_meals
+    - snap_wic
+    - mobile_pantries
+    - community_kitchens
+  keywords:
+    - food
+    - meal
+    - pantry
+    - kitchen
+    - nutrition
+    - groceries
+    - SNAP
+    - WIC
+
+shelter:
+  subcategories:
+    - emergency_shelter
+    - transitional_housing
+    - permanent_housing
+    - domestic_violence_shelter
+    - youth_shelter
+  keywords:
+    - shelter
+    - housing
+    - homeless
+    - bed
+    - transitional
+    - emergency housing
+
+recovery:
+  subcategories:
+    - detox
+    - mat_services
+    - support_groups
+    - sober_living
+    - harm_reduction
+    - aa_na_meetings
+  keywords:
+    - recovery
+    - addiction
+    - substance
+    - detox
+    - MAT
+    - methadone
+    - suboxone
+    - AA
+    - NA
+    - sober
+
+healthcare:
+  subcategories:
+    - medical
+    - mental_health
+    - dental
+    - vision
+    - pharmacy
+    - womens_health
+  keywords:
+    - health
+    - medical
+    - clinic
+    - doctor
+    - mental
+    - dental
+    - therapy
+    - counseling
+    - medication
+
+legal:
+  subcategories:
+    - legal_aid
+    - documentation
+    - immigration
+    - expungement
+    - family_law
+  keywords:
+    - legal
+    - lawyer
+    - court
+    - documentation
+    - ID
+    - license
+    - immigration
+    - expungement
+
+employment:
+  subcategories:
+    - job_training
+    - job_placement
+    - vocational_rehab
+    - education
+    - resume_help
+  keywords:
+    - job
+    - employment
+    - work
+    - training
+    - vocational
+    - education
+    - GED
+    - career
+
+transport:
+  subcategories:
+    - bus_passes
+    - medical_transport
+    - gas_vouchers
+    - vehicle_assistance
+  keywords:
+    - transportation
+    - bus
+    - metro
+    - transit
+    - gas
+    - vehicle
+    - medical transport
+
+hygiene:
+  subcategories:
+    - showers
+    - laundry
+    - clothing
+    - hygiene_kits
+  keywords:
+    - shower
+    - laundry
+    - clothes
+    - clothing
+    - hygiene
+    - clean
+
+benefits:
+  subcategories:
+    - snap_tanf
+    - social_security
+    - medicaid_medicare
+    - utility_assistance
+  keywords:
+    - benefits
+    - SNAP
+    - TANF
+    - social security
+    - medicaid
+    - medicare
+    - utilities
+
+family:
+  subcategories:
+    - childcare
+    - parenting_support
+    - family_counseling
+    - diapers_formula
+  keywords:
+    - family
+    - children
+    - childcare
+    - parenting
+    - diapers
+    - formula
+    - baby
+
+youth:
+  subcategories:
+    - youth_shelter
+    - education_support
+    - youth_programs
+    - runaway_services
+  keywords:
+    - youth
+    - teen
+    - adolescent
+    - runaway
+    - young adult
+
+veterans:
+  subcategories:
+    - va_services
+    - veteran_housing
+    - veteran_benefits
+    - veteran_healthcare
+  keywords:
+    - veteran
+    - VA
+    - military
+    - service member
+    - VFW
+
+lgbtq:
+  subcategories:
+    - lgbtq_housing
+    - lgbtq_health
+    - lgbtq_support
+    - trans_services
+  keywords:
+    - LGBTQ
+    - LGBT
+    - gay
+    - lesbian
+    - trans
+    - transgender
+    - queer
+    - pride
+
+seniors:
+  subcategories:
+    - senior_housing
+    - senior_nutrition
+    - senior_transport
+    - senior_healthcare
+  keywords:
+    - senior
+    - elderly
+    - aging
+    - medicare
+    - retirement
+    - elder
+
+pets:
+  subcategories:
+    - pet_food
+    - veterinary
+    - pet_shelter
+    - pet_adoption
+  keywords:
+    - pet
+    - animal
+    - dog
+    - cat
+    - veterinary
+    - vet
