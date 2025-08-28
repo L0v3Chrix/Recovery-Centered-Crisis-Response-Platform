@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 
 const NAV_ITEMS = [
@@ -40,18 +39,8 @@ export default function OverlayAppBar() {
 
   return (
     <div className="pointer-events-none fixed inset-x-0 top-0 z-40">
-      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
-        {/* Logo (no bar, just floating) */}
-        <Link href="/" aria-label="HelpNow ATX" className="pointer-events-auto">
-          <Image 
-            src="/brand/helpnowatx_logo_final.png" 
-            alt="HelpNow ATX" 
-            width={1400} 
-            height={500}
-            className="h-10 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]" 
-            priority 
-          />
-        </Link>
+      {/* Row with only the hamburger on the right */}
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 flex h-16 items-center justify-end">
         
         {/* Hamburger button with glass effect */}
         <button 

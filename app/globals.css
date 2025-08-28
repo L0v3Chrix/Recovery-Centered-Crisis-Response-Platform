@@ -125,3 +125,33 @@
     @apply bg-aurora-emerald500 hover:bg-opacity-90 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg min-h-[60px] flex items-center justify-center;
   }
 }
+
+/* ---- Global readability + depth ---- */
+@layer base {
+  /* Darken background under all content for consistent contrast */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0; /* below content */
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.34), rgba(0,0,0,.22) 40%, rgba(0,0,0,.28)),
+      radial-gradient(1200px 900px at 50% 20%, rgba(0,0,0,.25), transparent 60%);
+  }
+  body { color: #f8fafc; }
+  h1, h2, h3 { color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.45); letter-spacing:-0.01em; }
+  p, li, small { color: rgba(248,250,252,.92); }
+  a { color:#7dd3fc; }
+  a:hover, a:focus { color:#38bdf8; text-decoration:underline; text-underline-offset:2px; }
+}
+
+/* Optional reusable surface for extra contrast on bright zones */
+.surface {
+  background: rgba(8,12,30,.48);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-radius: 1rem;
+  box-shadow: 0 18px 60px rgba(10,23,70,.40);
+  outline: 1px solid rgba(255,255,255,.08);
+}

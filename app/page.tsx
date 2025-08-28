@@ -1,4 +1,4 @@
-import { AlertTriangle, Utensils, Home, Heart, Phone, MapPin, Search, Gavel, Activity } from 'lucide-react'
+import { AlertTriangle, Utensils, Home, Heart, Phone, MapPin, Gavel, Activity } from 'lucide-react'
 import LocationPrompt from '@/components/LocationPrompt'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -101,6 +101,14 @@ export default function HomePage() {
             Connect instantly to verified help, when you need it most
           </p>
           
+          {/* Evolution Message */}
+          <div className="mt-6 max-w-2xl mx-auto surface p-3 md:p-4">
+            <p className="text-sm md:text-base leading-relaxed">
+              HelpNow ATX is evolving in real time. We ship improvements and new features regularly.
+              If something looks off, thanks for your patience—and please check back soon. Your feedback helps keep this lifeline accurate.
+            </p>
+          </div>
+          
           {/* Support Button in Hero */}
           <div className="mt-6">
             <Link 
@@ -112,25 +120,7 @@ export default function HomePage() {
             </Link>
           </div>
         
-          {/* Search with Mode Toggle */}
-          <div className="max-w-2xl mx-auto mb-6">
-            <div className="mb-4 flex justify-center gap-2">
-              <button className="btn-ghost text-white border-white/40 hover:bg-white/10">
-                I need help
-              </button>
-              <button className="btn-quiet text-white/70 hover:text-white hover:bg-white/5">
-                I&apos;m helping someone
-              </button>
-            </div>
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search: &quot;I need food&quot; or enter location..."
-                className="w-full pl-12 pr-4 py-4 text-lg border border-white/20 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 rounded-xl focus:ring-2 focus:ring-aurora-azure400 focus:border-transparent shadow-sm"
-              />
-            </div>
-          </div>
+          {/* SEARCH REMOVED — feature not live */}
 
           {/* Action Buttons */}
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
