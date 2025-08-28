@@ -401,9 +401,9 @@ function ResourceCard({ item, rank, isTopResult }: ResourceCardProps) {
             Website
           </a>
         )}
-        {resource.address && (
+        {item.address && (
           <a 
-            href={`https://maps.google.com/?q=${encodeURIComponent(resource.address)}`}
+            href={`https://maps.google.com/?q=${encodeURIComponent(item.address)}`}
             target="_blank" 
             rel="noopener noreferrer"
             className="btn-sm btn-outline"
