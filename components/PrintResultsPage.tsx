@@ -73,6 +73,9 @@ export default function PrintResultsPage() {
           
           if (response.ok) {
             const data = await response.json()
+            
+            // Keep the original structure for PrintResultsPage
+            // It expects { resource: {...}, score, reasons }
             const topResults = data.recommendations || []
             
             const grouped = topResults.reduce((acc: GroupedResults, item: ScoredResource) => {

@@ -112,7 +112,15 @@ export default function ResultsPage() {
           }
 
           const data = await response.json()
-          const topResults = data.recommendations
+          
+          // Flatten the response - merge resource data with score
+          const topResults = data.recommendations.map((rec: any) => ({
+            ...rec.resource,
+            score: rec.score,
+            distance: rec.distance,
+            reasons: rec.reasons,
+            isOpen: true // Default to true for now
+          }))
           
           // Group by category
           const grouped = topResults.reduce((acc: GroupedResults, item: ResourceWithScore) => {
