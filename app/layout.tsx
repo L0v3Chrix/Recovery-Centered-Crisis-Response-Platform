@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
-import SiteHeader from '../components/SiteHeader'
+import OverlayAppBar from '../components/OverlayAppBar'
 import SiteFooter from '../components/SiteFooter'
-import Breadcrumbs from '../components/Breadcrumbs'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -66,28 +65,25 @@ export default function RootLayout({
         <meta name="format-detection" content="telephone=yes" />
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
-      <body className="flex flex-col min-h-screen antialiased tracking-tight font-sans">
+      <body>
         {/* Skip to content link for accessibility */}
         <a 
           href="#main-content" 
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-aurora-indigo500 text-white px-4 py-2 rounded-lg font-medium z-50 focus:ring-2 focus:ring-aurora-azure400 focus:ring-offset-2"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-sky-500 text-white px-4 py-2 rounded-lg font-medium z-50 focus:ring-2 focus:ring-sky-400 focus:ring-offset-2"
         >
           Skip to content
         </a>
         
-        {/* Site Header */}
-        <SiteHeader />
+        {/* Overlay navigation (floating) */}
+        <OverlayAppBar />
         
-        {/* Breadcrumbs */}
-        <Breadcrumbs />
+        {/* Main content - relative z-index to stay behind nav */}
+        <main id="main-content" className="relative z-[1]">
+          {children}
+        </main>
         
-        {/* Main content container with max-width */}
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex flex-col min-h-screen">
-          <main id="main-content" className="flex-grow">
-            {children}
-          </main>
-          <SiteFooter />
-        </div>
+        {/* Footer */}
+        <SiteFooter />
       </body>
     </html>
   )

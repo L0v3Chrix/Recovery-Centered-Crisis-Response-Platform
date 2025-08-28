@@ -17,7 +17,11 @@ function CategoryCard({ title, subtitle, description, icon, bgColor, href, urgen
   return (
     <a
       href={href}
-      className={`${bgColor} text-white p-6 rounded-xl shadow-lg transform transition hover:scale-105 active:scale-95 block group relative overflow-hidden`}
+      className="ui-card text-white p-6 transform transition hover:scale-105 active:scale-95 block group relative overflow-hidden"
+      style={{
+        background: bgColor.includes('gradient') ? bgColor : undefined,
+        backgroundColor: !bgColor.includes('gradient') ? bgColor : undefined
+      }}
     >
       {urgent && (
         <div className="absolute top-2 right-2">
@@ -42,7 +46,7 @@ function CategoryCard({ title, subtitle, description, icon, bgColor, href, urgen
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-aurora">
+    <div className="min-h-screen relative">
       {/* Crisis Ribbon - Always Visible */}
       <div className="bg-aurora-crimson600 text-white py-3 px-4 text-center shadow-lg">
         <div className="flex flex-wrap items-center justify-center gap-2">
@@ -59,19 +63,25 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Brand Header Section */}
-      <div className="py-12 text-center text-white">
-        <div className="mb-6">
-          {/* Logo Image */}
-          <div className="mb-6 flex justify-center">
-            <Image 
-              src="/brand/logo-hlifeline.svg" 
-              alt="HelpNow ATX - Real help, verified daily"
-              width={280}
-              height={80}
-              className="w-auto h-20 md:h-24"
-              priority
-            />
+      {/* Brand Header Section with ambient glow */}
+      <section className="relative overflow-hidden">
+        {/* Ambient glow effects */}
+        <div className="absolute -top-20 -left-10 h-72 w-72 rounded-full bg-sky-400/25 blur-3xl"></div>
+        <div className="absolute -top-32 right-0 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl"></div>
+        
+        <div className="py-16 text-center text-white relative">
+          <div className="mb-6">
+            {/* Logo Image with depth */}
+            <div className="mb-6 flex justify-center">
+              <Image 
+                src="/brand/helpnowatx_logo_final.png" 
+                alt="HelpNow ATX - Real help, verified daily"
+                width={1400}
+                height={500}
+                className="h-16 md:h-20 w-auto drop-shadow-[0_6px_24px_rgba(0,0,0,0.45)]"
+                priority
+              />
+            </div>
           </div>
           
           {/* Tagline and badges */}
@@ -101,25 +111,25 @@ export default function HomePage() {
               Help keep this project alive
             </Link>
           </div>
-        </div>
-
-        {/* Search with Mode Toggle */}
-        <div className="max-w-2xl mx-auto mb-6">
-          <div className="mb-4 flex justify-center gap-2">
-            <button className="btn-ghost text-white border-white/40 hover:bg-white/10">
-              I need help
-            </button>
-            <button className="btn-quiet text-white/70 hover:text-white hover:bg-white/5">
-              I&apos;m helping someone
-            </button>
-          </div>
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Search: &quot;I need food&quot; or enter location..."
-              className="w-full pl-12 pr-4 py-4 text-lg border border-white/20 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 rounded-xl focus:ring-2 focus:ring-aurora-azure400 focus:border-transparent shadow-sm"
-            />
+        
+          {/* Search with Mode Toggle */}
+          <div className="max-w-2xl mx-auto mb-6">
+            <div className="mb-4 flex justify-center gap-2">
+              <button className="btn-ghost text-white border-white/40 hover:bg-white/10">
+                I need help
+              </button>
+              <button className="btn-quiet text-white/70 hover:text-white hover:bg-white/5">
+                I&apos;m helping someone
+              </button>
+            </div>
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search: &quot;I need food&quot; or enter location..."
+                className="w-full pl-12 pr-4 py-4 text-lg border border-white/20 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 rounded-xl focus:ring-2 focus:ring-aurora-azure400 focus:border-transparent shadow-sm"
+              />
+            </div>
           </div>
 
           {/* Action Buttons */}
@@ -138,12 +148,12 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Quick Access Grid */}
-      <div className="bg-canvas-tint py-12">
+      <div className="py-12">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl font-semibold text-aurora-indigo700 mb-6 text-center">
+          <h2 className="text-2xl font-semibold text-white mb-6 text-center">
             Quick Access
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
@@ -225,14 +235,14 @@ export default function HomePage() {
 
 
       {/* How to Use Section */}
-      <div className="bg-canvas-tint py-12">
+      <div className="py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h3 className="text-2xl font-bold text-aurora-indigo700 mb-6">
+            <h3 className="text-2xl font-bold text-white mb-6">
               How to use this map of help
             </h3>
-            <div className="panel">
-              <p className="text-lg text-warm-slate-700 mb-6 leading-relaxed">
+            <div className="ui-card p-8">
+              <p className="text-lg text-slate-200 mb-6 leading-relaxed">
                 Every resource is verified and updated regularly. Click any category above for immediate access, 
                 or use the guided paths to walk through exactly what you need step by step.
               </p>
