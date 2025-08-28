@@ -15,6 +15,18 @@ interface QuizState {
   answers: QuizAnswer[]
 }
 
+// Define proper types for options
+type StepOption =
+  | { id: string; text: string; action: string; weight?: undefined }
+  | { id: string; text: string; weight: number; action?: undefined }
+  | { id: string; text: string; category: string; weight: number }
+  | { id: string; text: string; location: string; weight: number }
+
+// Type guard for action
+function hasAction(opt: any): opt is { id: string; text: string; action: string } {
+  return typeof opt?.action === 'string';
+}
+
 const QUIZ_STEPS = [
   {
     id: 'safety',
@@ -143,7 +155,7 @@ export default function QuizWizard() {
     const selectedOption = currentStepData.options.find(opt => opt.id === optionId)
     
     // Handle crisis redirect
-    if (selectedOption?.action === 'crisis-redirect') {
+    if (hasAction(selectedOption) && selectedOption.action === 'crisis-redirect') {
       router.push('/crisis')
       return
     }

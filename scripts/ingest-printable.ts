@@ -84,7 +84,7 @@ function extractResourceData(): RawCategory[] {
     const categories: RawCategory[] = [];
     const categoryMatches = dataStr.matchAll(/\{\s*title:\s*"([^"]+)"/g);
     
-    for (const match of categoryMatches) {
+    for (const match of Array.from(categoryMatches)) {
       categories.push({
         title: match[1],
         resources: []

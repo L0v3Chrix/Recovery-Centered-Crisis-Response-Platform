@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { TResource } from '@/types/resource';
+import type { Resource, Category } from '@/src/types/resource';
+import { getAllResources } from '@/src/lib/resources';
 
 export async function GET(
   request: NextRequest,
@@ -17,9 +18,7 @@ export async function GET(
     const openNow = searchParams.get('openNow') === 'true';
     
     // Load all resources
-    const dataPath = path.join(process.cwd(), 'data/resources.normalized.json');
-    const data = fs.readFileSync(dataPath, 'utf-8');
-    const allResources: TResource[] = JSON.parse(data);
+    const allResources: Resource[] = getAllResources();
     
     // Filter by category
     let filtered = allResources.filter(r => r.category === category);
@@ -43,7 +42,8 @@ export async function GET(
       filtered = filtered.filter(r => {
         if (!r.hours) return true; // Assume open if no hours
         
-        const hours = r.hours.toLowerCase();
+        const textHours = typeof r.hours === "string" ? r.hours : r.hours == null ? "" : JSON.stringify(r.hours);
+        const hours = textHours.toLowerCase();
         
         // Check for 24-hour service
         if (hours.includes('24 hour') || hours.includes('24/7')) {

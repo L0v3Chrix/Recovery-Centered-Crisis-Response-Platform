@@ -50,7 +50,7 @@ function deduplicateResources(resources: TResource[]): TResource[] {
       
       // Merge services
       if (resource.services) {
-        existing.services = [...new Set([...(existing.services || []), ...resource.services])];
+        existing.services = Array.from(new Set([...(existing.services || []), ...resource.services]));
       }
     }
   });
@@ -75,7 +75,7 @@ function assignMissingRegions(resources: TResource[]): void {
   
   resources.forEach(resource => {
     if (!resource.region && resource.zip) {
-      resource.region = zipRegions[resource.zip] || 'central';
+      resource.region = (zipRegions[resource.zip] || 'central') as 'north' | 'south' | 'east' | 'west' | 'central';
     } else if (!resource.region) {
       // Default to central if no ZIP
       resource.region = 'central';

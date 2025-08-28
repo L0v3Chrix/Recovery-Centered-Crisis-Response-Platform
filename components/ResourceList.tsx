@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { Search, Filter, MapPin, Clock } from 'lucide-react'
 import ResourceCard from './ResourceCard'
 import { Resource, ResourceCategory, SearchFilters } from '@/types/resources'
-import { searchResources } from '@/lib/database'
+import { searchResources } from '@/src/lib/resources'
 
 interface ResourceListProps {
   category?: ResourceCategory
@@ -44,14 +44,14 @@ export default function ResourceList({
     }
 
     const results = searchResources(searchFilters)
-    let filteredResources = results.map(match => match.resource)
+    let filteredResources = results.map((match: any) => match.resource)
 
     // Apply text search
     if (searchTerm) {
-      filteredResources = filteredResources.filter(resource => 
+      filteredResources = filteredResources.filter((resource: Resource) => 
         resource.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         resource.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        resource.services.some(service => 
+        resource.services.some((service: string) => 
           service.toLowerCase().includes(searchTerm.toLowerCase())
         )
       )

@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import fs from 'fs';
 import path from 'path';
-import { TResource } from '@/types/resource';
+import type { Resource, Category } from '@/src/types/resource';
+import { getAllResources } from '@/src/lib/resources';
 
 const RequestSchema = z.object({
   categories: z.array(z.string()).min(1), // Changed to array of categories
@@ -21,10 +22,8 @@ type Request = z.infer<typeof RequestSchema>;
 const AUSTIN_CENTER = { lat: 30.2672, lng: -97.7431 };
 
 // Load resources
-function loadResources(): TResource[] {
-  const dataPath = path.join(process.cwd(), 'data/resources.normalized.json');
-  const data = fs.readFileSync(dataPath, 'utf-8');
-  return JSON.parse(data);
+function loadResources(): Resource[] {
+  return getAllResources();
 }
 
 // Calculate distance between two points
@@ -41,7 +40,7 @@ function calculateDistance(lat1: number, lng1: number, lat2: number, lng2: numbe
 }
 
 // Score a single resource
-function scoreResource(resource: TResource, request: Request): number {
+function scoreResource(resource: Resource, request: Request): number {
   let score = 0;
   
   // Category match (50%)
@@ -152,7 +151,7 @@ function scoreResource(resource: TResource, request: Request): number {
   // Special needs match
   if (request.needs && resource.services) {
     const matchCount = request.needs.filter(n => 
-      resource.services?.some(s => s.toLowerCase().includes(n.toLowerCase()))
+      resource.services?.some((s: string) => s.toLowerCase().includes(n.toLowerCase()))
     ).length;
     
     if (matchCount > 0) {
@@ -164,9 +163,9 @@ function scoreResource(resource: TResource, request: Request): number {
 }
 
 // Diversity guard: ensure balanced results across categories
-function applyDiversityGuard(scoredResources: Array<TResource & {score: number}>, categories: string[], limit: number = 20): Array<TResource & {score: number}> {
+function applyDiversityGuard(scoredResources: Array<Resource & {score: number}>, categories: string[], limit: number = 20): Array<Resource & {score: number}> {
   // Group resources by category
-  const buckets = new Map<string, Array<TResource & {score: number}>>();
+  const buckets = new Map<string, Array<Resource & {score: number}>>();
   
   // Initialize buckets for each requested category
   categories.forEach(cat => buckets.set(cat, []));
@@ -184,7 +183,7 @@ function applyDiversityGuard(scoredResources: Array<TResource & {score: number}>
   });
   
   // Round-robin selection to ensure diversity
-  const result: Array<TResource & {score: number}> = [];
+  const result: Array<Resource & {score: number}> = [];
   let hasMoreResources = true;
   
   while (result.length < limit && hasMoreResources) {

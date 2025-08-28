@@ -207,7 +207,8 @@ export default function CategoryResources({ category, title, description }: Cate
 function ResourceCard({ resource }: { resource: TResource }) {
   const isOpen = () => {
     if (!resource.hours) return true
-    const hours = resource.hours.toLowerCase()
+    const textHours = typeof resource.hours === "string" ? resource.hours : resource.hours == null ? "" : JSON.stringify(resource.hours);
+    const hours = textHours.toLowerCase()
     if (hours.includes('24 hour') || hours.includes('24/7')) return true
     
     // Simple check - in production you'd want more robust parsing
@@ -249,17 +250,22 @@ function ResourceCard({ resource }: { resource: TResource }) {
           </div>
         )}
 
-        {resource.hours && (
-          <div className="flex items-start text-sm">
-            <Clock className="w-4 h-4 mr-2 mt-0.5 text-warm-slate-400 flex-shrink-0" />
-            <div>
-              <span className={`${open ? 'text-green-600 font-medium' : 'text-warm-slate-600'}`}>
-                {resource.hours}
-              </span>
-              {open && <span className="text-green-600 ml-2">• Open Now</span>}
-            </div>
-          </div>
-        )}
+        {(() => {
+          if (typeof resource.hours === 'string') {
+            return (
+              <div className="flex items-start text-sm">
+                <Clock className="w-4 h-4 mr-2 mt-0.5 text-warm-slate-400 flex-shrink-0" />
+                <div>
+                  <span className={`${open ? 'text-green-600 font-medium' : 'text-warm-slate-600'}`}>
+                    {resource.hours}
+                  </span>
+                  {open && <span className="text-green-600 ml-2">• Open Now</span>}
+                </div>
+              </div>
+            );
+          }
+          return null;
+        })()}
 
         {resource.website && (
           <div className="flex items-center text-sm">
@@ -279,7 +285,7 @@ function ResourceCard({ resource }: { resource: TResource }) {
       {resource.services && resource.services.length > 0 && (
         <div className="border-t pt-3">
           <div className="flex flex-wrap gap-1">
-            {resource.services.slice(0, 3).map((service, index) => (
+            {resource.services.slice(0, 3).map((service: string, index: number) => (
               <span 
                 key={index}
                 className="inline-block bg-gray-100 text-xs text-warm-slate-600 px-2 py-1 rounded"

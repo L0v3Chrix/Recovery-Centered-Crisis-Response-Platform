@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { Resource, ResourceCategory, RecoveryStage, SearchFilters, ResourceMatch } from '@/types/resources'
 import { UserLocation } from '@/types/api'
-import { searchResources, getResourcesByCategory } from '@/lib/database'
+import { searchResources, getResourcesByCategory } from '@/src/lib/resources'
 import { searchTreatmentFacilities, convertSAMHSAToResource } from '@/lib/samhsa-api'
 
 interface UseResourceSearchOptions {
@@ -107,7 +107,7 @@ export function useResourceSearch(
       try {
         // Get local resources
         const localMatches = searchResources(filters)
-        let allResources = localMatches.map(match => match.resource)
+        let allResources = localMatches.map((match: ResourceMatch) => match.resource)
 
         // Add SAMHSA resources if applicable
         if (enableSAMHSAIntegration && (category === ResourceCategory.RECOVERY || !category)) {
@@ -125,24 +125,24 @@ export function useResourceSearch(
         // Apply text search
         if (searchTerm.trim()) {
           const term = searchTerm.toLowerCase().trim()
-          allResources = allResources.filter(resource => 
+          allResources = allResources.filter((resource: Resource) => 
             resource.name.toLowerCase().includes(term) ||
             resource.description.toLowerCase().includes(term) ||
-            resource.services.some(service => service.toLowerCase().includes(term)) ||
+            resource.services.some((service: string) => service.toLowerCase().includes(term)) ||
             resource.address.toLowerCase().includes(term)
           )
         }
 
         // Remove duplicates (by name and address)
-        const uniqueResources = allResources.filter((resource, index, self) =>
-          index === self.findIndex(r => 
+        const uniqueResources = allResources.filter((resource: Resource, index: number, self: Resource[]) =>
+          index === self.findIndex((r: Resource) => 
             r.name === resource.name && r.address === resource.address
           )
         )
 
         // Sort by relevance/distance
         if (userLocation) {
-          uniqueResources.sort((a, b) => {
+          uniqueResources.sort((a: Resource, b: Resource) => {
             const distA = calculateDistance(
               userLocation.coordinates.lat,
               userLocation.coordinates.lng,
