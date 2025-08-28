@@ -2,11 +2,6 @@ import CategoryResources from '@/components/CategoryResources'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
-export const metadata = {
-  title: 'Healthcare Resources | HelpNow ATX',
-  description: 'Find medical care, mental health services, dental care, and pharmacy assistance in Central Texas. Free and low-cost healthcare available.',
-}
-
 export default function HealthcarePage() {
   return (
     <>

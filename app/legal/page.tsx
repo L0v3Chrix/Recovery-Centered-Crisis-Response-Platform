@@ -2,11 +2,6 @@ import CategoryResources from '@/components/CategoryResources'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
-export const metadata = {
-  title: 'Legal Resources | HelpNow ATX',
-  description: 'Find legal aid, documentation assistance, immigration help, and expungement services in Central Texas. Free legal help available.',
-}
-
 export default function LegalPage() {
   return (
     <>

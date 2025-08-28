@@ -2,11 +2,6 @@ import CategoryResources from '@/components/CategoryResources'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
-export const metadata = {
-  title: 'Shelter & Housing Resources | HelpNow ATX',
-  description: 'Find emergency shelter, transitional housing, and permanent housing assistance in Central Texas. Safe shelter available 24/7.',
-}
-
 export default function ShelterPage() {
   return (
     <>

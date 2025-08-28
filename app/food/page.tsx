@@ -1,11 +1,7 @@
 import CategoryResources from '@/components/CategoryResources'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-
-export const metadata = {
-  title: 'Food Resources | HelpNow ATX',
-  description: 'Find food pantries, hot meals, groceries, and nutrition assistance in Central Texas. Free food resources available now.',
-}
+import { Metadata } from 'next'
 
 export default function FoodPage() {
   return (

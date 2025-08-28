@@ -2,11 +2,6 @@ import CategoryResources from '@/components/CategoryResources'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
-export const metadata = {
-  title: 'Recovery & Treatment Resources | HelpNow ATX',
-  description: 'Find addiction treatment, detox services, MAT programs, and recovery support in Central Texas. Help is available.',
-}
-
 export default function RecoveryPage() {
   return (
     <>
