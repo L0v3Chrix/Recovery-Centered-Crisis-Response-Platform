@@ -1,0 +1,135 @@
+/* ScrollStack Component - Optimized for Aurora Hope Design System */
+
+.scroll-stack {
+  position: relative;
+  min-height: 100vh;
+  perspective: 1000px;
+  overflow: hidden;
+}
+
+.scroll-stack-item {
+  position: sticky;
+  top: 10vh;
+  margin: 2rem 0;
+  transform-style: preserve-3d;
+  transition: 
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, filter;
+}
+
+/* Performance optimizations */
+.scroll-stack-item {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  contain: layout style paint;
+}
+
+/* Active item styling */
+.scroll-stack[data-active-index="0"] .scroll-stack-item:nth-child(1),
+.scroll-stack[data-active-index="1"] .scroll-stack-item:nth-child(2),
+.scroll-stack[data-active-index="2"] .scroll-stack-item:nth-child(3),
+.scroll-stack[data-active-index="3"] .scroll-stack-item:nth-child(4),
+.scroll-stack[data-active-index="4"] .scroll-stack-item:nth-child(5) {
+  transform: translateY(0) scale(1) rotateX(0deg);
+  opacity: 1;
+  filter: blur(0px) brightness(1);
+  z-index: 10;
+}
+
+/* Non-active items */
+.scroll-stack-item:not(.scroll-stack-item:nth-child(n)) {
+  opacity: 0.7;
+  filter: blur(1px) brightness(0.8);
+  z-index: 5;
+}
+
+/* Stacking effect - items stack behind active item */
+.scroll-stack-item:nth-child(n+2) {
+  transform: translateY(-10px) scale(0.95) rotateX(2deg);
+}
+
+.scroll-stack-item:nth-child(n+3) {
+  transform: translateY(-20px) scale(0.9) rotateX(4deg);
+}
+
+.scroll-stack-item:nth-child(n+4) {
+  transform: translateY(-30px) scale(0.85) rotateX(6deg);
+}
+
+/* Hover enhancements (desktop only) */
+@media (hover: hover) {
+  .scroll-stack-item:hover {
+    transform: translateY(-5px) scale(1.02) rotateX(-1deg) !important;
+    opacity: 1 !important;
+    filter: blur(0px) brightness(1.05) !important;
+    z-index: 15 !important;
+    box-shadow: 
+      0 10px 25px rgba(27, 42, 91, 0.15),
+      0 20px 40px rgba(27, 42, 91, 0.1);
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .scroll-stack {
+    perspective: 500px;
+  }
+  
+  .scroll-stack-item {
+    top: 5vh;
+    margin: 1rem 0;
+  }
+  
+  /* Reduce transform complexity on mobile */
+  .scroll-stack-item:nth-child(n+2) {
+    transform: translateY(-5px) scale(0.98);
+  }
+  
+  .scroll-stack-item:nth-child(n+3) {
+    transform: translateY(-10px) scale(0.96);
+  }
+  
+  .scroll-stack-item:nth-child(n+4) {
+    transform: translateY(-15px) scale(0.94);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-stack-item {
+    transition: opacity 0.2s ease !important;
+    transform: none !important;
+    filter: none !important;
+    position: relative !important;
+    top: auto !important;
+    perspective: none !important;
+  }
+  
+  .scroll-stack {
+    perspective: none !important;
+    min-height: auto !important;
+  }
+  
+  .scroll-stack-item:hover {
+    transform: none !important;
+    box-shadow: 0 4px 12px rgba(27, 42, 91, 0.1) !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .scroll-stack-item {
+    filter: none !important;
+  }
+}
+
+/* Focus management for accessibility */
+.scroll-stack-item:focus-within {
+  z-index: 20 !important;
+  opacity: 1 !important;
+  filter: blur(0px) brightness(1) !important;
+  outline: 3px solid var(--aurora-azure400);
+  outline-offset: 2px;
+}
