@@ -7,7 +7,21 @@ module.exports = {
   ],
   theme: {
     extend: {
+      borderRadius: {
+        '2xl': '1.25rem',
+      },
       colors: {
+        // Aurora Hope Palette - Psychology-based colors for crisis resources
+        aurora: {
+          indigo700: '#1B2A5B', // Trust, primary brand
+          indigo500: '#2B50E2', // Action buttons, CTAs
+          azure400: '#3EC6FF',   // Focus states, hover effects
+          emerald500: '#14B8A6', // Support actions, positive
+          fuchsia500: '#A855F7', // Education highlights
+          crimson600: '#E11D48', // EMERGENCY ONLY
+        },
+        ink900: '#0F172A',      // Deep text
+        canvasTint: '#F6F8FF',  // Subtle backgrounds
         // Design Brief 2025 - Warm Brand Colors
         'compassion-coral': {
           50: '#fff1f4',

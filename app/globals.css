@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Aurora Hope Design System - Psychology-based Colors */
+  --aurora-indigo700: #1B2A5B;  /* Trust, primary brand */
+  --aurora-indigo500: #2B50E2;  /* Action buttons, CTAs */
+  --aurora-azure400: #3EC6FF;   /* Focus states, hover effects */
+  --aurora-emerald500: #14B8A6; /* Support actions, positive */
+  --aurora-fuchsia500: #A855F7; /* Education highlights */
+  --aurora-crimson600: #E11D48; /* EMERGENCY ONLY */
+  --ink900: #0F172A;            /* Deep text */
+  --canvas-tint: #F6F8FF;       /* Subtle backgrounds */
+}
+
+/* Aurora Hope Gradients */
+.bg-aurora {
+  background: linear-gradient(135deg, #1B2A5B 0%, #2B50E2 35%, #6BA9FF 100%);
+}
+
+.bg-support {
+  background: linear-gradient(135deg, #2B50E2 0%, #14B8A6 50%, #3EC6FF 100%);
+}
+
 @layer base {
   body {
     @apply bg-gray-50 text-gray-900;
@@ -13,19 +34,59 @@
 }
 
 @layer components {
+  /* Aurora Hope Component Layer */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    box-shadow: 0 0 0 3px rgba(62,198,255,.35);
+    box-shadow: none;
+  }
+  
+  .btn:focus {
+    box-shadow: 0 0 0 3px rgba(62,198,255,.35);
+  }
+  
+  .btn-primary {
+    @apply btn bg-aurora-indigo500 hover:bg-aurora-indigo700 text-white focus:ring-aurora-azure400;
+  }
+  
+  .btn-ghost {
+    @apply btn bg-transparent hover:bg-canvas-tint text-aurora-indigo700 border border-aurora-indigo500 hover:border-aurora-indigo700;
+  }
+  
+  .btn-quiet {
+    @apply btn bg-transparent hover:bg-canvas-tint text-warm-slate-600 hover:text-aurora-indigo700 min-h-[44px] px-6;
+  }
+  
+  .chip {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-canvas-tint text-aurora-indigo700 border border-aurora-azure400;
+  }
+  
+  .card {
+    @apply bg-white rounded-2xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow;
+  }
+  
+  .panel {
+    @apply bg-canvas-tint rounded-2xl p-8 border border-aurora-azure400/20;
+  }
+  
+  .support {
+    @apply bg-aurora-emerald500 hover:bg-opacity-90 text-white rounded-lg px-4 py-2 font-medium transition-all;
+  }
+
+  /* Legacy Components (keeping for compatibility) */
   .crisis-button {
-    @apply bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-lg text-lg shadow-lg transform transition hover:scale-105 active:scale-95;
+    @apply bg-aurora-crimson600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-lg text-lg shadow-lg transform transition hover:scale-105 active:scale-95;
   }
   
   .resource-card {
-    @apply bg-white rounded-lg shadow-md p-4 border border-gray-200 hover:shadow-lg transition-shadow;
+    @apply card;
   }
   
   .action-button {
-    @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center gap-2;
+    @apply btn-primary py-3 px-6;
   }
   
   .call-button {
-    @apply bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg min-h-[60px] flex items-center justify-center;
+    @apply bg-aurora-emerald500 hover:bg-opacity-90 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg min-h-[60px] flex items-center justify-center;
   }
 }
