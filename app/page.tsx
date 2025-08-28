@@ -250,7 +250,6 @@ export default function HomePage() {
           <LocationPrompt />
         </div>
       </div>
-      </div>
     </div>
   )
 }

@@ -41,6 +41,82 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Dependencies**: No new dependencies (Step 0 already installed lenis, framer-motion, class-variance-authority)
 - **Testing**: Component classes ready for use, gradients tested and functional
 
+### Step 2: Layout, Header & Support-First Footer - 2025-08-28
+
+#### Added
+- **Max-width Container**: 7xl container in app/layout.tsx with responsive padding
+- **Accessibility**: Skip-to-content link with Aurora styling and proper focus management
+- **Typography**: Base font with antialiased and tracking-tight for improved readability
+
+#### Changed
+- **SiteFooter.tsx**: Complete redesign with Support-first navigation
+  - Replaced "/donate" with "/support" in primary navigation
+  - Applied Aurora design tokens (canvas-tint background, aurora-azure borders)
+  - Used .btn-quiet class for footer links with 44px minimum touch targets
+  - Added helpnowatx.org domain display prominently
+  - Responsive layout with flex-col on mobile, flex-row on desktop
+
+#### Technical Details
+- **Commit**: `feat(ui): modern layout + support-first footer`
+- **Files Modified**: app/layout.tsx, components/SiteFooter.tsx
+- **Accessibility**: Skip link, proper focus management, WCAG 2.1 AA compliant touch targets
+
+### Step 3: Home Rebuild with Lenis ScrollStack - 2025-08-28
+
+#### Added
+- **ScrollStack Component**: Complete interactive stacking system with performance optimizations
+  - ScrollStack.tsx with throttled scroll handling and reduced-motion support
+  - ScrollStack.css with GPU acceleration and mobile optimizations
+  - Focus management and accessibility compliance
+- **GuidedPaths Component**: 3 interactive resource cards
+  - "Food today" - emergency food assistance pathway
+  - "Shelter tonight" - immediate housing resource pathway  
+  - "Recovery now" - addiction treatment pathway
+  - Each with detailed checklists and Aurora-themed styling
+
+#### Changed
+- **Homepage (app/page.tsx)**: Complete visual overhaul
+  - Background: Changed from flat white to rich .bg-aurora gradient
+  - Crisis banner: Updated to aurora-crimson600 (proper emergency color)
+  - Brand header: Added location chip and verified resource chip
+  - Search: Added mode toggle ("I need help" / "I'm helping someone")
+  - Quick Access: Applied Aurora color tokens to all 6 category cards
+  - Added "How to use this map of help" guidance panel
+  - Support strip: .bg-support gradient with support-first CTAs
+
+#### Technical Details
+- **Commit**: `feat(home): rebuild with aurora gradients + Lenis ScrollStack guided paths`
+- **Files Added**: components/ScrollStack.tsx, components/ScrollStack.css, components/GuidedPaths.tsx
+- **Files Modified**: app/page.tsx
+- **Performance**: GPU acceleration, reduced-motion compliance, mobile optimization
+
+### Step 4: Support Page Implementation - 2025-08-28
+
+#### Added
+- **Support Page (app/support/page.tsx)**: Complete support-first donation experience
+  - Hero section: "Help keep this project alive" with compelling subcopy
+  - Primary CTA: Square Checkout integration via NEXT_PUBLIC_SQUARE_CHECKOUT
+  - Secondary CTA: Cash App integration via NEXT_PUBLIC_CASH_APP_HANDLE
+  - Weekly funding transparency section showing exact cost breakdown
+  - "More ways to support" with social sharing and resource submission options
+  - Trust indicators: 100% transparent, no recurring fees, open book policy
+- **Weekly Updates Data (data/updates.ts)**: Structured funding transparency
+  - Server hosting & CDN costs (~$30/week)
+  - Data verification calls (~$50/week)  
+  - Emergency updates (~$20/week)
+  - TypeScript interfaces for maintainability
+
+#### Changed
+- **Analytics Integration**: GA event tracking for support_click events
+  - Method parameter tracking (square/cashapp/more)
+  - Value and currency parameters for conversion tracking
+
+#### Technical Details
+- **Commit**: `feat(support): support-first page with Square + Cash App`
+- **Files Added**: app/support/page.tsx, data/updates.ts
+- **Environment Variables**: NEXT_PUBLIC_SQUARE_CHECKOUT, NEXT_PUBLIC_CASH_APP_HANDLE
+- **Analytics**: Google Analytics event tracking implemented
+
 ### Planning Phase - 2025-08-28
 
 #### Added

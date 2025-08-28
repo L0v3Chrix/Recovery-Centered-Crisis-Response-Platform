@@ -50,15 +50,15 @@
   }
   
   .btn-ghost {
-    @apply btn bg-transparent hover:bg-canvas-tint text-aurora-indigo700 border border-aurora-indigo500 hover:border-aurora-indigo700;
+    @apply btn bg-transparent hover:bg-canvasTint text-aurora-indigo700 border border-aurora-indigo500 hover:border-aurora-indigo700;
   }
   
   .btn-quiet {
-    @apply btn bg-transparent hover:bg-canvas-tint text-warm-slate-600 hover:text-aurora-indigo700 min-h-[44px] px-6;
+    @apply btn bg-transparent hover:bg-canvasTint text-warm-slate-600 hover:text-aurora-indigo700 min-h-[44px] px-6;
   }
   
   .chip {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-canvas-tint text-aurora-indigo700 border border-aurora-azure400;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-canvasTint text-aurora-indigo700 border border-aurora-azure400;
   }
   
   .card {
@@ -66,7 +66,7 @@
   }
   
   .panel {
-    @apply bg-canvas-tint rounded-2xl p-8 border border-aurora-azure400/20;
+    @apply bg-canvasTint rounded-2xl p-8 border border-aurora-azure400/20;
   }
   
   .support {

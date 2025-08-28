@@ -30,14 +30,43 @@
    - [x] Updated STYLEGUIDE.md with implemented tokens
    - [x] Committed with conventional commit message
 
+4. **Step 2: Layout, Header & Support-First Footer** ✅
+   - [x] Updated app/layout.tsx with max-width container and responsive padding
+   - [x] Added skip-to-content link for accessibility
+   - [x] Set base font with antialiased and tracking-tight
+   - [x] Updated SiteFooter with Support-first navigation (replaced /donate with /support)
+   - [x] Applied Aurora design tokens and .btn-quiet styling
+   - [x] Committed with conventional commit message
+
+5. **Step 3: Home Rebuild with Lenis ScrollStack** ✅
+   - [x] Created ScrollStack.tsx and ScrollStack.css with performance optimizations
+   - [x] Built GuidedPaths.tsx with 3 interactive cards (Food today, Shelter tonight, Recovery now)
+   - [x] Rebuilt homepage with bg-aurora gradient background
+   - [x] Added brand header with location and verified chips
+   - [x] Implemented search with mode toggle functionality
+   - [x] Applied Aurora colors to all Quick Access category cards
+   - [x] Added "How to use this map of help" guidance panel
+   - [x] Implemented support strip with .bg-support gradient and support-first CTAs
+   - [x] Committed with conventional commit message
+
+6. **Step 4: /support Page Implementation** ✅
+   - [x] Created app/support/page.tsx with support-first messaging
+   - [x] Hero section with "Help keep this project alive" compelling copy
+   - [x] Primary CTA linking to Square Checkout (environment variable)
+   - [x] Secondary CTA linking to Cash App (environment variable)
+   - [x] "More ways to support" section with trust notes and transparency
+   - [x] Created data/updates.ts for weekly funding transparency
+   - [x] GA event tracking for support_click with method parameters
+   - [x] Committed with conventional commit message
+
 ### **Currently Working On** 🚧
 - Updating progress tracking documents
-- Preparing for Step 2: Layout, Header & Support-First Footer
+- Completing Steps 0-4 documentation
 
 ### **Next Up** ⏳
-- Update app/layout.tsx with max-width container
-- Create components/SiteFooter.tsx with Support-first navigation
-- Mount footer globally
+- Begin Phase 2: Support & Community Pages (Steps 5-7)
+- GHL API v2 integration
+- Admin reports page implementation
 
 ---
 
