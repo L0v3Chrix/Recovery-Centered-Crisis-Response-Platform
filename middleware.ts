@@ -2,6 +2,17 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
+  const url = request.nextUrl.clone()
+  const hostname = request.headers.get('host') || ''
+  
+  // Force HTTPS redirect if not already HTTPS
+  if (process.env.NODE_ENV === 'production' && 
+      request.headers.get('x-forwarded-proto') !== 'https') {
+    url.protocol = 'https:'
+    url.host = hostname
+    return NextResponse.redirect(url, 301)
+  }
+  
   const response = NextResponse.next()
   
   // Security headers for mixed content prevention
@@ -24,9 +35,9 @@ export function middleware(request: NextRequest) {
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
   response.headers.set('Permissions-Policy', 'geolocation=(), microphone=(), camera=()')
   
-  // Strict Transport Security (HSTS) - will be enabled after verification
+  // Strict Transport Security (HSTS) with preload
   if (process.env.NODE_ENV === 'production') {
-    response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
+    response.headers.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload')
   }
   
   return response

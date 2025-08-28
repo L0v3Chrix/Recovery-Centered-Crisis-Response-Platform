@@ -11,7 +11,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://helpnowatx.org'),
+  metadataBase: new URL('https://www.helpnowatx.org'),
   title: 'HelpNow ATX - Real help, verified daily',
   description: 'Find verified crisis, food, shelter, and recovery resources in Central Texas. 516+ resources updated weekly.',
   keywords: ['crisis', 'food', 'shelter', 'recovery', 'resources', 'Austin', 'Travis County', 'Central Texas', 'help', 'emergency'],
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'HelpNow ATX - Real help, verified daily',
     description: 'Find verified crisis, food, shelter, and recovery resources in Central Texas.',
-    url: 'https://helpnowatx.org',
+    url: 'https://www.helpnowatx.org',
     siteName: 'HelpNow ATX',
     images: ['/og/default-1200x630.png'],
     locale: 'en_US',
