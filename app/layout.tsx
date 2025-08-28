@@ -1,16 +1,21 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
 import Breadcrumbs from '../components/Breadcrumbs'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: '#2B50E2',
+}
 
 export const metadata: Metadata = {
   title: 'HelpNow ATX - Real help, verified daily',
   description: 'Find verified crisis, food, shelter, and recovery resources in Central Texas. 516+ resources updated weekly.',
   keywords: ['crisis', 'food', 'shelter', 'recovery', 'resources', 'Austin', 'Travis County', 'Central Texas', 'help', 'emergency'],
   authors: [{ name: 'Raise the Vibe' }],
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
-  themeColor: '#2B50E2',
   manifest: '/manifest.json',
   icons: {
     icon: [
