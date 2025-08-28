@@ -5,7 +5,7 @@ import path from 'path';
 import { TResource } from '@/types/resource';
 
 const RequestSchema = z.object({
-  category: z.string(),
+  categories: z.array(z.string()).min(1), // Changed to array of categories
   subcategory: z.string().optional(),
   zip: z.string().optional(),
   lat: z.number().optional(),
@@ -45,7 +45,7 @@ function scoreResource(resource: TResource, request: Request): number {
   let score = 0;
   
   // Category match (50%)
-  if (resource.category === request.category) {
+  if (request.categories.includes(resource.category)) {
     score += 0.5;
   } else {
     // Partial credit for related categories
@@ -58,7 +58,12 @@ function scoreResource(resource: TResource, request: Request): number {
       'employment': ['benefits', 'education']
     };
     
-    if (relatedCategories[request.category]?.includes(resource.category)) {
+    // Check if any requested category is related to this resource's category
+    const hasRelation = request.categories.some(cat => 
+      relatedCategories[cat]?.includes(resource.category)
+    );
+    
+    if (hasRelation) {
       score += 0.2;
     }
   }
@@ -98,153 +103,193 @@ function scoreResource(resource: TResource, request: Request): number {
         '78749': 'south', '78744': 'south', '78741': 'south', '78747': 'south',
         '78721': 'east', '78724': 'east', '78617': 'east',
         '78725': 'east', '78742': 'east', '78719': 'east',
-        '78746': 'west', '78730': 'west', '78733': 'west',
-        '78734': 'west', '78735': 'west', '78736': 'west', '78738': 'west', '78739': 'west'
+        '78730': 'west', '78733': 'west', '78735': 'west', 
+        '78736': 'west', '78738': 'west', '78739': 'west',
+        '78746': 'west', '78750': 'west', '78726': 'west', '78732': 'west',
+        '78734': 'west', '78737': 'west'
       };
       userRegion = zipRegions[request.zip] || 'central';
     }
     
+    // Full match for same region
     if (resource.region === userRegion) {
       score += 0.2;
-    } else if (userRegion === 'central' || resource.region === 'central') {
-      // Partial credit for central region adjacency
+    } else if (resource.region === 'central' || userRegion === 'central') {
+      // Partial credit for central region
       score += 0.1;
     }
   }
   
-  // Distance score (20%) - only if we have coordinates
+  // Distance bonus (20%)
   if (request.lat && request.lng && resource.coordinates) {
     const distance = calculateDistance(
-      request.lat, request.lng,
-      resource.coordinates.lat, resource.coordinates.lng
+      request.lat, 
+      request.lng,
+      resource.coordinates.lat,
+      resource.coordinates.lng
     );
     
-    // Transport mode affects distance scoring
-    let maxDistance = 10; // km for car
-    if (request.transportMode === 'transit') maxDistance = 5;
-    if (request.transportMode === 'walk') maxDistance = 2;
-    
-    if (distance <= maxDistance) {
-      // Linear decay from 20% to 0%
-      score += 0.2 * (1 - distance / maxDistance);
+    if (distance <= 3.0) {
+      score += 0.2; // Very close
+    } else if (distance <= 8.0) {
+      score += 0.1; // Moderate distance
+    } else if (distance <= 15.0) {
+      score += 0.05; // Far but still in area
     }
-  } else if (!request.lat && !request.lng) {
-    // If no coordinates provided, give partial distance score
-    score += 0.1;
   }
   
   // Eligibility match (10%)
-  if (request.eligibility && request.eligibility.length > 0 && resource.eligibility) {
-    const matches = request.eligibility.filter(e => 
-      resource.eligibility?.some(re => 
-        re.toLowerCase().includes(e.toLowerCase())
-      )
-    );
-    score += 0.1 * (matches.length / request.eligibility.length);
+  if (request.eligibility && resource.eligibility) {
+    const matchCount = request.eligibility.filter(e => 
+      resource.eligibility?.includes(e)
+    ).length;
+    
+    if (matchCount > 0) {
+      score += Math.min(0.1, matchCount * 0.03);
+    }
   }
   
-  // Needs match (bonus up to 10%)
-  if (request.needs && request.needs.length > 0 && resource.services) {
-    const serviceText = resource.services.join(' ').toLowerCase();
-    const matches = request.needs.filter(need => 
-      serviceText.includes(need.toLowerCase())
-    );
-    score += Math.min(0.1, 0.02 * matches.length);
+  // Special needs match
+  if (request.needs && resource.services) {
+    const matchCount = request.needs.filter(n => 
+      resource.services?.some(s => s.toLowerCase().includes(n.toLowerCase()))
+    ).length;
+    
+    if (matchCount > 0) {
+      score += Math.min(0.05, matchCount * 0.02);
+    }
   }
   
   return score;
 }
 
-// Check if resource is currently open
-function isOpen(hours?: string): boolean {
-  if (!hours) return true; // Assume open if no hours specified
+// Diversity guard: ensure balanced results across categories
+function applyDiversityGuard(scoredResources: Array<TResource & {score: number}>, categories: string[], limit: number = 20): Array<TResource & {score: number}> {
+  // Group resources by category
+  const buckets = new Map<string, Array<TResource & {score: number}>>();
   
-  const now = new Date();
-  const currentDay = now.toLocaleDateString('en-US', { weekday: 'long' });
-  const currentTime = now.getHours() * 60 + now.getMinutes(); // Minutes since midnight
+  // Initialize buckets for each requested category
+  categories.forEach(cat => buckets.set(cat, []));
   
-  // Parse hours string (e.g., "Mon-Fri 9am-5pm")
-  // This is a simplified check - real implementation would need more robust parsing
-  const lowerHours = hours.toLowerCase();
-  const dayAbbrev = currentDay.substring(0, 3).toLowerCase();
+  // Sort resources into buckets
+  scoredResources.forEach(resource => {
+    if (categories.includes(resource.category)) {
+      buckets.get(resource.category)?.push(resource);
+    }
+  });
   
-  if (!lowerHours.includes(dayAbbrev) && !lowerHours.includes('daily') && !lowerHours.includes('24')) {
-    return false;
-  }
+  // Sort each bucket by score
+  buckets.forEach(bucket => {
+    bucket.sort((a, b) => b.score - a.score);
+  });
   
-  // Check for 24-hour service
-  if (lowerHours.includes('24 hour') || lowerHours.includes('24/7')) {
-    return true;
-  }
+  // Round-robin selection to ensure diversity
+  const result: Array<TResource & {score: number}> = [];
+  let hasMoreResources = true;
   
-  // Extract time ranges (simplified)
-  const timeMatch = lowerHours.match(/(\d{1,2}):?(\d{2})?\s*(am|pm)?.*?(\d{1,2}):?(\d{2})?\s*(am|pm)?/);
-  if (timeMatch) {
-    // Parse start time
-    let startHour = parseInt(timeMatch[1]);
-    const startMin = parseInt(timeMatch[2] || '0');
-    if (timeMatch[3] === 'pm' && startHour !== 12) startHour += 12;
-    if (timeMatch[3] === 'am' && startHour === 12) startHour = 0;
-    const startTime = startHour * 60 + startMin;
+  while (result.length < limit && hasMoreResources) {
+    hasMoreResources = false;
     
-    // Parse end time
-    let endHour = parseInt(timeMatch[4]);
-    const endMin = parseInt(timeMatch[5] || '0');
-    if (timeMatch[6] === 'pm' && endHour !== 12) endHour += 12;
-    if (timeMatch[6] === 'am' && endHour === 12) endHour = 0;
-    const endTime = endHour * 60 + endMin;
-    
-    return currentTime >= startTime && currentTime <= endTime;
+    for (const category of categories) {
+      const bucket = buckets.get(category);
+      if (bucket && bucket.length > 0) {
+        result.push(bucket.shift()!);
+        hasMoreResources = true;
+        
+        if (result.length >= limit) break;
+      }
+    }
   }
   
-  return true; // Default to open if can't parse
+  return result;
 }
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const validated = RequestSchema.parse(body);
     
-    // Load all resources
-    const resources = loadResources();
+    // Parse and validate request
+    const parsed = RequestSchema.safeParse(body);
     
-    // Score all resources
-    const scoredResources = resources.map(resource => ({
-      ...resource,
-      score: scoreResource(resource, validated),
-      isOpen: isOpen(resource.hours)
-    }));
-    
-    // Filter and sort
-    const recommendations = scoredResources
-      .filter(r => r.score > 0.1) // Minimum threshold
-      .sort((a, b) => {
-        // Sort by score, then by whether open
-        if (Math.abs(a.score - b.score) > 0.01) {
-          return b.score - a.score;
-        }
-        if (a.isOpen !== b.isOpen) {
-          return a.isOpen ? -1 : 1;
-        }
-        return 0;
-      })
-      .slice(0, 20); // Top 20 recommendations
-    
-    return NextResponse.json({
-      recommendations,
-      totalMatches: recommendations.length,
-      request: validated
-    });
-    
-  } catch (error) {
-    if (error instanceof z.ZodError) {
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: 'Invalid request', details: error.errors },
+        { error: 'Invalid request', details: parsed.error.issues },
         { status: 400 }
       );
     }
     
-    console.error('Quiz recommendation error:', error);
+    const req = parsed.data;
+    const resources = loadResources();
+    
+    // Filter resources to those in requested categories
+    const candidateResources = resources.filter(r => 
+      req.categories.includes(r.category)
+    );
+    
+    // Score all candidate resources
+    const scoredResources = candidateResources.map(resource => ({
+      ...resource,
+      score: scoreResource(resource, req)
+    }));
+    
+    // Sort by score
+    scoredResources.sort((a, b) => b.score - a.score);
+    
+    // Apply diversity guard for balanced results
+    const diverseResults = applyDiversityGuard(scoredResources, req.categories, 20);
+    
+    // Format results
+    const recommendations = diverseResults.map(resource => ({
+      resource: {
+        id: resource.id,
+        name: resource.name,
+        category: resource.category,
+        subcategories: resource.subcategories,
+        description: resource.description,
+        address: resource.address,
+        city: resource.city,
+        state: resource.state,
+        zip: resource.zip,
+        phone: resource.phone,
+        website: resource.website,
+        hours: resource.hours,
+        services: resource.services,
+        eligibility: resource.eligibility,
+        region: resource.region,
+        coordinates: resource.coordinates,
+        lastVerified: resource.lastVerified
+      },
+      score: Math.round(resource.score * 100),
+      distance: resource.coordinates && req.lat && req.lng
+        ? calculateDistance(req.lat, req.lng, resource.coordinates.lat, resource.coordinates.lng)
+        : null,
+      reasons: [
+        req.categories.includes(resource.category) && `Matches ${resource.category} category`,
+        resource.region && 'In your area',
+        resource.score >= 0.7 && 'High relevance match'
+      ].filter(Boolean) as string[]
+    }));
+    
+    // Calculate totals by category
+    const categoryTotals: Record<string, number> = {};
+    req.categories.forEach(cat => {
+      categoryTotals[cat] = resources.filter(r => r.category === cat).length;
+    });
+    
+    return NextResponse.json({
+      success: true,
+      recommendations,
+      meta: {
+        totalResources: resources.length,
+        candidatesConsidered: candidateResources.length,
+        categoriesRequested: req.categories,
+        categoryTotals,
+        resultsReturned: recommendations.length
+      }
+    });
+    
+  } catch (error) {
+    console.error('Error in recommendations API:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

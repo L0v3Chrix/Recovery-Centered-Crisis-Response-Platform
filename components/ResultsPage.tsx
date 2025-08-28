@@ -55,8 +55,8 @@ export default function ResultsPage() {
           const primaryNeedAnswer = answers.find(a => a.questionId === 'primary-need')
           const locationAnswer = answers.find(a => a.questionId === 'location')
           
-          // Determine primary category from multi-select
-          let category = 'crisis' // default
+          // Extract all selected categories from multi-select
+          let categories: string[] = ['crisis'] // default
           let needs: string[] = []
           
           if (primaryNeedAnswer && Array.isArray(primaryNeedAnswer.answer)) {
@@ -69,11 +69,17 @@ export default function ResultsPage() {
               'legal': 'legal'
             }
             
-            // Use first selected category as primary
-            const primarySelection = primaryNeedAnswer.answer[0]
-            category = categoryMap[primarySelection] || 'crisis'
+            // Map all selected options to categories
+            categories = primaryNeedAnswer.answer
+              .map(selection => categoryMap[selection])
+              .filter(Boolean)
             
-            // Get all selected categories as needs
+            // If no valid categories mapped, use default
+            if (categories.length === 0) {
+              categories = ['crisis']
+            }
+            
+            // Store original selections as needs
             needs = primaryNeedAnswer.answer
           }
           
@@ -90,12 +96,12 @@ export default function ResultsPage() {
             zip = zipMap[locationAnswer.answer as string]
           }
 
-          // Call our API
+          // Call our API with multiple categories
           const response = await fetch('/api/quiz/recommendations', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              category,
+              categories, // Send array of categories
               needs,
               zip
             })

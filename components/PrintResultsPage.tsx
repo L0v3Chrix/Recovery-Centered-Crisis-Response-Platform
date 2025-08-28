@@ -41,10 +41,34 @@ export default function PrintResultsPage() {
       const fetchResults = async () => {
         try {
           const answers = JSON.parse(answersParam)
+          
+          // Extract categories from answers
+          const primaryNeedAnswer = answers.find((a: any) => a.questionId === 'primary-need')
+          let categories = ['crisis'] // default
+          
+          if (primaryNeedAnswer && Array.isArray(primaryNeedAnswer.answer)) {
+            const categoryMap: Record<string, string> = {
+              'crisis': 'crisis',
+              'food': 'food',
+              'shelter': 'shelter',
+              'recovery': 'recovery',
+              'healthcare': 'healthcare',
+              'legal': 'legal'
+            }
+            
+            categories = primaryNeedAnswer.answer
+              .map((selection: string) => categoryMap[selection])
+              .filter(Boolean)
+            
+            if (categories.length === 0) {
+              categories = ['crisis']
+            }
+          }
+          
           const response = await fetch('/api/quiz/recommendations', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ answers })
+            body: JSON.stringify({ categories })
           })
           
           if (response.ok) {
