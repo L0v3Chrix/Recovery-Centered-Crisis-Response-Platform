@@ -4,50 +4,56 @@ import Link from 'next/link'
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-gray-100 border-t py-4 text-center text-sm mt-auto">
-      <div className="container mx-auto px-4">
-        {/* Published by */}
-        <div className="mb-3">
-          <p className="text-gray-600">
-            Published by{' '}
-            <a
-              href="https://raisethevibe.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800 font-medium underline"
-            >
-              Raise the Vibe
-            </a>
-          </p>
-        </div>
+    <footer className="bg-canvas-tint border-t border-aurora-azure400/20 py-6 mt-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          {/* Left: Published by info */}
+          <div className="text-center sm:text-left">
+            <p className="text-warm-slate-600 text-sm">
+              Published by{' '}
+              <a
+                href="https://raisethevibe.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-aurora-indigo700 hover:text-aurora-indigo500 font-medium"
+              >
+                Raise the Vibe
+              </a>
+              {' • '}
+              <span className="text-aurora-indigo700 font-medium">
+                helpnowatx.org
+              </span>
+            </p>
+          </div>
 
-        {/* Navigation Buttons */}
-        <nav className="flex flex-wrap justify-center gap-3">
-          <Link
-            href="/donate"
-            className="inline-flex items-center gap-2 rounded-lg px-3 py-2 font-medium shadow-sm hover:shadow bg-blue-600 text-white hover:bg-blue-700 transition-colors"
-          >
-            💝 Donate
-          </Link>
-          <Link
-            href="/partners"
-            className="inline-flex items-center gap-2 rounded-lg px-3 py-2 font-medium shadow-sm hover:shadow bg-gray-600 text-white hover:bg-gray-700 transition-colors"
-          >
-            🤝 Partners
-          </Link>
-          <Link
-            href="/share"
-            className="inline-flex items-center gap-2 rounded-lg px-3 py-2 font-medium shadow-sm hover:shadow bg-green-600 text-white hover:bg-green-700 transition-colors"
-          >
-            📢 Share
-          </Link>
-          <Link
-            href="/submit"
-            className="inline-flex items-center gap-2 rounded-lg px-3 py-2 font-medium shadow-sm hover:shadow bg-purple-600 text-white hover:bg-purple-700 transition-colors"
-          >
-            ➕ Submit a Resource
-          </Link>
-        </nav>
+          {/* Right: Navigation Links */}
+          <nav className="flex flex-wrap justify-center sm:justify-end gap-2">
+            <Link
+              href="/support"
+              className="btn-quiet min-h-[44px]"
+            >
+              Support
+            </Link>
+            <Link
+              href="/share"
+              className="btn-quiet min-h-[44px]"
+            >
+              Share
+            </Link>
+            <Link
+              href="/partners"
+              className="btn-quiet min-h-[44px]"
+            >
+              Partners
+            </Link>
+            <Link
+              href="/submit"
+              className="btn-quiet min-h-[44px]"
+            >
+              Submit
+            </Link>
+          </nav>
+        </div>
       </div>
     </footer>
   )

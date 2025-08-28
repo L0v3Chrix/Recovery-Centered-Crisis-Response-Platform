@@ -8,6 +8,39 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Step 1: Aurora Design Tokens & Component Layer - 2025-08-28
+
+#### Added
+- **CSS Variables**: Complete Aurora Hope palette in `:root` (globals.css)
+  - 8 psychology-based colors with usage comments
+  - Semantic naming for trust, action, support, education, emergency use cases
+- **Gradient System**: `.bg-aurora` and `.bg-support` linear gradients
+  - Aurora gradient: `linear-gradient(135deg, #1B2A5B 0%, #2B50E2 35%, #6BA9FF 100%)`
+  - Support gradient: `linear-gradient(135deg, #2B50E2 0%, #14B8A6 50%, #3EC6FF 100%)`
+- **Component Layer**: Complete button and layout system (@layer components)
+  - Button system: `.btn`, `.btn-primary`, `.btn-ghost`, `.btn-quiet`
+  - Layout components: `.chip`, `.card`, `.panel`, `.support`
+  - Focus ring styling with Aurora azure for accessibility compliance
+- **Tailwind Integration**: Extended color palette in tailwind.config.js
+  - All Aurora colors available as Tailwind utilities
+  - Custom border radius `2xl: '1.25rem'` for modern card appearance
+
+#### Changed
+- **STYLEGUIDE.md**: Updated from "Framework Defined" to "Step 1 Implemented"
+  - Added "IMPLEMENTED" section with active CSS variables and classes
+  - Documented all available component classes and their usage
+  - Added Tailwind utility class reference
+- **Legacy Components**: Updated existing components to use Aurora colors
+  - `.crisis-button` now uses `aurora-crimson600` 
+  - `.call-button` now uses `aurora-emerald500`
+  - Maintained backward compatibility
+
+#### Technical Details
+- **Commit**: `feat(ui): add Aurora tokens, gradients, and component layer`
+- **Files Modified**: tailwind.config.js, app/globals.css, docs/STYLEGUIDE.md
+- **Dependencies**: No new dependencies (Step 0 already installed lenis, framer-motion, class-variance-authority)
+- **Testing**: Component classes ready for use, gradients tested and functional
+
 ### Planning Phase - 2025-08-28
 
 #### Added
