@@ -122,7 +122,7 @@ export default function PrintResultsPage() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">No Results Found</h1>
-          <p>We couldn't find resources matching your criteria.</p>
+          <p>We couldn&apos;t find resources matching your criteria.</p>
         </div>
       </div>
     )

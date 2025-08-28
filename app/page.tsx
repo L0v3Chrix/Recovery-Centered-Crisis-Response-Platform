@@ -1,6 +1,7 @@
 import { AlertTriangle, Utensils, Home, Heart, Phone, MapPin, Search, Gavel, Activity } from 'lucide-react'
 import LocationPrompt from '@/components/LocationPrompt'
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface CategoryCardProps {
   title: string
@@ -63,10 +64,13 @@ export default function HomePage() {
         <div className="mb-6">
           <div className="inline-flex items-center gap-3 mb-4">
             <div className="w-20 h-20 relative">
-              <img 
+              <Image 
                 src="/brand/logo-hlifeline.svg" 
                 alt="HelpNow ATX"
+                width={80}
+                height={80}
                 className="w-full h-full"
+                priority
               />
             </div>
             <div className="text-left">

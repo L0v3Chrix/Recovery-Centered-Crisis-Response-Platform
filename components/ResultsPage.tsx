@@ -158,7 +158,7 @@ export default function ResultsPage() {
       <div className="min-h-screen bg-aurora flex items-center justify-center">
         <div className="text-center text-white">
           <h1 className="text-2xl font-bold mb-4">No Results Found</h1>
-          <p className="mb-6">We couldn't find resources matching your criteria.</p>
+          <p className="mb-6">We couldn&apos;t find resources matching your criteria.</p>
           <Link href="/quiz" className="btn bg-white text-aurora-indigo700">
             Retake Assessment
           </Link>

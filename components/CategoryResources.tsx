@@ -25,42 +25,42 @@ export default function CategoryResources({ category, title, description }: Cate
   const [regions] = useState(['north', 'south', 'east', 'west', 'central'])
 
   useEffect(() => {
+    const fetchResources = async () => {
+      try {
+        const params = new URLSearchParams()
+        if (selectedSubcategory) params.append('subcategory', selectedSubcategory)
+        if (selectedRegion) params.append('region', selectedRegion)
+        if (openNowOnly) params.append('openNow', 'true')
+        
+        const response = await fetch(`/api/resources/${category}?${params}`)
+        if (!response.ok) throw new Error('Failed to fetch resources')
+        
+        const data = await response.json()
+        setResources(data.resources)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load resources')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    const fetchCategoryInfo = async () => {
+      try {
+        const response = await fetch(`/api/resources/${category}`, {
+          method: 'OPTIONS'
+        })
+        if (response.ok) {
+          const data = await response.json()
+          setSubcategories(data.subcategories || [])
+        }
+      } catch (err) {
+        console.error('Failed to fetch category info:', err)
+      }
+    }
+
     fetchResources()
     fetchCategoryInfo()
   }, [category, selectedSubcategory, selectedRegion, openNowOnly])
-
-  const fetchResources = async () => {
-    try {
-      const params = new URLSearchParams()
-      if (selectedSubcategory) params.append('subcategory', selectedSubcategory)
-      if (selectedRegion) params.append('region', selectedRegion)
-      if (openNowOnly) params.append('openNow', 'true')
-      
-      const response = await fetch(`/api/resources/${category}?${params}`)
-      if (!response.ok) throw new Error('Failed to fetch resources')
-      
-      const data = await response.json()
-      setResources(data.resources)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load resources')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const fetchCategoryInfo = async () => {
-    try {
-      const response = await fetch(`/api/resources/${category}`, {
-        method: 'OPTIONS'
-      })
-      if (response.ok) {
-        const data = await response.json()
-        setSubcategories(data.subcategories || [])
-      }
-    } catch (err) {
-      console.error('Failed to fetch category info:', err)
-    }
-  }
 
   const formatSubcategory = (sub: string) => {
     return sub.split('_').map(word => 

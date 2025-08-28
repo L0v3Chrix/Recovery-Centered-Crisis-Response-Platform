@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { Download, Copy, Check, ExternalLink } from 'lucide-react'
+import Image from 'next/image'
 
 export default function PartnersPage() {
   const [copiedBadge, setCopiedBadge] = useState<string | null>(null)
@@ -122,9 +123,11 @@ export default function PartnersPage() {
                         {badge.name}
                       </h3>
                       <div className="bg-gray-50 rounded-lg p-6 flex items-center justify-center">
-                        <img
+                        <Image
                           src={badge.file}
                           alt={`${badge.name} badge`}
+                          width={360}
+                          height={110}
                           className="max-w-full h-auto"
                           style={{ maxHeight: '110px' }}
                         />
@@ -202,7 +205,7 @@ export default function PartnersPage() {
                     Track Your Impact
                   </h4>
                   <p className="text-sm text-gray-600">
-                    UTM tracking shows how many people you've helped connect to resources
+                    UTM tracking shows how many people you&apos;ve helped connect to resources
                   </p>
                 </div>
               </div>
@@ -221,7 +224,7 @@ export default function PartnersPage() {
                   </span>
                   <div>
                     <p className="font-medium text-gray-800">Choose your preferred badge style</p>
-                    <p className="text-sm text-gray-600">Pick the design that best fits your website's aesthetic</p>
+                    <p className="text-sm text-gray-600">Pick the design that best fits your website&apos;s aesthetic</p>
                   </div>
                 </li>
                 
@@ -231,7 +234,7 @@ export default function PartnersPage() {
                   </span>
                   <div>
                     <p className="font-medium text-gray-800">Copy the embed code</p>
-                    <p className="text-sm text-gray-600">Click the "Copy" button to copy the HTML to your clipboard</p>
+                    <p className="text-sm text-gray-600">Click the &quot;Copy&quot; button to copy the HTML to your clipboard</p>
                   </div>
                 </li>
                 
@@ -250,7 +253,7 @@ export default function PartnersPage() {
                     4
                   </span>
                   <div>
-                    <p className="font-medium text-gray-800">That's it!</p>
+                    <p className="font-medium text-gray-800">That&apos;s it!</p>
                     <p className="text-sm text-gray-600">The badge automatically links to helpnowatx.org with tracking</p>
                   </div>
                 </li>
