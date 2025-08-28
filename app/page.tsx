@@ -62,35 +62,32 @@ export default function HomePage() {
       {/* Brand Header Section */}
       <div className="py-12 text-center text-white">
         <div className="mb-6">
-          <div className="inline-flex items-center gap-3 mb-4">
-            <div className="w-20 h-20 relative">
-              <Image 
-                src="/brand/logo-hlifeline.svg" 
-                alt="HelpNow ATX"
-                width={80}
-                height={80}
-                className="w-full h-full"
-                priority
-              />
-            </div>
-            <div className="text-left">
-              <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                HelpNow ATX
-              </h1>
-              <p className="text-lg text-white/80 font-medium">Real help • Verified daily</p>
-              <div className="flex items-center gap-4 mt-2">
-                <span className="chip bg-white/20 text-white border-white/30">
-                  <MapPin className="w-3 h-3 mr-1" />
-                  Austin, TX
-                </span>
-                <span className="chip bg-aurora-emerald500/20 text-white border-aurora-emerald500/40">
-                  <span className="w-2 h-2 bg-aurora-emerald500 rounded-full mr-2"></span>
-                  516+ verified
-                </span>
-              </div>
-            </div>
+          {/* Logo Image */}
+          <div className="mb-6 flex justify-center">
+            <Image 
+              src="/brand/logo-hlifeline.svg" 
+              alt="HelpNow ATX - Real help, verified daily"
+              width={280}
+              height={80}
+              className="w-auto h-20 md:h-24"
+              priority
+            />
           </div>
-          <p className="text-xl text-white/90 max-w-2xl mx-auto font-medium">
+          
+          {/* Tagline and badges */}
+          <p className="text-lg text-white/80 font-medium mb-3">Real help • Verified daily</p>
+          <div className="flex items-center justify-center gap-4">
+            <span className="chip bg-white/20 text-white border-white/30">
+              <MapPin className="w-3 h-3 mr-1" />
+              Austin, TX
+            </span>
+            <span className="chip bg-aurora-emerald500/20 text-white border-aurora-emerald500/40">
+              <span className="w-2 h-2 bg-aurora-emerald500 rounded-full mr-2"></span>
+              516+ verified
+            </span>
+          </div>
+          
+          <p className="text-xl text-white/90 max-w-2xl mx-auto font-medium mt-6">
             Connect instantly to verified help, when you need it most
           </p>
           

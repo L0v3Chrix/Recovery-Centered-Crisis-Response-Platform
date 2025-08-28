@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
+import Breadcrumbs from '../components/Breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'HelpNow ATX - Real help, verified daily',
@@ -67,6 +69,12 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        
+        {/* Site Header */}
+        <SiteHeader />
+        
+        {/* Breadcrumbs */}
+        <Breadcrumbs />
         
         {/* Main content container with max-width */}
         <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex flex-col min-h-screen">
