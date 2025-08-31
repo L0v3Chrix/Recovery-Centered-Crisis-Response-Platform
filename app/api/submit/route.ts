@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 
 // GHL API v2 Configuration
 const GHL_BASE_URL = process.env.GHL_BASE_URL || 'https://services.leadconnectorhq.com'
-const GHL_PIT = process.env.GHL_PIT
-const GHL_LOCATION_ID = process.env.GHL_LOCATION_ID
+const GHL_PIT = process.env.GHL_PIT || 'pit-8963fa78-8ed3-4c4f-99fb-898f76fc6620'
+const GHL_LOCATION_ID = process.env.GHL_LOCATION_ID || 's64yjTf17LupdrR0UtVQ'
 const GHL_PIPELINE_ID = process.env.GHL_PIPELINE_ID
 const GHL_PIPELINE_STAGE_ID = process.env.GHL_PIPELINE_STAGE_ID
 const GHL_USER_ID = process.env.GHL_USER_ID
@@ -37,9 +37,9 @@ interface GHLContact {
   lastName: string
   email: string
   phone?: string
-  tags: string[]
-  customFields: Record<string, any>
-  source: string
+  tags?: string[]
+  customFields?: Array<{key: string, field_value: string}>
+  source?: string
 }
 
 interface GHLOpportunity {
@@ -50,6 +50,81 @@ interface GHLOpportunity {
   name: string
   monetaryValue: number
   status: string
+}
+
+interface GHLNote {
+  body: string
+  userId?: string
+}
+
+// Create note attached to contact in GoHighLevel
+async function createGHLNote(contactId: string, noteData: GHLNote): Promise<boolean> {
+  try {
+    const response = await fetch(`${GHL_BASE_URL}/contacts/${contactId}/notes/`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${GHL_PIT}`,
+        'Content-Type': 'application/json',
+        'Version': '2021-07-28'
+      },
+      body: JSON.stringify(noteData)
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({ message: 'Unknown error' }))
+      console.error(`GHL Note Creation Failed: ${response.status}`, errorData)
+      return false
+    }
+
+    const result = await response.json()
+    console.log('GHL Note Created:', { noteId: result.note?.id || result.id })
+    return true
+  } catch (error) {
+    console.error('Error creating GHL note:', error)
+    return false
+  }
+}
+
+// Format resource submission as comprehensive note content
+function formatResourceNote(data: ResourceSubmission): string {
+  const timestamp = new Date().toLocaleString('en-US', {
+    timeZone: 'America/Chicago',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+
+  return `🔄 RESOURCE SUBMISSION - ${timestamp}
+
+📍 RESOURCE DETAILS:
+• Name: ${data.resourceName}
+• Category: ${data.resourceCategory}
+• Description: ${data.resourceDescription}
+
+📞 CONTACT INFORMATION:
+• Phone: ${data.resourcePhone || 'Not provided'}
+• Website: ${data.resourceWebsite || 'Not provided'}  
+• Address: ${data.resourceAddress || 'Not provided'}
+
+ℹ️ ADDITIONAL INFORMATION:
+• Services Offered: ${data.servicesOffered || 'Not specified'}
+• Hours of Operation: ${data.hoursOfOperation || 'Not specified'}
+• Eligibility Criteria: ${data.eligibilityCriteria || 'Not specified'}
+• Cost Information: ${data.costInfo || 'Not specified'}
+
+📤 SUBMISSION DETAILS:
+• Source: ${data.submissionSource || 'helpnowatx.org/submit'}
+• Submitted: ${timestamp}
+• Status: Pending Review
+• Contact ID: Will be updated after processing
+
+⚡ NEXT STEPS:
+• Verify resource information
+• Contact organization to confirm details  
+• Add to verified resource database
+• Send confirmation email when live`
 }
 
 export async function POST(request: NextRequest) {
@@ -81,23 +156,12 @@ export async function POST(request: NextRequest) {
       firstName,
       lastName,
       email: data.contactEmail,
-      phone: data.contactPhone || '',
-      tags: ['resource-submission', `category-${data.resourceCategory.toLowerCase()}`],
-      customFields: {
-        'resource_name': data.resourceName,
-        'resource_description': data.resourceDescription,
-        'resource_category': data.resourceCategory,
-        'resource_website': data.resourceWebsite || '',
-        'resource_address': data.resourceAddress || '',
-        'resource_phone': data.resourcePhone || '',
-        'services_offered': data.servicesOffered,
-        'hours_of_operation': data.hoursOfOperation || '',
-        'eligibility_criteria': data.eligibilityCriteria || '',
-        'cost_info': data.costInfo || '',
-        'submission_date': new Date().toISOString(),
-        'submission_source': data.submissionSource || 'helpnowatx.org'
-      },
       source: 'helpnowatx.org'
+    }
+
+    // Add phone if provided
+    if (data.contactPhone?.trim()) {
+      contactData.phone = data.contactPhone.trim()
     }
 
     // Step 1: Create or update contact in GHL
@@ -106,10 +170,12 @@ export async function POST(request: NextRequest) {
       headers: {
         'Authorization': `Bearer ${GHL_PIT}`,
         'Content-Type': 'application/json',
-        'Version': '2021-07-28',
-        'X-LC-Tenant': GHL_LOCATION_ID
+        'Version': '2021-07-28'
       },
-      body: JSON.stringify(contactData)
+      body: JSON.stringify({
+        ...contactData,
+        locationId: GHL_LOCATION_ID
+      })
     })
 
     if (!contactResponse.ok) {
@@ -131,9 +197,27 @@ export async function POST(request: NextRequest) {
     }
 
     const contactResult = await contactResponse.json()
-    console.log('GHL Contact Created:', { contactId: contactResult.contact?.id, email: data.contactEmail })
+    const contactId = contactResult.contact?.id
+    console.log('GHL Contact Created:', { contactId, email: data.contactEmail })
 
-    // Step 2: Create opportunity if pipeline info is available
+    // Step 2: Create comprehensive note with all resource details
+    if (contactId) {
+      const noteContent = formatResourceNote(data)
+      const noteData: GHLNote = {
+        body: noteContent
+      }
+
+      console.log('Creating comprehensive note for contact:', contactId)
+      const noteCreated = await createGHLNote(contactId, noteData)
+      
+      if (noteCreated) {
+        console.log('Resource details successfully attached as note')
+      } else {
+        console.error('Failed to attach resource details as note')
+      }
+    }
+
+    // Step 3: Create opportunity if pipeline info is available
     if (GHL_PIPELINE_ID && GHL_PIPELINE_STAGE_ID && contactResult.contact?.id) {
       const opportunityData: GHLOpportunity = {
         pipelineId: GHL_PIPELINE_ID,
