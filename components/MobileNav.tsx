@@ -90,7 +90,7 @@ export default function MobileNav() {
           {/* Menu panel */}
           <div
             id="mobile-menu"
-            className="fixed right-0 top-0 h-full w-full max-w-sm bg-white z-50 shadow-xl lg:hidden"
+            className="fixed right-0 top-0 h-full w-full max-w-sm bg-white z-50 shadow-xl lg:hidden flex flex-col"
             role="dialog"
             aria-modal="true"
             aria-label="Navigation menu"
@@ -106,20 +106,41 @@ export default function MobileNav() {
               </button>
             </div>
 
-            <nav className="px-4 py-6">
-              <ul className="space-y-3">
-                {NAV_ITEMS.map((item) => (
-                  <li key={item.href}>
+            <nav className="px-4 py-6 flex-1 overflow-y-auto">
+              <ul className="space-y-3 pb-6">
+                {NAV_ITEMS.map((item, index) => (
+                  <li key={`${item.href}-${index}`}>
                     <Link
                       href={item.href}
                       onClick={() => setIsOpen(false)}
-                      className="block px-3 py-2 text-lg text-gray-700 hover:text-aurora-indigo700 hover:bg-aurora-pink50 rounded-lg transition-colors"
+                      className={
+                        item.href === '/support'
+                          ? "block px-4 py-3 text-lg font-semibold text-white bg-aurora-emerald500 hover:bg-emerald-600 rounded-lg transition-colors shadow-md"
+                          : "block px-3 py-2 text-lg text-gray-700 hover:text-aurora-indigo700 hover:bg-aurora-pink50 rounded-lg transition-colors"
+                      }
                     >
-                      {item.label}
+                      {item.href === '/support' && item.label === 'Support' ? '💚 Support' : 
+                       item.href === '/support' && item.label === 'Donate' ? '💲 Donate' : 
+                       item.label}
                     </Link>
                   </li>
                 ))}
               </ul>
+              
+              {/* Branding within nav area to avoid overlap */}
+              <div className="px-3 pt-4 border-t border-gray-200 mt-4">
+                <p className="text-xs text-gray-500 text-center">
+                  Powered by{' '}
+                  <a 
+                    href="https://www.raizethevibe.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-sky-500 hover:text-sky-600"
+                  >
+                    Raise the Vibe
+                  </a>
+                </p>
+              </div>
             </nav>
           </div>
         </>

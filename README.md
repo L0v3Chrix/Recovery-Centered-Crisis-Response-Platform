@@ -257,7 +257,7 @@ Built for public good. See [LICENSE](LICENSE) for details.
 
 ---
 
-**Developed by:** [Raize the Vibe](https://raisethevibe.com) - Done-for-you vibecoding studio  
+**Developed by:** [Raize the Vibe](https://www.raizethevibe.com) - Done-for-you vibecoding studio  
 **AI Development Partner:** Claude Code (Anthropic)  
 **Project Duration:** August 2025 intensive development sprint  
 **Technical Stack:** Next.js 14, TypeScript, Tailwind CSS, Vercel, Cloudflare

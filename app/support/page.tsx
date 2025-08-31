@@ -38,17 +38,168 @@ export default function SupportPage() {
           <div className="max-w-4xl mx-auto">
             <Heart className="w-16 h-16 mx-auto mb-6 text-white/90" />
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              About This Project
+              You're Part of Something Beautiful
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-white/90 font-medium leading-relaxed">
-              A free, comprehensive guide to verified help resources in Central Texas
+              Every contribution fuels hope, powers breakthroughs, and keeps Austin's lifeline free
             </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a 
+                href="#donation-levels"
+                className="inline-flex items-center px-8 py-4 text-lg font-bold text-aurora-indigo700 bg-white hover:bg-gray-100 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+              >
+                💚 Choose Your Impact Level 💲
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Donation Levels Section - Above the fold */}
+      <div id="donation-levels" className="py-16 bg-gradient-to-b from-white to-aurora-azure50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h2 className="text-4xl font-bold text-aurora-indigo700 mb-4">
+              Choose Your Impact Level
+            </h2>
+            <p className="text-lg text-warm-slate-700 leading-relaxed">
+              Every contribution creates someone's breakthrough moment. Pick the level that feels right for you.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {/* $5 Level */}
+            <div className="bg-white rounded-2xl p-6 shadow-lg border border-aurora-emerald500/20 hover:shadow-xl transition-shadow">
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-aurora-emerald500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">☕</span>
+                </div>
+                <h3 className="text-xl font-bold text-aurora-indigo700 mb-2">Spark Hope</h3>
+                <div className="text-3xl font-bold text-aurora-emerald500 mb-2">$5</div>
+                <p className="text-sm text-warm-slate-600">Buy a coffee, keep hope brewing</p>
+              </div>
+              <div className="space-y-3">
+                <button
+                  onClick={handleSquareClick}
+                  className="w-full bg-aurora-emerald500 hover:bg-emerald-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+                >
+                  💳 Square - $5
+                </button>
+                <button
+                  onClick={handleCashAppClick}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+                >
+                  💰 Cash App - $5
+                </button>
+              </div>
+            </div>
+
+            {/* $25 Level */}
+            <div className="bg-white rounded-2xl p-6 shadow-lg border border-aurora-azure400/20 hover:shadow-xl transition-shadow">
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-aurora-azure400 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">⚡</span>
+                </div>
+                <h3 className="text-xl font-bold text-aurora-indigo700 mb-2">Power Updates</h3>
+                <div className="text-3xl font-bold text-aurora-azure400 mb-2">$25</div>
+                <p className="text-sm text-warm-slate-600">Fuel weekly verification calls</p>
+              </div>
+              <div className="space-y-3">
+                <button
+                  onClick={handleSquareClick}
+                  className="w-full bg-aurora-azure400 hover:bg-sky-500 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+                >
+                  💳 Square - $25
+                </button>
+                <button
+                  onClick={handleCashAppClick}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+                >
+                  💰 Cash App - $25
+                </button>
+              </div>
+            </div>
+
+            {/* $50 Level */}
+            <div className="bg-white rounded-2xl p-6 shadow-lg border border-aurora-fuchsia500/20 hover:shadow-xl transition-shadow">
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-aurora-fuchsia500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🏆</span>
+                </div>
+                <h3 className="text-xl font-bold text-aurora-indigo700 mb-2">Champion</h3>
+                <div className="text-3xl font-bold text-aurora-fuchsia500 mb-2">$50</div>
+                <p className="text-sm text-warm-slate-600">Protect a month of verified info</p>
+              </div>
+              <div className="space-y-3">
+                <button
+                  onClick={handleSquareClick}
+                  className="w-full bg-aurora-fuchsia500 hover:bg-purple-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+                >
+                  💳 Square - $50
+                </button>
+                <button
+                  onClick={handleCashAppClick}
+                  className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+                >
+                  💰 Cash App - $50
+                </button>
+              </div>
+            </div>
+
+            {/* $100 Level */}
+            <div className="bg-white rounded-2xl p-6 shadow-lg border border-yellow-500/20 hover:shadow-xl transition-shadow relative">
+              <div className="absolute -top-2 -right-2 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                HERO
+              </div>
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🦸‍♀️</span>
+                </div>
+                <h3 className="text-xl font-bold text-aurora-indigo700 mb-2">Community Hero</h3>
+                <div className="text-3xl font-bold text-yellow-600 mb-2">$100</div>
+                <p className="text-sm text-warm-slate-600">Champion Austin's safety net</p>
+              </div>
+              <div className="space-y-3">
+                <button
+                  onClick={handleSquareClick}
+                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+                >
+                  💳 Square - $100
+                </button>
+                <button
+                  onClick={handleCashAppClick}
+                  className="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+                >
+                  💰 Cash App - $100
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center mt-12">
+            <p className="text-warm-slate-600 mb-4">
+              <strong>Choose any amount:</strong> Every contribution powers someone's breakthrough moment
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={handleSquareClick}
+                className="btn bg-aurora-indigo700 text-white hover:bg-aurora-indigo500 font-semibold px-8 py-3"
+              >
+                💳 Custom Amount - Square
+              </button>
+              <button
+                onClick={handleCashAppClick}
+                className="btn bg-green-600 text-white hover:bg-green-700 font-semibold px-8 py-3"
+              >
+                💰 Custom Amount - Cash App
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
       {/* About Section */}
-      <div className="py-16">
+      <div className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
@@ -96,9 +247,74 @@ export default function SupportPage() {
               </div>
             </div>
 
+            {/* Inspirational Story Section */}
+            <div className="bg-gradient-to-r from-aurora-emerald500/10 to-aurora-azure400/10 rounded-2xl p-8 mb-16 border border-aurora-emerald500/20">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-aurora-indigo700 mb-4">
+                  The Story Behind This Lifeline
+                </h2>
+                <div className="w-24 h-1 bg-aurora-emerald500 mx-auto rounded-full mb-6"></div>
+              </div>
+              
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div className="space-y-6">
+                  <div className="bg-white/60 rounded-xl p-6 border border-aurora-azure400/20">
+                    <h3 className="text-xl font-semibold text-aurora-indigo700 mb-3">
+                      🌅 It Started with One Late Night Search
+                    </h3>
+                    <p className="text-warm-slate-700 leading-relaxed">
+                      At 2:47 AM, someone in Austin was frantically searching for emergency food assistance. 
+                      They found 12 different websites with outdated information, called 8 numbers that didn't work, 
+                      and nearly gave up. That person shouldn't have had to wait until morning for help.
+                    </p>
+                  </div>
+                  
+                  <div className="bg-white/60 rounded-xl p-6 border border-aurora-emerald500/20">
+                    <h3 className="text-xl font-semibold text-aurora-indigo700 mb-3">
+                      💡 The Breakthrough Moment
+                    </h3>
+                    <p className="text-warm-slate-700 leading-relaxed">
+                      <strong>Raize the Vibe</strong> partnered with local advocates to build something different - 
+                      a living directory where every resource is verified weekly, every phone number works, 
+                      and every address is current. Not just another website, but Austin's most trusted lifeline.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="space-y-6">
+                  <div className="bg-white/60 rounded-xl p-6 border border-aurora-fuchsia500/20">
+                    <h3 className="text-xl font-semibold text-aurora-indigo700 mb-3">
+                      🚀 Growing Every Week
+                    </h3>
+                    <p className="text-warm-slate-700 leading-relaxed mb-4">
+                      Today, HelpNow ATX serves thousands of searches monthly. People find housing at 3 AM, 
+                      locate food pantries on Sundays, and connect with crisis support when they need it most.
+                    </p>
+                    <div className="bg-aurora-emerald500/10 rounded-lg p-4">
+                      <p className="text-sm font-medium text-aurora-emerald700">
+                        <strong>Growing Impact:</strong> Every search represents someone's moment of hope. 
+                        Every verified resource becomes someone's breakthrough in their darkest hour.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-white/60 rounded-xl p-6 border border-aurora-azure400/20">
+                    <h3 className="text-xl font-semibold text-aurora-indigo700 mb-3">
+                      🎯 Your Role in This Story
+                    </h3>
+                    <p className="text-warm-slate-700 leading-relaxed">
+                      Every contribution you make becomes part of someone else's breakthrough story. 
+                      You're not just supporting a website - you're ensuring that when Austin's most vulnerable 
+                      residents need help, they find it instantly, accurately, and with dignity.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Ways to Support Grid */}
             <h2 className="text-3xl font-bold text-aurora-indigo700 text-center mb-12">
-              Ways to support this project
+              Join Austin's Hope Network
             </h2>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
@@ -106,23 +322,23 @@ export default function SupportPage() {
               <div className="card text-center">
                 <DollarSign className="w-12 h-12 text-aurora-emerald500 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-aurora-indigo700 mb-3">
-                  Fund the updates
+                  Be someone's turning point
                 </h3>
                 <p className="text-warm-slate-600 mb-4">
-                  Server costs, weekly verification calls, and emergency updates cost ~$100/week.
+                  Your support powers the moment when someone in crisis finds exactly the help they need. Every dollar fuels hope.
                 </p>
                 <div className="space-y-2">
                   <button
                     onClick={handleSquareClick}
                     className="btn-sm bg-aurora-emerald500 text-white hover:bg-aurora-emerald600 w-full"
                   >
-                    Support via Square
+                    🌟 Spark hope ($5+)
                   </button>
                   <button
                     onClick={handleCashAppClick}
                     className="btn-sm btn-outline w-full"
                   >
-                    Cash App
+                    ⚡ Power updates ($25+)
                   </button>
                 </div>
               </div>
@@ -170,51 +386,51 @@ export default function SupportPage() {
               </div>
             </div>
 
-            {/* Operating Transparency */}
+            {/* Community Impact */}
             <div className="bg-gradient-to-br from-aurora-azure400/10 to-aurora-emerald500/10 rounded-xl p-8 border border-aurora-azure400/20">
               <h3 className="text-2xl font-semibold text-aurora-indigo700 mb-6 text-center">
-                How your support keeps this running
+                Your impact ripples through Austin
               </h3>
               
               <div className="grid md:grid-cols-3 gap-6 mb-8">
                 <div className="text-center">
                   <div className="w-12 h-12 bg-aurora-emerald500 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-white font-bold">$30</span>
+                    <span className="text-white font-bold">💫</span>
                   </div>
-                  <h4 className="font-semibold text-aurora-indigo700 mb-2">Server & CDN</h4>
-                  <p className="text-sm text-warm-slate-600">Keep the site fast and available 24/7</p>
+                  <h4 className="font-semibold text-aurora-indigo700 mb-2">Instant hope</h4>
+                  <p className="text-sm text-warm-slate-600">Available 24/7 when crisis strikes at 3am</p>
                 </div>
                 
                 <div className="text-center">
                   <div className="w-12 h-12 bg-aurora-azure400 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-white font-bold">$50</span>
+                    <span className="text-white font-bold">🎯</span>
                   </div>
-                  <h4 className="font-semibold text-aurora-indigo700 mb-2">Verification calls</h4>
-                  <p className="text-sm text-warm-slate-600">Weekly calls to verify 500+ resources are active</p>
+                  <h4 className="font-semibold text-aurora-indigo700 mb-2">Verified accuracy</h4>
+                  <p className="text-sm text-warm-slate-600">516+ resources checked weekly - no dead ends</p>
                 </div>
                 
                 <div className="text-center">
                   <div className="w-12 h-12 bg-aurora-fuchsia500 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-white font-bold">$20</span>
+                    <span className="text-white font-bold">🚀</span>
                   </div>
-                  <h4 className="font-semibold text-aurora-indigo700 mb-2">Emergency updates</h4>
-                  <p className="text-sm text-warm-slate-600">Real-time updates when resources change</p>
+                  <h4 className="font-semibold text-aurora-indigo700 mb-2">Lightning updates</h4>
+                  <p className="text-sm text-warm-slate-600">Real-time changes keep help current</p>
                 </div>
               </div>
 
               <div className="text-center">
                 <p className="text-lg text-warm-slate-700 mb-4">
-                  <strong>Total weekly cost: ~$100</strong>
+                  <strong>Every contribution multiplies hope across Central Texas</strong>
                 </p>
                 <div className="grid md:grid-cols-3 gap-6 text-sm text-warm-slate-600">
                   <p>
-                    <strong>100% transparent:</strong> All contributions go directly to operations
+                    <strong>🏆 Community champion:</strong> You fuel someone's breakthrough moment
                   </p>
                   <p>
-                    <strong>No overhead:</strong> No salaries, offices, or administrative costs
+                    <strong>💚 Pure impact:</strong> 100% powers verified resources
                   </p>
                   <p>
-                    <strong>Open books:</strong> Monthly reports available on request
+                    <strong>⚡ Always growing:</strong> More resources added weekly
                   </p>
                 </div>
               </div>

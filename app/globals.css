@@ -87,7 +87,7 @@
   }
   
   .card {
-    @apply bg-white rounded-2xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow;
+    @apply bg-white rounded-2xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow text-gray-900;
   }
   
   /* Glass morphism card with depth */
@@ -123,6 +123,136 @@
   
   .call-button {
     @apply bg-aurora-emerald500 hover:bg-opacity-90 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg min-h-[60px] flex items-center justify-center;
+  }
+
+  /* Missing button classes */
+  .btn-sm {
+    @apply btn px-3 py-2 text-sm;
+  }
+
+  .btn-outline {
+    @apply btn bg-transparent border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400;
+  }
+
+  /* Form input styling for readability */
+  input[type="text"], input[type="email"], input[type="tel"], input[type="url"], textarea, select {
+    @apply text-gray-900 bg-white placeholder:text-gray-500;
+  }
+
+  input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="url"]:focus, textarea:focus, select:focus {
+    @apply text-gray-900;
+  }
+
+  /* Form labels should be dark on light card backgrounds */
+  .card label {
+    @apply text-gray-700;
+  }
+
+
+  /* Light background sections should have dark text */
+  .bg-white, .bg-gray-50, .bg-blue-50, .bg-purple-50, .bg-green-50, .bg-yellow-50, .bg-red-50 {
+    color: #374151 !important; /* gray-700 */
+  }
+
+  /* All content within light background containers */
+  .bg-white *, .bg-gray-50 *, .bg-blue-50 *, .bg-purple-50 *, .bg-green-50 *, .bg-yellow-50 *, .bg-red-50 * {
+    color: inherit;
+  }
+
+  /* Ensure headings on light backgrounds are dark */
+  .bg-white h1, .bg-white h2, .bg-white h3, .bg-white h4, .bg-white h5, .bg-white h6,
+  .bg-gray-50 h1, .bg-gray-50 h2, .bg-gray-50 h3, .bg-gray-50 h4, .bg-gray-50 h5, .bg-gray-50 h6,
+  .bg-blue-50 h1, .bg-blue-50 h2, .bg-blue-50 h3, .bg-blue-50 h4, .bg-blue-50 h5, .bg-blue-50 h6 {
+    color: #111827 !important; /* gray-900 */
+    text-shadow: none;
+  }
+
+  /* Override global dark theme for specific colored text that should remain colored */
+  .text-purple-700, .text-blue-600, .text-green-700, .text-red-700, .text-yellow-700, .text-gray-600, .text-gray-700 {
+    color: inherit !important;
+  }
+
+  /* Aurora color system fallbacks for readability */
+  .text-warm-slate-700 {
+    color: #374151 !important; /* gray-700 */
+  }
+  
+  .text-warm-slate-600 {
+    color: #4b5563 !important; /* gray-600 */
+  }
+
+  .text-aurora-indigo700 {
+    color: #1e3a8a !important; /* blue-800 */
+  }
+
+  .text-aurora-indigo600 {
+    color: #2563eb !important; /* blue-600 */
+  }
+
+  .text-aurora-emerald500 {
+    color: #10b981 !important; /* emerald-500 */
+  }
+
+  .text-aurora-fuchsia500 {
+    color: #a855f7 !important; /* purple-500 */
+  }
+
+  .text-aurora-azure400 {
+    color: #60a5fa !important; /* blue-400 */
+  }
+
+  .text-aurora-indigo500 {
+    color: #3b82f6 !important; /* blue-500 */
+  }
+
+  /* Background color fallbacks */
+  .bg-aurora-emerald500 {
+    background-color: #10b981 !important; /* emerald-500 */
+  }
+
+  .bg-aurora-azure400 {
+    background-color: #60a5fa !important; /* blue-400 */
+  }
+
+  .bg-aurora-fuchsia500 {
+    background-color: #a855f7 !important; /* purple-500 */
+  }
+
+  .bg-aurora-emerald600 {
+    background-color: #059669 !important; /* emerald-600 */
+  }
+
+  .bg-aurora-azure50 {
+    background-color: #eff6ff !important; /* blue-50 */
+  }
+
+  .border-aurora-azure200 {
+    border-color: #bfdbfe !important; /* blue-200 */
+  }
+
+  /* Support page specific fixes */
+  .bg-gradient-to-br {
+    color: #374151 !important; /* Ensure dark text on gradient backgrounds */
+  }
+
+  .bg-gradient-to-br * {
+    color: inherit !important;
+  }
+
+  /* Hero section fixes - ensure contrast on the main page container */
+  .bg-gradient-to-b {
+    color: #374151; /* Dark text on light gradient backgrounds */
+  }
+
+  .bg-gradient-to-b * {
+    color: inherit;
+  }
+
+  /* Ensure all text in light background containers is dark */
+  .py-16 .text-aurora-indigo700,
+  .py-16 .text-warm-slate-700,
+  .py-16 .text-warm-slate-600 {
+    color: #374151 !important;
   }
 }
 

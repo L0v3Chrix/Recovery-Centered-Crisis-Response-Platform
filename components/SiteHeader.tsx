@@ -24,13 +24,19 @@ export default function SiteHeader() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
-            {HEADER_NAV_ITEMS.map((item) => (
+            {HEADER_NAV_ITEMS.map((item, index) => (
               <Link
-                key={item.href}
+                key={`${item.href}-${index}`}
                 href={item.href}
-                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-aurora-indigo700 hover:bg-aurora-pink50 rounded-lg transition-colors"
+                className={
+                  item.href === '/support'
+                    ? "px-4 py-2 text-sm font-semibold text-white bg-aurora-emerald500 hover:bg-emerald-600 rounded-lg transition-colors shadow-md hover:shadow-lg"
+                    : "px-3 py-2 text-sm font-medium text-gray-700 hover:text-aurora-indigo700 hover:bg-aurora-pink50 rounded-lg transition-colors"
+                }
               >
-                {item.label}
+                {item.href === '/support' && item.label === 'Support' ? '💚 Support' : 
+                 item.href === '/support' && item.label === 'Donate' ? '💲 Donate' : 
+                 item.label}
               </Link>
             ))}
           </nav>

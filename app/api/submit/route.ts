@@ -178,6 +178,9 @@ export async function POST(request: NextRequest) {
       })
     })
 
+    let contactResult
+    let contactId
+    
     if (!contactResponse.ok) {
       const errorText = await contactResponse.text()
       console.error('GHL Contact Creation Failed:', {
@@ -187,18 +190,35 @@ export async function POST(request: NextRequest) {
         contactData: JSON.stringify(contactData, null, 2)
       })
 
-      // Webhook fallback - attempt to send data to a backup endpoint
-      await webhookFallback(data, `GHL Contact Creation Failed: ${contactResponse.status}`)
+      // Check if this is a duplicate contact error
+      if (contactResponse.status === 400 && errorText.includes('duplicated contacts')) {
+        try {
+          const errorData = JSON.parse(errorText)
+          if (errorData.meta && errorData.meta.contactId) {
+            contactId = errorData.meta.contactId
+            console.log('Using existing contact ID for duplicate:', contactId)
+            // Create a mock result object to continue processing
+            contactResult = { contact: { id: contactId } }
+          }
+        } catch (parseError) {
+          console.error('Error parsing duplicate contact response:', parseError)
+        }
+      }
 
-      return NextResponse.json(
-        { error: 'Failed to create contact', details: 'Contact submission failed but has been logged for manual processing' },
-        { status: contactResponse.status }
-      )
+      // If we couldn't handle the duplicate, fall back to error handling
+      if (!contactId) {
+        await webhookFallback(data, `GHL Contact Creation Failed: ${contactResponse.status}`)
+        return NextResponse.json(
+          { error: 'Failed to create contact', details: 'Contact submission failed but has been logged for manual processing' },
+          { status: contactResponse.status }
+        )
+      }
+    } else {
+      contactResult = await contactResponse.json()
+      contactId = contactResult.contact?.id
     }
 
-    const contactResult = await contactResponse.json()
-    const contactId = contactResult.contact?.id
-    console.log('GHL Contact Created:', { contactId, email: data.contactEmail })
+    console.log('GHL Contact Created/Found:', { contactId, email: data.contactEmail })
 
     // Step 2: Create comprehensive note with all resource details
     if (contactId) {

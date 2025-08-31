@@ -1,5 +1,6 @@
 import { AlertTriangle, Utensils, Home, Heart, Phone, MapPin, Gavel, Activity } from 'lucide-react'
 import LocationPrompt from '@/components/LocationPrompt'
+import WelcomeModal from '@/components/WelcomeModal'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -47,6 +48,7 @@ function CategoryCard({ title, subtitle, description, icon, bgColor, href, urgen
 export default function HomePage() {
   return (
     <div className="min-h-screen relative">
+      <WelcomeModal />
       {/* Crisis Ribbon - Always Visible */}
       <div className="bg-aurora-crimson600 text-white py-3 px-4 text-center shadow-lg">
         <div className="flex flex-wrap items-center justify-center gap-2">
@@ -64,78 +66,97 @@ export default function HomePage() {
       </div>
 
       {/* Brand Header Section with ambient glow */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-slate-900/60 to-transparent">
+      <section className="relative overflow-hidden bg-support">
         {/* Ambient glow effects */}
         <div className="absolute -top-20 -left-10 h-72 w-72 rounded-full bg-sky-400/15 blur-3xl"></div>
         <div className="absolute -top-32 right-0 h-96 w-96 rounded-full bg-indigo-500/10 blur-3xl"></div>
         
-        <div className="py-16 text-center text-white relative">
-          <div className="mb-6">
-            {/* Logo Image with depth */}
-            <div className="mb-6 flex justify-center">
-              <Image 
-                src="/brand/wordmark-horizontal.svg" 
-                alt="HelpNow ATX - Real help, verified daily"
-                width={360}
-                height={110}
-                className="h-16 md:h-20 w-auto drop-shadow-[0_6px_24px_rgba(0,0,0,0.45)]"
-                priority
-              />
+        <div className="py-16 text-white relative">
+          <div className="container mx-auto px-4">
+            {/* Logo and Core Message */}
+            <div className="text-center mb-12">
+              <div className="mb-6 flex justify-center">
+                <Image 
+                  src="/brand/wordmark-horizontal.svg" 
+                  alt="HelpNow ATX - Real help, verified daily"
+                  width={360}
+                  height={110}
+                  className="h-16 md:h-20 w-auto drop-shadow-[0_6px_24px_rgba(0,0,0,0.45)]"
+                  priority
+                />
+              </div>
+              
+              <p className="text-lg text-white/80 font-medium mb-3">Real help • Verified daily</p>
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <span className="chip bg-white/20 text-white border-white/30">
+                  <MapPin className="w-3 h-3 mr-1" />
+                  Austin, TX
+                </span>
+                <span className="chip bg-aurora-emerald500/20 text-white border-aurora-emerald500/40">
+                  <span className="w-2 h-2 bg-aurora-emerald500 rounded-full mr-2"></span>
+                  516+ verified
+                </span>
+              </div>
+              
+              <p className="text-xl text-white/90 max-w-2xl mx-auto font-medium">
+                Connect instantly to verified help, when you need it most
+              </p>
             </div>
-          </div>
-          
-          {/* Tagline and badges */}
-          <p className="text-lg text-white/80 font-medium mb-3">Real help • Verified daily</p>
-          <div className="flex items-center justify-center gap-4">
-            <span className="chip bg-white/20 text-white border-white/30">
-              <MapPin className="w-3 h-3 mr-1" />
-              Austin, TX
-            </span>
-            <span className="chip bg-aurora-emerald500/20 text-white border-aurora-emerald500/40">
-              <span className="w-2 h-2 bg-aurora-emerald500 rounded-full mr-2"></span>
-              516+ verified
-            </span>
-          </div>
-          
-          <p className="text-xl text-white/90 max-w-2xl mx-auto font-medium mt-6">
-            Connect instantly to verified help, when you need it most
-          </p>
-          
-          {/* Evolution Message */}
-          <div className="mt-6 max-w-2xl mx-auto surface p-3 md:p-4">
-            <p className="text-sm md:text-base leading-relaxed">
-              HelpNow ATX is evolving in real time. We ship improvements and new features regularly.
-              If something looks off, thanks for your patience—and please check back soon. Your feedback helps keep this lifeline accurate.
-            </p>
-          </div>
-          
-          {/* Support Button in Hero */}
-          <div className="mt-6">
-            <Link 
-              href="/support"
-              className="inline-flex items-center px-6 py-3 text-base font-semibold text-aurora-indigo700 bg-white hover:bg-gray-100 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
-            >
-              <Heart className="w-5 h-5 mr-2" />
-              Help keep this project alive
-            </Link>
-          </div>
-        
-          {/* SEARCH REMOVED — feature not live */}
 
-          {/* Action Buttons */}
-          <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link 
-              href="/quiz"
-              className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-aurora-emerald500 hover:bg-teal-600 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
-            >
-              📋 Take Assessment
-            </Link>
-            <Link 
-              href="/printable"
-              className="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-white/10 hover:bg-white/20 border border-white/30 rounded-lg transition-colors duration-200"
-            >
-              🖨️ Print Resources
-            </Link>
+            {/* Hero Action Cards Grid */}
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
+              <div className="ui-card bg-white/10 backdrop-blur-sm border border-white/20 p-6 text-center">
+                <div className="text-4xl mb-4">📋</div>
+                <h4 className="text-xl font-bold mb-3">Get matched</h4>
+                <p className="text-white/80 mb-4">
+                  Take our quick assessment to find the right resources for your situation.
+                </p>
+                <Link 
+                  href="/quiz" 
+                  className="btn bg-aurora-azure400 hover:bg-sky-600 text-white font-semibold"
+                >
+                  Take Assessment
+                </Link>
+              </div>
+              
+              <div className="ui-card bg-white/10 backdrop-blur-sm border border-white/20 p-6 text-center">
+                <div className="text-4xl mb-4">🖨️</div>
+                <h4 className="text-xl font-bold mb-3">Print resources</h4>
+                <p className="text-white/80 mb-4">
+                  Download and print essential resources to keep with you offline.
+                </p>
+                <Link 
+                  href="/printable" 
+                  className="btn bg-aurora-fuchsia500 hover:bg-purple-600 text-white font-semibold"
+                >
+                  Print Resources
+                </Link>
+              </div>
+              
+              <div className="ui-card bg-white/10 backdrop-blur-sm border border-white/20 p-6 text-center">
+                <div className="text-4xl mb-4">💚</div>
+                <h4 className="text-xl font-bold mb-3">Keep us alive</h4>
+                <p className="text-white/80 mb-4">
+                  Help us maintain and grow this life-saving resource for everyone.
+                </p>
+                <Link 
+                  href="/support" 
+                  className="btn bg-aurora-emerald500 hover:bg-emerald-600 text-white font-semibold animate-pulse"
+                >
+                  Help keep this project alive 💲
+                </Link>
+              </div>
+            </div>
+            
+            {/* Evolution Message */}
+            <div className="text-center">
+              <div className="max-w-2xl mx-auto ui-card bg-white/5 backdrop-blur-sm border border-white/10 p-4">
+                <p className="text-sm md:text-base leading-relaxed text-white/90">
+                  HelpNow ATX is evolving in real time. We ship improvements and new features regularly.
+                  If something looks off, thanks for your patience—and please check back soon. Your feedback helps keep this lifeline accurate.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -146,7 +167,7 @@ export default function HomePage() {
           <h2 className="text-2xl font-semibold text-white mb-6 text-center">
             Quick Access
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
             <CategoryCard
               title="Crisis"
               subtitle="NOW"
@@ -154,6 +175,16 @@ export default function HomePage() {
               icon="🚨"
               bgColor="bg-aurora-crimson600 hover:bg-red-700"
               href="/crisis"
+              urgent={true}
+            />
+
+            <CategoryCard
+              title="Life-Saving"
+              subtitle="LINKS"
+              description="Hospitals | Detox"
+              icon="🏥"
+              bgColor="bg-red-600 hover:bg-red-700"
+              href="/life-saving-links"
               urgent={true}
             />
             
@@ -264,28 +295,73 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Support Strip */}
-      <div className="bg-support py-12 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h3 className="text-2xl font-bold mb-4">
-            Help keep this project alive
-          </h3>
-          <p className="text-lg mb-8 text-white/90 max-w-2xl mx-auto">
-            Fresh updates, verified resources, and uptime cost real money. 
-            Your support keeps this lifeline available 24/7.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/support" className="btn bg-white text-aurora-indigo700 hover:bg-gray-100 font-semibold">
-              💙 Support via Square
-            </Link>
-            <a 
-              href="https://cash.app/$helpnowatx" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="btn-ghost border-white text-white hover:bg-white/10"
-            >
-              💰 Cash App
-            </a>
+      {/* Community Action Section */}
+      <div className="bg-support py-16 text-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold mb-4">
+              Help us help others
+            </h3>
+            <p className="text-lg text-white/90 max-w-2xl mx-auto">
+              This platform saves lives through community action. Every share, every update, every dollar helps someone in crisis find exactly what they need.
+            </p>
+          </div>
+          
+          {/* Action Cards Grid */}
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <div className="ui-card bg-white/10 backdrop-blur-sm border border-white/20 p-6 text-center">
+              <div className="text-4xl mb-4">📢</div>
+              <h4 className="text-xl font-bold mb-3">Spread the word</h4>
+              <p className="text-white/80 mb-4">
+                Share helpnowatx.org with anyone who might need it. Word of mouth saves lives.
+              </p>
+              <Link 
+                href="/share" 
+                className="btn bg-aurora-emerald500 hover:bg-emerald-600 text-white font-semibold"
+              >
+                Get share tools
+              </Link>
+            </div>
+            
+            <div className="ui-card bg-white/10 backdrop-blur-sm border border-white/20 p-6 text-center">
+              <div className="text-4xl mb-4">📝</div>
+              <h4 className="text-xl font-bold mb-3">Submit updates</h4>
+              <p className="text-white/80 mb-4">
+                Know a resource that's missing or outdated? Help keep our database fresh.
+              </p>
+              <Link 
+                href="/submit" 
+                className="btn bg-aurora-azure400 hover:bg-sky-600 text-white font-semibold"
+              >
+                Submit resource
+              </Link>
+            </div>
+            
+            <div className="ui-card bg-white/10 backdrop-blur-sm border border-white/20 p-6 text-center">
+              <div className="text-4xl mb-4">🤝</div>
+              <h4 className="text-xl font-bold mb-3">Partner with us</h4>
+              <p className="text-white/80 mb-4">
+                Organizations and volunteers who help verify and maintain resources.
+              </p>
+              <Link 
+                href="/partners" 
+                className="btn bg-aurora-fuchsia500 hover:bg-purple-600 text-white font-semibold"
+              >
+                Learn about partnerships
+              </Link>
+            </div>
+          </div>
+          
+          {/* Donation Call to Action */}
+          <div className="text-center">
+            <div className="flex flex-wrap justify-center gap-4 mb-4">
+              <Link href="/support" className="btn bg-white text-aurora-indigo700 hover:bg-gray-100 font-semibold text-lg px-8 py-3">
+                💚 Help keep this project alive 💲
+              </Link>
+            </div>
+            <p className="text-sm text-white/75 max-w-lg mx-auto">
+              Join Austin's hope network - be the reason 516+ resources stay fresh, accurate, and life-changing
+            </p>
           </div>
         </div>
       </div>

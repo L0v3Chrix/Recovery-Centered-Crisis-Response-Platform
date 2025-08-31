@@ -75,7 +75,7 @@ const createPressKit = async () => {
 For questions about badge usage or partnership opportunities, please contact us through our website.
 
 Published by Raise the Vibe
-Website: https://raisethevibe.com`
+Website: https://www.raizethevibe.com`
 
   try {
     // Create zip archive

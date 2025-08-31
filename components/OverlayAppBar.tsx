@@ -6,8 +6,10 @@ import { useState, useEffect, useRef } from 'react';
 const NAV_ITEMS = [
   { href: '/', label: 'Home' },
   { href: '/crisis', label: 'Crisis Help' },
+  { href: '/life-saving-links', label: '🚨 Life-Saving Links' },
   { href: '/food', label: 'Food' },
   { href: '/shelter', label: 'Shelter' },
+  { href: '/sober-living', label: '🏠 Sober Living & Reentry' },
   { href: '/healthcare', label: 'Healthcare' },
   { href: '/recovery', label: 'Recovery' },
   { href: '/housing', label: 'Housing' },

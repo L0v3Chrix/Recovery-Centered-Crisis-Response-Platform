@@ -14,8 +14,11 @@ export const NAV_ITEMS: NavItem[] = [
   { href: '/crisis', label: 'Crisis' },
   { href: '/quiz', label: 'Get Matched' },
   { href: '/printable', label: 'Printable' },
+  { href: '/share', label: 'Share' },
+  { href: '/submit', label: 'Submit Updates' },
   { href: '/partners', label: 'Partners' },
   { href: '/support', label: 'Support' },
+  { href: '/support', label: 'Donate' }, // Points to same support page but different label for clarity
 ];
 
 // For header navigation (excludes home)
