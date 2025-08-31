@@ -38,10 +38,10 @@ export default function SupportPage() {
           <div className="max-w-4xl mx-auto">
             <Heart className="w-16 h-16 mx-auto mb-6 text-white/90" />
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              You're Part of Something Beautiful
+              You&apos;re Part of Something Beautiful
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-white/90 font-medium leading-relaxed">
-              Every contribution fuels hope, powers breakthroughs, and keeps Austin's lifeline free
+              Every contribution fuels hope, powers breakthroughs, and keeps Austin&apos;s lifeline free
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a 
@@ -63,7 +63,7 @@ export default function SupportPage() {
               Choose Your Impact Level
             </h2>
             <p className="text-lg text-warm-slate-700 leading-relaxed">
-              Every contribution creates someone's breakthrough moment. Pick the level that feels right for you.
+              Every contribution creates someone&apos;s breakthrough moment. Pick the level that feels right for you.
             </p>
           </div>
           
@@ -157,7 +157,7 @@ export default function SupportPage() {
                 </div>
                 <h3 className="text-xl font-bold text-aurora-indigo700 mb-2">Community Hero</h3>
                 <div className="text-3xl font-bold text-yellow-600 mb-2">$100</div>
-                <p className="text-sm text-warm-slate-600">Champion Austin's safety net</p>
+                <p className="text-sm text-warm-slate-600">Champion Austin&apos;s safety net</p>
               </div>
               <div className="space-y-3">
                 <button
@@ -178,7 +178,7 @@ export default function SupportPage() {
           
           <div className="text-center mt-12">
             <p className="text-warm-slate-600 mb-4">
-              <strong>Choose any amount:</strong> Every contribution powers someone's breakthrough moment
+              <strong>Choose any amount:</strong> Every contribution powers someone&apos;s breakthrough moment
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
@@ -264,8 +264,8 @@ export default function SupportPage() {
                     </h3>
                     <p className="text-warm-slate-700 leading-relaxed">
                       At 2:47 AM, someone in Austin was frantically searching for emergency food assistance. 
-                      They found 12 different websites with outdated information, called 8 numbers that didn't work, 
-                      and nearly gave up. That person shouldn't have had to wait until morning for help.
+                      They found 12 different websites with outdated information, called 8 numbers that didn&apos;t work, 
+                      and nearly gave up. That person shouldn&apos;t have had to wait until morning for help.
                     </p>
                   </div>
                   
@@ -276,7 +276,7 @@ export default function SupportPage() {
                     <p className="text-warm-slate-700 leading-relaxed">
                       <strong>Raize the Vibe</strong> partnered with local advocates to build something different - 
                       a living directory where every resource is verified weekly, every phone number works, 
-                      and every address is current. Not just another website, but Austin's most trusted lifeline.
+                      and every address is current. Not just another website, but Austin&apos;s most trusted lifeline.
                     </p>
                   </div>
                 </div>
@@ -292,8 +292,8 @@ export default function SupportPage() {
                     </p>
                     <div className="bg-aurora-emerald500/10 rounded-lg p-4">
                       <p className="text-sm font-medium text-aurora-emerald700">
-                        <strong>Growing Impact:</strong> Every search represents someone's moment of hope. 
-                        Every verified resource becomes someone's breakthrough in their darkest hour.
+                        <strong>Growing Impact:</strong> Every search represents someone&apos;s moment of hope. 
+                        Every verified resource becomes someone&apos;s breakthrough in their darkest hour.
                       </p>
                     </div>
                   </div>
@@ -303,8 +303,8 @@ export default function SupportPage() {
                       🎯 Your Role in This Story
                     </h3>
                     <p className="text-warm-slate-700 leading-relaxed">
-                      Every contribution you make becomes part of someone else's breakthrough story. 
-                      You're not just supporting a website - you're ensuring that when Austin's most vulnerable 
+                      Every contribution you make becomes part of someone else&apos;s breakthrough story. 
+                      You&apos;re not just supporting a website - you&apos;re ensuring that when Austin&apos;s most vulnerable 
                       residents need help, they find it instantly, accurately, and with dignity.
                     </p>
                   </div>
@@ -314,7 +314,7 @@ export default function SupportPage() {
 
             {/* Ways to Support Grid */}
             <h2 className="text-3xl font-bold text-aurora-indigo700 text-center mb-12">
-              Join Austin's Hope Network
+              Join Austin&apos;s Hope Network
             </h2>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
@@ -322,7 +322,7 @@ export default function SupportPage() {
               <div className="card text-center">
                 <DollarSign className="w-12 h-12 text-aurora-emerald500 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-aurora-indigo700 mb-3">
-                  Be someone's turning point
+                  Be someone&apos;s turning point
                 </h3>
                 <p className="text-warm-slate-600 mb-4">
                   Your support powers the moment when someone in crisis finds exactly the help they need. Every dollar fuels hope.
@@ -424,7 +424,7 @@ export default function SupportPage() {
                 </p>
                 <div className="grid md:grid-cols-3 gap-6 text-sm text-warm-slate-600">
                   <p>
-                    <strong>🏆 Community champion:</strong> You fuel someone's breakthrough moment
+                    <strong>🏆 Community champion:</strong> You fuel someone&apos;s breakthrough moment
                   </p>
                   <p>
                     <strong>💚 Pure impact:</strong> 100% powers verified resources

@@ -327,7 +327,7 @@ export default function HomePage() {
               <div className="text-4xl mb-4">📝</div>
               <h4 className="text-xl font-bold mb-3">Submit updates</h4>
               <p className="text-white/80 mb-4">
-                Know a resource that's missing or outdated? Help keep our database fresh.
+                Know a resource that&apos;s missing or outdated? Help keep our database fresh.
               </p>
               <Link 
                 href="/submit" 
@@ -360,7 +360,7 @@ export default function HomePage() {
               </Link>
             </div>
             <p className="text-sm text-white/75 max-w-lg mx-auto">
-              Join Austin's hope network - be the reason 516+ resources stay fresh, accurate, and life-changing
+              Join Austin&apos;s hope network - be the reason 516+ resources stay fresh, accurate, and life-changing
             </p>
           </div>
         </div>
