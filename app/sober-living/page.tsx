@@ -41,10 +41,10 @@ const soberLivingResources: SoberLivingResource[] = [
   {
     id: 'recovery-centered-living',
     name: 'Recovery Centered Living (RCL)',
-    description: 'MAT advocate home with peer-led approach supporting multiple recovery pathways including medication-assisted treatment. Founder-led with lived recovery experience.',
-    phone: '(512) 784-2851',
+    description: 'MAT and MAP friendly recovery homes with peer-led approach supporting multiple recovery pathways. 6 total houses: 2 women&apos;s houses and 4 men&apos;s houses. Founder-led with lived recovery experience.',
+    phone: '(512) 777-1748',
     website: 'https://www.recoverycenteredliving.com',
-    address: '3 Recovery Residences, Austin area',
+    address: '6 Recovery Residences (2 Women, 4 Men), Austin area',
     housingType: 'sober_living',
     genderRestriction: 'mixed',
     costRange: 'moderate',
@@ -62,8 +62,8 @@ const soberLivingResources: SoberLivingResource[] = [
     backgroundCheckRequired: true,
     employmentRequired: false,
     
-    specialties: ['MAT Advocacy', 'Multiple Recovery Pathways', 'Peer Support', 'High Accountability'],
-    notes: 'Fills gaps in traditional sober living with flexible recovery approach',
+    specialties: ['MAT & MAP Friendly', 'Multiple Recovery Pathways', 'Peer Support', 'High Accountability', 'Gender-Specific Housing'],
+    notes: 'MAT and MAP friendly but not exclusive. 6 houses total with gender-specific accommodations.',
     featured: true,
     area: 'central'
   },
