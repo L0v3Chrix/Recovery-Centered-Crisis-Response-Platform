@@ -13,7 +13,7 @@ export default function SiteHeader() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
-              src="/brand/HNAlogov3.png"
+              src="/brand/HelpNowATX.png"
               alt="HelpNow ATX"
               width={160}
               height={50}

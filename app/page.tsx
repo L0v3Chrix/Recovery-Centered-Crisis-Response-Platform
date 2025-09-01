@@ -77,7 +77,7 @@ export default function HomePage() {
             <div className="text-center mb-12">
               <div className="mb-6 flex justify-center">
                 <Image 
-                  src="/brand/HNAlogov3.png" 
+                  src="/brand/HelpNowATX.png" 
                   alt="HelpNow ATX - Real help, verified daily"
                   width={500}
                   height={150}
