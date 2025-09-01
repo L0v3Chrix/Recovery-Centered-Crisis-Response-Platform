@@ -13,11 +13,11 @@ export default function SiteHeader() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
-              src="/brand/logo-hlifeline.svg"
+              src="/brand/HNAlogov3.png"
               alt="HelpNow ATX"
-              width={140}
-              height={40}
-              className="h-10 w-auto"
+              width={160}
+              height={50}
+              className="h-12 w-auto"
               priority
             />
           </Link>

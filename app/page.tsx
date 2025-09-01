@@ -77,11 +77,11 @@ export default function HomePage() {
             <div className="text-center mb-12">
               <div className="mb-6 flex justify-center">
                 <Image 
-                  src="/brand/wordmark-horizontal.svg" 
+                  src="/brand/HNAlogov3.png" 
                   alt="HelpNow ATX - Real help, verified daily"
-                  width={400}
-                  height={120}
-                  className="h-18 md:h-24 w-auto drop-shadow-[0_6px_24px_rgba(0,0,0,0.45)]"
+                  width={500}
+                  height={150}
+                  className="h-20 md:h-28 w-auto drop-shadow-[0_6px_24px_rgba(0,0,0,0.45)]"
                   priority
                 />
               </div>
