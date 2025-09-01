@@ -79,9 +79,9 @@ export default function HomePage() {
                 <Image 
                   src="/brand/wordmark-horizontal.svg" 
                   alt="HelpNow ATX - Real help, verified daily"
-                  width={360}
-                  height={110}
-                  className="h-16 md:h-20 w-auto drop-shadow-[0_6px_24px_rgba(0,0,0,0.45)]"
+                  width={400}
+                  height={120}
+                  className="h-18 md:h-24 w-auto drop-shadow-[0_6px_24px_rgba(0,0,0,0.45)]"
                   priority
                 />
               </div>

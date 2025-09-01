@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
 import './globals.css'
 import OverlayAppBar from '../components/OverlayAppBar'
 import SiteFooter from '../components/SiteFooter'
@@ -57,7 +58,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
+      <head>        
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -67,6 +68,19 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body>
+        {/* Google Analytics */}
+        <Script 
+          src="https://www.googletagmanager.com/gtag/js?id=G-2SNWBYGTRH"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-2SNWBYGTRH');
+          `}
+        </Script>
         {/* Skip to content link for accessibility */}
         <a 
           href="#main-content" 
